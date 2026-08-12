@@ -1,0 +1,394 @@
+@charset "utf-8";
+
+/* 멀티페이지 구조 공통 레이아웃 (index / brand-story / data-crm / marketing) */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutMe {
+    flex: 1;
+}
+
+.caseSection {
+    flex: 1;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: 50vh;
+}
+
+.landingHero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.landingHero h1 {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 48px;
+    color: #373737;
+    margin-bottom: 14px;
+}
+
+.landingHero p {
+    font-size: 16px;
+    color: #8A8A8A;
+}
+
+.quickLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 0 60px;
+}
+
+.qlBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid #373737;
+    border-radius: 50px;
+    padding: 12px 26px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 15px;
+    color: #373737;
+    transition: all 0.3s;
+}
+
+.qlBtn:hover {
+    background: #373737;
+    color: #FFFFFF;
+}
+
+.siteFooter {
+    margin-top: auto;
+}
+
+/* 스크롤 테스트용 임시 섹션 (사이드탭 active 스크롤 확인용, 실제 콘텐츠 들어가면 삭제 가능) */
+.scrollTestSection {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: #373737;
+    border-top: 2px dashed #373737;
+}
+
+.scrollTestSection.t1 { background: #FFFFFF; }
+.scrollTestSection.t2 { background: #F2F2F2; }
+.scrollTestSection.t3 { background: #E8E8E8; }
+.scrollTestSection.t4 { background: #F2F2F2; }
+
+/* ABOUT 페이지 - 대비 카피 섹션 (짧은 헤드라인 + 서브 한 줄) */
+.aboutSectionInner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 24px;
+}
+
+/* 섹션1 - 배경에 큰 워터마크 텍스트를 깔아서 임팩트 보강 */
+.aboutWatermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 280px;
+    font-weight: 800;
+    letter-spacing: 14px;
+    color: rgba(55, 55, 55, 0.05);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* 섹션1 - 헤드라인 아래 작은 태그 뱃지 */
+.aboutTags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.aboutTag {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #FF5C4D;
+    border: 1.5px solid #FF5C4D;
+    border-radius: 50px;
+    padding: 6px 16px;
+}
+
+.aboutIcon {
+    display: block;
+    font-size: 32px;
+    color: #FF5C4D;
+    margin-bottom: 16px;
+}
+
+.aboutNum {
+    display: block;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #FF5C4D;
+    margin-bottom: 18px;
+}
+
+.aboutHeadline {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #373737;
+    margin-bottom: 18px;
+}
+
+.aboutSub {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    color: #8A8A8A;
+}
+
+/* 섹션2 - 회사명 나열 대신, 개념 흐름(환경 -> 기준 -> 결과)을 아이콘 3단계로 표현 */
+.aboutFlow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 26px 0;
+}
+
+.aboutFlowStep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100px;
+}
+
+.aboutFlowStep i {
+    font-size: 22px;
+    color: #FF5C4D;
+}
+
+.aboutFlowStep span {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #373737;
+    text-align: center;
+}
+
+.aboutTimelineLine {
+    width: 28px;
+    height: 1.5px;
+    background: #FF5C4D;
+    flex-shrink: 0;
+}
+
+/* 섹션2 - 추상적인 3단계 흐름에서 구체적인 사진/스탯으로 넘어가는 연결 문장 */
+.aboutBridge {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #B9B9B9;
+    margin-top: 24px;
+    margin-bottom: 4px;
+}
+
+/* 섹션3 - 핵심 수치를 큰 스탯으로 강조 */
+.aboutStat {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 22px 0;
+}
+
+.aboutStatNum {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: #FF5C4D;
+    line-height: 1;
+}
+
+.aboutStatNum small {
+    font-size: 22px;
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+.aboutStatLabel {
+    display: block;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #8A8A8A;
+    margin-top: 8px;
+}
+
+/* 섹션2 - 사진(증거) + 스탯을 한 세트로 붙이는 영역 */
+.aboutProof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 22px;
+}
+
+/* 신산커피 박람회 사진 프레임 (img/expo-booth.jpg) */
+.aboutPhotoSlot {
+    width: 160px;
+    height: 120px;
+    border: 2px solid #373737;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.aboutPhotoSlot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.aboutProof .aboutStat {
+    margin: 0;
+}
+
+/* 상단 헤더바: 화면 전체 폭 바 안에 로고 + 카테고리 메뉴
+   (min-height로 최소 높이만 보장 -> 내용이 그 안에 다 안 들어가도 배경이 잘리지 않고 같이 늘어남) */
+.home_header {
+    min-height: 90px;
+    border-bottom: none;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 999990;
+}
+
+.home_header .home_box {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    height: auto;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 0;
+    animation: topbarIn 0.8s both;
+    transition: gap 0.35s ease, background 0.35s ease;
+}
+
+.home_header.scrolled .home_box {
+    gap: 4px;
+    background: #FFFFFF;
+}
+
+@keyframes topbarIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home_header .home_logo {
+    font-size: 32px;
+}
+
+.home_header .home_logo .logoImg {
+    display: block;
+    height: 28px;
+    width: auto;
+    transition: height 0.35s ease;
+}
+
+.home_header.scrolled .home_logo .logoImg {
+    height: 20px;
+}
+
+.headerNav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    transition: gap 0.35s ease;
+}
+
+.home_header.scrolled .headerNav ul {
+    gap: 18px;
+}
+
+.headerNav ul li a {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: #8A8A8A;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s, font-size 0.35s ease;
+}
+
+.home_header.scrolled .headerNav ul li a {
+    font-size: 10px;
+}
+
+.headerNav ul li a:hover {
+    color: #373737;
+}
+
+.headerNav ul li.active a {
+    color: #FF5C4D;
+    border-bottom-color: #FF5C4D;
+}
+
+@media screen and (max-width: 900px) {
+    .aboutBox {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .aboutBox .information,
+    .aboutBox .information02 {
+        width: 100%;
+    }
+
+    .aboutBox .information02 {
+        height: auto;
+        display: block;
+        opacity: 1;
+        transform: none;
+        margin-top: 20px;
+    }
+}

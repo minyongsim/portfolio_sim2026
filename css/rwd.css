@@ -1,0 +1,227 @@
+@charset "utf-8";
+
+/* 반응형 (태블릿 / 모바일) */
+
+/* ====== 태블릿 (~1024px) ====== */
+@media screen and (max-width: 1024px) {
+    .home_header .home_box {
+        max-width: 700px;
+    }
+
+    .headerNav ul {
+        gap: 20px;
+    }
+
+    .projHeaderInner,
+    .projIntroInner,
+    .projMetaInner,
+    .projBody {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* ====== 큰 모바일 / 세로 태블릿 (~768px) ====== */
+@media screen and (max-width: 768px) {
+    .home_header {
+        min-height: 74px;
+    }
+
+    .headerNav ul {
+        gap: 14px;
+    }
+
+    .home_header.scrolled .headerNav ul {
+        gap: 10px;
+    }
+
+    .caseGrid {
+        gap: 16px;
+    }
+
+    .caseCard {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .projMeta,
+    .projMetaInner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projIntroInner h1 {
+        font-size: 26px;
+    }
+
+    .projStats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .aboutHeadline {
+        font-size: 38px;
+    }
+
+    .aboutWatermark {
+        font-size: 160px;
+    }
+
+    .footerWatermark {
+        font-size: 90px;
+    }
+}
+
+/* ====== 모바일 (~600px 이하) ======
+   화면이 좁아 사이드탭(폴더탭 내비게이션)은 아예 숨깁니다. */
+@media screen and (max-width: 600px) {
+    #header {
+        display: none;
+    }
+
+    /* 모바일: JS 위치 계산 없이 우측 하단에 고정 (푸터 바로 위, 오른쪽) */
+    .gotop {
+        left: auto;
+        right: 16px;
+        top: auto !important;
+        bottom: 20px;
+        width: auto;
+        transform: none;
+    }
+
+    /* 모바일에서는 푸터 진입 시 20% 늘어나는 효과 끄기 */
+    .siteFooter.grow {
+        padding: 30px 20px;
+    }
+
+    .home_header {
+        min-height: 64px;
+    }
+
+    .home_header .home_box {
+        gap: 4px;
+    }
+
+    .headerNav ul {
+        gap: 10px;
+    }
+
+    .headerNav ul li a {
+        font-size: 10px;
+        letter-spacing: 0.3px;
+    }
+
+    .scrollTestSection {
+        font-size: 16px;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .aboutHeadline {
+        font-size: 30px;
+    }
+
+    .aboutSub {
+        font-size: 14px;
+    }
+
+    .aboutFlowStep {
+        width: 80px;
+    }
+
+    .aboutFlowStep i {
+        font-size: 18px;
+    }
+
+    .aboutFlowStep span {
+        font-size: 11px;
+    }
+
+    .aboutTimelineLine {
+        width: 16px;
+    }
+
+    .aboutStatNum {
+        font-size: 44px;
+    }
+
+    .aboutStatNum small {
+        font-size: 16px;
+    }
+
+    .aboutWatermark {
+        font-size: 90px;
+        letter-spacing: 6px;
+    }
+
+    .footerWatermark {
+        font-size: 54px;
+        letter-spacing: 4px;
+    }
+
+    .aboutTag {
+        font-size: 11px;
+        padding: 5px 12px;
+    }
+
+    .aboutProof {
+        gap: 18px;
+    }
+
+    .aboutPhotoSlot {
+        width: 120px;
+        height: 90px;
+    }
+
+    .siteFooterInner {
+        gap: 16px;
+    }
+
+    .siteFooterInner p {
+        font-size: 12px;
+    }
+
+    .siteFooterTagline {
+        font-size: 13px;
+        padding: 0 20px;
+    }
+
+    .projIntroInner h1 {
+        font-size: 22px;
+    }
+
+    .projIntroInner .projLead {
+        font-size: 13px;
+    }
+
+    .projMeta,
+    .projMetaInner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projMeta .projMetaItem {
+        padding: 12px 14px;
+    }
+
+    .projBody {
+        padding: 30px 16px 60px;
+    }
+
+    .projSection p {
+        font-size: 14px;
+    }
+}
+
+/* ====== 아주 작은 화면 (~380px 이하) ====== */
+@media screen and (max-width: 380px) {
+    .headerNav ul {
+        gap: 6px;
+    }
+
+    .headerNav ul li a {
+        font-size: 9px;
+    }
+
+    .projMeta,
+    .projMetaInner {
+        grid-template-columns: 1fr 1fr;
+    }
+}
