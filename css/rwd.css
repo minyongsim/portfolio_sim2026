@@ -171,6 +171,16 @@
         height: 90px;
     }
 
+    .aboutPhotoSlot.isPoster {
+        width: 104px;
+        height: 144px;
+    }
+
+    .aboutPhotoSlot.isCard {
+        width: 132px;
+        height: 176px;
+    }
+
     .siteFooterInner {
         gap: 16px;
     }

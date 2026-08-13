@@ -38,7 +38,7 @@ $(function ($) {
         // about은 확정 카피로 교체, 나머지는 아직 임시 문구
         var footerCopyMap = {
             'about': '이런 결과가 필요하시면, 편하게 연락 주세요.',
-            'brand-story': '(임시 카피) BRAND STORAGE 페이지 문구 자리입니다.',
+            'brand-story': '이런 브랜드를 만들 사람이 필요하시면, 편하게 연락 주세요.',
             'data-crm': '(임시 카피) DATA & CRM 페이지 문구 자리입니다.',
             'marketing': '(임시 카피) MARKETING 페이지 문구 자리입니다.'
         };
@@ -62,8 +62,79 @@ $(function ($) {
         };
         var $sections = $(sectionSelectors[page] || PROJECT_DETAIL_SELECTOR);
         var $menuBox = $header.find('.menuBox');
+        var $brandPanels = $('.brandPanel');
 
-        if ($sections.length && $menuBox.length) {
+        // brand-story는 위아래로 쌓인 스크롤 섹션이 아니라 탭 전환형(.brandPanel)이라,
+        // 사이드 탭도 "브랜드 전환용"이 아니라 지금 열려있는 브랜드 패널 "안"의 서브섹션
+        // (.brandSubSection)만 보여줌 -> 탭을 바꾸면 사이드 탭 목록도 그 브랜드 것으로 통째로 교체됨
+        // (아래 일반 스크롤 스파이/휠 스냅 분기는 타지 않음)
+        if (page === 'brand-story' && $brandPanels.length && $menuBox.length) {
+            var headerH = $topbar.length ? $topbar.outerHeight() : 0;
+            var brandSpyObserver = null;
+
+            function renderBrandSideNav() {
+                if (brandSpyObserver) { brandSpyObserver.disconnect(); brandSpyObserver = null; }
+                $menuBox.empty();
+
+                var $activePanel = $brandPanels.filter('.active');
+                var $subs = $activePanel.find('.brandSubSection');
+
+                $subs.each(function (i) {
+                    var tabLabel = $(this).data('tab') || ('SECTION ' + (i + 1));
+                    $menuBox.append(
+                        '<li data-idx="' + i + '" class="' + (i === 0 ? 'active' : '') + '"><a href="#">' +
+                        '<span><i class="fa-solid fa-folder-open"></i> ' + tabLabel + '</span>' +
+                        '<span><i class="fa-solid fa-folder"></i> ' + (i + 1) + '</span>' +
+                        '</a></li>'
+                    );
+                });
+
+                var $navLis = $menuBox.find('li');
+
+                // 탭 누르면 해당 서브섹션으로 스크롤 (지금은 서브섹션이 1개뿐이라도,
+                // 나중에 브랜드별 콘텐츠가 늘어나면 그대로 여러 개로 확장됨)
+                // .off()로 이전 탭 전환 때 걸어둔 핸들러부터 먼저 정리 (안 그러면 탭 바꿀 때마다 중복 바인딩됨)
+                $menuBox.off('click', 'li a').on('click', 'li a', function (e) {
+                    e.preventDefault();
+                    var idx = $(this).closest('li').data('idx');
+                    var $target = $subs.eq(idx);
+                    if ($target.length) {
+                        $('html,body').stop().animate({ scrollTop: $target.offset().top - headerH }, 600);
+                    }
+                });
+
+                if ($subs.length > 1 && 'IntersectionObserver' in window) {
+                    var ratios = new Map();
+                    brandSpyObserver = new IntersectionObserver(function (entries) {
+                        entries.forEach(function (entry) { ratios.set(entry.target, entry.intersectionRatio); });
+                        var bestIdx = -1, bestRatio = 0;
+                        $subs.each(function (i) {
+                            var r = ratios.get(this) || 0;
+                            if (r > bestRatio) { bestRatio = r; bestIdx = i; }
+                        });
+                        if (bestIdx > -1) {
+                            $navLis.removeClass('active');
+                            $navLis.eq(bestIdx).addClass('active');
+                        }
+                    }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+                    $subs.each(function () { brandSpyObserver.observe(this); });
+                }
+            }
+
+            function activateBrandTab(target) {
+                $('.brandTabBtn').removeClass('active');
+                $('.brandTabBtn[data-target="' + target + '"]').addClass('active');
+                $brandPanels.removeClass('active');
+                $brandPanels.filter('[data-brand="' + target + '"]').addClass('active');
+                renderBrandSideNav();
+            }
+
+            $(document).on('click', '.brandTabBtn', function () {
+                activateBrandTab($(this).data('target'));
+            });
+
+            renderBrandSideNav();
+        } else if ($sections.length && $menuBox.length) {
             // 페이지에 있는 섹션 개수만큼 사이드 탭 생성 (예: SECTION 1~4)
             // 섹션 요소에 data-tab="INTRO" 같은 값이 있으면 그 이름을 쓰고,
             // 없으면 기본값인 "SECTION N"으로 표시함 (about은 data-tab 지정, 나머진 기본값)
@@ -209,6 +280,70 @@ $(function ($) {
         }, { threshold: 0.6 });
 
         $statNums.each(function () { statObserver.observe(this); });
+    }
+
+    // ---- 증거 사진 라이트박스 (클릭하면 크게 보기 + 슬라이드) ----
+    // 대상: .aboutPhotoSlot img (about.html의 케이스 증거 사진, brand-story.html의 신산커피 패키지/현장 사진 등)
+    // 같은 .aboutProof 안의 사진끼리를 한 그룹으로 묶어서, 그 그룹 안에서만 좌우로 슬라이드됨
+    var $photoTriggers = $('.aboutPhotoSlot img');
+    if ($photoTriggers.length) {
+        var $lightbox = $('\
+        <div class="photoLightbox" aria-hidden="true">\
+            <button type="button" class="lightboxClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>\
+            <button type="button" class="lightboxNav lightboxPrev" aria-label="이전 사진"><i class="fa-solid fa-chevron-left"></i></button>\
+            <div class="lightboxStage">\
+                <img src="" alt="">\
+                <p class="lightboxCounter"></p>\
+            </div>\
+            <button type="button" class="lightboxNav lightboxNext" aria-label="다음 사진"><i class="fa-solid fa-chevron-right"></i></button>\
+        </div>').appendTo('body');
+
+        var $lbImg = $lightbox.find('.lightboxStage img');
+        var $lbCounter = $lightbox.find('.lightboxCounter');
+        var $lbGroup = $();
+        var lbIndex = 0;
+
+        function lbRender() {
+            var $img = $lbGroup.eq(lbIndex);
+            $lbImg.attr('src', $img.attr('src')).attr('alt', $img.attr('alt') || '');
+            var multi = $lbGroup.length > 1;
+            $lightbox.find('.lightboxNav').toggle(multi);
+            $lbCounter.text(multi ? (lbIndex + 1) + ' / ' + $lbGroup.length : '').toggle(multi);
+        }
+
+        function lbOpen($clicked) {
+            var $proof = $clicked.closest('.aboutProof');
+            $lbGroup = $proof.length ? $proof.find('.aboutPhotoSlot img') : $clicked;
+            lbIndex = Math.max($lbGroup.index($clicked), 0);
+            lbRender();
+            $lightbox.addClass('active').attr('aria-hidden', 'false');
+            $('body').addClass('lightboxOpen');
+        }
+
+        function lbClose() {
+            $lightbox.removeClass('active').attr('aria-hidden', 'true');
+            $('body').removeClass('lightboxOpen');
+        }
+
+        function lbStep(dir) {
+            if (!$lbGroup.length) return;
+            lbIndex = (lbIndex + dir + $lbGroup.length) % $lbGroup.length;
+            lbRender();
+        }
+
+        $(document).on('click', '.aboutPhotoSlot img', function () { lbOpen($(this)); });
+        $lightbox.on('click', '.lightboxClose', lbClose);
+        $lightbox.on('click', '.lightboxPrev', function () { lbStep(-1); });
+        $lightbox.on('click', '.lightboxNext', function () { lbStep(1); });
+        $lightbox.on('click', function (e) {
+            if (e.target === this) lbClose();
+        });
+        $(document).on('keydown', function (e) {
+            if (!$lightbox.hasClass('active')) return;
+            if (e.key === 'Escape') lbClose();
+            if (e.key === 'ArrowLeft') lbStep(-1);
+            if (e.key === 'ArrowRight') lbStep(1);
+        });
     }
 
     // ---- 새로 고침하면 스크롤 맨 위로 + 로딩 화면 숨기기 ----

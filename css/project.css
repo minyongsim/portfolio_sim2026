@@ -73,8 +73,8 @@ body {
 }
 
 .projMeta {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    /* 전체 폭 배경 밴드. 실제 4칸 그리드는 안쪽 .projMetaInner가 담당한다.
+       (기존에 여기에도 grid가 걸려 있어 메타 바가 왼쪽 1/4로 찌그러지던 버그 수정) */
     border-top: 1px solid #4D4D4D;
     border-bottom: 1px solid #4D4D4D;
     background: #262626;
