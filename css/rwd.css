@@ -370,8 +370,14 @@
         gap: 20px;
     }
 
-    .footerLogo img {
-        height: 32px;
+    /* 상단바 글자 로고 — 좁은 화면에서 메뉴와 부딪히지 않게 낮춤 */
+    .logoText .logoTitle {
+        font-size: 22px;
+        letter-spacing: 1.5px;
+    }
+
+    .footerLogo .logoTitle {
+        font-size: 21px;
     }
 
     .footerRight {

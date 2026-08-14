@@ -593,19 +593,8 @@ body {
     margin-bottom: 14px;
 }
 
-/* 로고 원본이 어두운 색이라 어두운 푸터에선 안 보임 → 흰색으로 반전 */
-.footerLogo img {
-    display: block;
-    height: 38px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
-    transition: opacity 0.2s ease;
-}
-
-.footerLogo:hover img {
-    opacity: 1;
-}
+/* 푸터 로고(글자)의 색·크기는 site.css에 모아뒀음.
+   style.css가 site.css보다 먼저 로드돼서, 같은 명시도면 여기 규칙이 밀림 */
 
 .siteFooterTagline {
     font-size: 15px;

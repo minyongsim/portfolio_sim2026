@@ -84,7 +84,7 @@ body {
 }
 
 /* 버튼 왼쪽 카테고리 아이콘.
-   폴더 = 아카이브(BRAND STORAGE), 파이차트 = 데이터, 확성기 = 마케팅.
+   폴더 = 브랜딩 케이스 모음(BRANDING), 파이차트 = 데이터, 확성기 = 마케팅.
    글자만 있을 때보다 세 갈래가 한눈에 구분됨. */
 .qlIcon {
     font-size: 15px;
@@ -609,6 +609,15 @@ body {
     color: #767676;
     margin-top: 24px;
     margin-bottom: 4px;
+    /* 이게 없어서 모바일에서 '자/기', '브/랜드가', '상/세,', '않/기'처럼
+       한글이 글자 단위로 쪼개지고 있었음. 헤드라인·본문과 같은 규칙으로 맞춤 */
+    word-break: keep-all;
+}
+
+/* 가운뎃점(·)은 어절 사이가 아니어도 줄바꿈 지점이 돼서
+   '노출· / 결제·배송'처럼 끊김. keep-all로는 막히지 않아 따로 묶어줌 */
+.nbGroup {
+    white-space: nowrap;
 }
 
 /* 섹션3 - 핵심 수치를 큰 스탯으로 강조 */
@@ -954,17 +963,49 @@ body {
     font-size: 32px;
 }
 
-/* 필기체 로고라 획이 얇아서 작게 쓰면 뭉개짐. 원본이 215x72라 키울 여유도 충분함.
-   아래 메뉴 글자보다 확실히 커야 로고 → 메뉴 순으로 위계가 잡힘 */
-.home_header .home_logo .logoImg {
-    display: block;
-    height: 42px;
-    width: auto;
-    transition: height 0.35s ease;
+/* 이미지 로고(필기체 logo-script.png)를 글자 로고로 교체.
+   본문과 같은 LaundryGothic을 써서 사이트 전체가 한 벌의 서체로 묶임.
+   상단바 높이는 .home_box의 10vh가 잡고 있어서 글자 크기를 바꿔도
+   기본 106px / 스크롤 90px로 유지됨 (이미지 로고일 때 111 / 90) */
+.logoText {
+    display: inline-block;
+    /* inline-block은 글자 베이스라인에 앉아서 아래에 디센더 여백(약 5px)이 생김.
+       이미지 로고일 땐 없던 여백이라 상단바가 111 → 116px로 커졌음 */
+    vertical-align: top;
+    line-height: 1;
+    text-decoration: none;
 }
 
-.home_header.scrolled .home_logo .logoImg {
-    height: 30px;
+.logoText .logoTitle {
+    display: block;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 26px;
+    /* 런드리고딕은 R(400)/B(700) 두 벌뿐이라 700이 곧 볼드 */
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #373737;
+    transition: font-size 0.35s ease, letter-spacing 0.35s ease, color 0.2s ease;
+}
+
+.home_header.scrolled .logoText .logoTitle {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}
+
+.home_logo .logoText:hover .logoTitle {
+    color: #FF5C4D;
+}
+
+/* 어두운 푸터용 반전 버전. 상단바와 같은 형태를 유지하고 색만 바꿈 */
+.footerLogo .logoTitle {
+    font-size: 24px;
+    color: #FFFFFF;
+    opacity: 0.92;
+    transition: opacity 0.2s ease;
+}
+
+.footerLogo:hover .logoTitle {
+    opacity: 1;
 }
 
 .headerNav ul {
@@ -1021,7 +1062,7 @@ body {
     }
 }
 
-/* BRAND STORAGE 전용: 브랜드별(신산커피/메르디센트) 탭 전환 레이아웃 */
+/* BRANDING 전용: 브랜드별(신산커피/메르디센트) 탭 전환 레이아웃 */
 .brandStorySection {
     flex: 1;
     max-width: 900px;
@@ -1053,6 +1094,8 @@ body {
 .brandIntro p {
     font-size: 15px;
     color: #6B6B6B;
+    /* 모바일에서 '브랜드/를'로 쪼개지던 것 방지 (h1에는 이미 걸려 있었음) */
+    word-break: keep-all;
 }
 
 .brandTabs {

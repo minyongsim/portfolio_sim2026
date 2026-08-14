@@ -60,7 +60,7 @@ $(function ($) {
     // HTML을 건드리지 않도록 상단바 앞에 JS로 끼워 넣음.
     var CATEGORY_LABEL = {
         'about': 'ABOUT',
-        'brand-story': 'BRAND STORAGE',
+        'brand-story': 'BRANDING',
         'data-crm': 'DATA &amp; CRM',
         'marketing': 'MARKETING'
     };

@@ -15,12 +15,14 @@ var NAV_HTML = '\
 var TOPBAR_HTML = '\
 <div class="home_box row">\
     <div class="home_logo">\
-        <a href="index.html"><img src="img/logo-script.png" alt="Portfolio .works2026" class="logoImg"></a>\
+        <a href="index.html" class="logoText">\
+            <span class="logoTitle">PORTFOLIO</span>\
+        </a>\
     </div>\
     <nav class="headerNav">\
         <ul>\
             <li data-nav="about"><a href="about.html">ABOUT</a></li>\
-            <li data-nav="brand-story"><a href="brand-story.html">BRAND STORAGE</a></li>\
+            <li data-nav="brand-story"><a href="brand-story.html">BRANDING</a></li>\
             <li data-nav="data-crm"><a href="data-crm.html">DATA &amp; CRM</a></li>\
             <li data-nav="marketing"><a href="marketing.html">MARKETING</a></li>\
         </ul>\
@@ -34,7 +36,9 @@ var FOOTER_HTML = '\
 <span class="footerWatermark">THANKS</span>\
 <div class="footerGrid">\
     <div class="footerLeft">\
-        <a class="footerLogo" href="{{BASE}}index.html"><img src="{{BASE}}img/logo-script.png" alt="Portfolio .works2026"></a>\
+        <a class="footerLogo logoText" href="{{BASE}}index.html">\
+            <span class="logoTitle">PORTFOLIO</span>\
+        </a>\
         <p class="siteFooterTagline"></p>\
     </div>\
     <div class="footerRight">\
