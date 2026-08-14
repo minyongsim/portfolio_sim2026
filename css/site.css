@@ -1179,6 +1179,69 @@ body {
     margin: 0;
 }
 
+/* 'TOP 10'은 내가 측정한 수치가 아니라 주최 측이 매긴 선정 결과라,
+   7~8%(실구매 전환율)와 똑같은 64px 숫자로 두면 두 성격이 섞여 보임.
+   게다가 사진 여덟 장 띠 아래에 큰 글자만 덩그러니 떠 붙을 자리가 없었음.
+   같은 페이지의 주문 흐름 카드와 같은 규칙(1.5px #E8E8E8 테두리 + 라운드 +
+   #FFF1EF 원 안의 코랄 아이콘)으로 배지를 만들어 '받은 것'처럼 보이게 함 */
+.awardBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 26px 16px 18px;
+    border: 1.5px solid #E8E8E8;
+    border-radius: 14px;
+    background: #FFFFFF;
+    text-align: left;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.awardBadge:hover {
+    border-color: #FF5C4D;
+    transform: translateY(-3px);
+}
+
+.abIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #FFF1EF;
+}
+
+.abIcon i {
+    font-size: 18px;
+    color: #FF5C4D;
+}
+
+.abBody {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 30px 볼드는 WCAG 큰 글자 기준(18.66px 볼드 이상)에 들어가므로
+   코랄(#FF5C4D)의 흰 배경 대비 3.05:1로 기준(3:1)을 통과함 */
+.abRank {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: 0.5px;
+    color: #FF5C4D;
+}
+
+.abLabel {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    color: #6B6B6B;
+    margin-top: 6px;
+    word-break: keep-all;
+}
+
 /* 주문 흐름 다이어그램 (메르디센트 운영 섹션)
    숫자 데이터가 아니라 '주문 한 건이 지나가는 단계'를 보여주는 그래픽.
    앞 섹션의 .aboutFlow 와 구분되도록 번호 + 원형 아이콘 + 설명 2줄 구조로 만듦 */

@@ -242,6 +242,28 @@
         font-size: 16px;
     }
 
+    /* 배지가 342px 본문 폭 안에 한 덩어리로 들어가게 낮춤
+       (아이콘 40 + 간격 12 + 라벨 한 줄) */
+    .awardBadge {
+        gap: 12px;
+        padding: 14px 18px 14px 14px;
+        border-radius: 12px;
+    }
+
+    .abIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .abRank {
+        font-size: 24px;
+    }
+
+    .abLabel {
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
     /* WORKS처럼 5글자짜리 워터마크가 화면 밖으로 잘리지 않도록 낮춤 */
     .aboutWatermark {
         font-size: 88px;
