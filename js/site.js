@@ -24,26 +24,182 @@ $(function ($) {
     // .siteFooter.grow 가 적용됐을 때 늘어나는 총 높이 (css/style.css 의 padding 값과 맞춰야 함)
     var GROW_EXTRA_PX = 300;
 
+    // ---- 휠 스냅 감도 조절값 ----
+    // 휠을 한 번 굴린 뒤 다음 입력을 받기까지 걸리는 시간 = WHEEL_ANIM_MS + WHEEL_COOLDOWN_MS.
+    // 이 값이 작을수록 "감도가 높다"(연속으로 굴릴 때 바로바로 반응)고 느껴짐.
+    // 다만 너무 작게 잡으면 트랙패드 관성 스크롤 한 번에 두 칸씩 넘어갈 수 있으니
+    // 400~550ms 사이에서 조절하는 걸 권장.
+    var WHEEL_ANIM_MS = 450;      // 다음 섹션까지 미끄러지는 시간 (이전 700)
+    var WHEEL_COOLDOWN_MS = 60;   // 도착 후 다음 휠을 받기까지의 여유 (이전 100)
+    var WHEEL_SAFETY_MS = 700;    // 애니메이션이 끊겼을 때 잠금이 영구히 안 풀리는 걸 막는 보험 (이전 1000)
+
     // ---- 상단바 채우기 + 현재 페이지 메뉴 active 표시 ----
     if ($topbar.length && typeof TOPBAR_HTML !== 'undefined') {
         $topbar.html(TOPBAR_HTML);
         if (page) $topbar.find('.headerNav li[data-nav="' + page + '"]').addClass('active');
     }
 
-    // ---- 푸터 채우기 + 페이지별 임시 카피 문구 ----
+    // ---- 푸터 채우기 + 카피 문구 ----
     if ($footer.length && typeof FOOTER_HTML !== 'undefined') {
-        $footer.html(FOOTER_HTML);
+        // {{BASE}}는 projects/ 같은 하위 폴더에서 열렸을 때 '../'로 치환됨
+        $footer.html(FOOTER_HTML.split('{{BASE}}').join(base));
 
-        // 페이지별 푸터 카피 (연락처 위, 가운데 정렬)
-        // about은 확정 카피로 교체, 나머지는 아직 임시 문구
-        var footerCopyMap = {
-            'about': '이런 결과가 필요하시면, 편하게 연락 주세요.',
-            'brand-story': '이런 브랜드를 만들 사람이 필요하시면, 편하게 연락 주세요.',
-            'data-crm': '(임시 카피) DATA & CRM 페이지 문구 자리입니다.',
-            'marketing': '(임시 카피) MARKETING 페이지 문구 자리입니다.'
-        };
-        $footer.find('.siteFooterTagline').text(footerCopyMap[page] || '(임시 카피) 문구 자리입니다.');
+        // 푸터 맺음말 (왼쪽 로고 아래)
+        // 오른쪽에 연락처와 이력서 링크가 있으므로, 영업 문구 대신 문의를 열어두는 한 문장만 둠
+        var FOOTER_COPY_DEFAULT = '더 궁금한 점이 있으시면 편하게 연락 주세요.';
+
+        // 특정 페이지만 다른 문구를 쓰고 싶으면 여기에 'page이름': '문구' 형태로 추가하면 됨
+        var footerCopyMap = {};
+
+        $footer.find('.siteFooterTagline').text(footerCopyMap[page] || FOOTER_COPY_DEFAULT);
     }
+
+    // ---- 상단 띠배너: 현재 카테고리 / 섹션 위치 / 스크롤 진행률 ----
+    // 기존 .slideBar(얇은 코랄 진행바)가 하던 일을 흡수해서, 진행률뿐 아니라
+    // "지금 어디를 보고 있는지"까지 알려줌. 페이지가 길어서 길잡이가 필요함.
+    // HTML을 건드리지 않도록 상단바 앞에 JS로 끼워 넣음.
+    var CATEGORY_LABEL = {
+        'about': 'ABOUT',
+        'brand-story': 'BRAND STORAGE',
+        'data-crm': 'DATA &amp; CRM',
+        'marketing': 'MARKETING'
+    };
+    var $strip = null;
+
+    if ($topbar.length) {
+        $strip = $('\
+        <div class="topStrip">\
+            <div class="topStripInner">\
+                <span class="tsCat"></span>\
+                <span class="tsCtx"></span>\
+                <span class="tsPct">0%</span>\
+            </div>\
+            <span class="tsProgress"></span>\
+        </div>').insertBefore($topbar);
+
+        $strip.find('.tsCat').html(CATEGORY_LABEL[page] || 'PORTFOLIO');
+    }
+
+    // ---- 상단 고정 영역(띠배너 + 상단바)이 가리는 높이 ----
+    // 예전엔 상단바 높이만 빼고 띠배너(34px)를 빼먹어서, 섹션으로 스냅·이동했을 때
+    // 섹션 머리가 헤더 뒤로 30~50px씩 숨었음.
+    // 그리고 상단바는 스크롤하면 min-height까지 줄어드는데, 스냅은 항상 "스크롤된 뒤"에
+    // 도착하므로 줄어든 뒤 높이(min-height)를 기준으로 잡아야 정확히 맞음.
+    function chromeH() {
+        var stripH = $strip && $strip.length ? $strip.outerHeight() : 0;
+        var barH = 0;
+        if ($topbar.length) {
+            barH = parseFloat(window.getComputedStyle($topbar[0]).minHeight) || 0;
+            if (!barH) barH = $topbar.outerHeight();
+        }
+        return Math.round(stripH + barH);
+    }
+
+    // 띠배너+상단바는 CSS에서 position:fixed라 문서 흐름에서 빠져 있음.
+    // (sticky로 두면 상단바가 스크롤 중에 줄어들 때 문서 높이까지 같이 줄어서
+    //  미리 계산해 둔 섹션 위치가 어긋나고, 스냅 후 섹션 머리가 헤더에 가려짐)
+    // 그래서 "줄어들기 전" 높이만큼의 빈 자리를 여기서 만들어 끼워 넣음.
+    var $chromeSpacer = null;
+
+    if ($topbar.length) {
+        $chromeSpacer = $('<div class="chromeSpacer" aria-hidden="true"></div>').insertAfter($topbar);
+    }
+
+    // ---- 요소의 '진짜' 문서상 위치 ----
+    // 등장 애니메이션(.reveal)이 걸린 요소는 아직 나타나기 전에 transform: translateY(18px)이
+    // 걸려 있어서, offset()/getBoundingClientRect()가 실제 레이아웃 위치보다 18px 아래로 나옴.
+    // 그 값으로 스크롤 목표를 잡으면 도착했을 때(=애니메이션이 끝나 transform이 풀린 뒤)
+    // 섹션이 18px 위로 올라가 버려서 머리가 헤더에 가려짐.
+    // offsetTop은 transform의 영향을 받지 않으므로 이걸 누적해서 씀.
+    function docTop($el) {
+        var el = $el && $el.length ? $el[0] : null;
+        var y = 0;
+        while (el) {
+            y += el.offsetTop;
+            el = el.offsetParent;
+        }
+        return y;
+    }
+
+    // 섹션 높이를 calc(100vh - var(--chromeH))로 잡을 수 있게 CSS에 값을 넘겨줌.
+    // 이게 없으면 섹션이 100vh라서 헤더가 가리는 만큼 아래가 화면 밖으로 밀려나고,
+    // 가운데 정렬된 내용도 실제 보이는 영역 기준으로는 아래로 치우쳐 보임.
+    function applyChromeVar() {
+        document.documentElement.style.setProperty('--chromeH', chromeH() + 'px');
+
+        if ($chromeSpacer) {
+            // 빈 자리는 '줄어들기 전' 높이 기준. 그래야 맨 위에서 첫 섹션이 안 가려짐.
+            var stripH = $strip && $strip.length ? $strip.outerHeight() : 0;
+            var wasScrolled = $topbar.hasClass('scrolled');
+            if (wasScrolled) $topbar.removeClass('scrolled');
+            var fullBarH = $topbar.outerHeight();
+            if (wasScrolled) $topbar.addClass('scrolled');
+            $chromeSpacer.css('height', Math.round(stripH + fullBarH) + 'px');
+        }
+    }
+    applyChromeVar();
+    $(window).on('resize', applyChromeVar);
+
+    // ---- 첫 화면 스크롤 유도 ----
+    // 첫 화면만 보고 나가는 걸 막기 위해 "아래에 더 있다"는 신호를 첫 섹션 바닥에 둠.
+    // HTML을 페이지마다 고치지 않도록 여기서 한 번만 넣고, 조금이라도 스크롤하면 사라짐.
+    var $scrollCue = null;
+    var $firstSection = $('.scrollTestSection').first();
+
+    if ($firstSection.length) {
+        $scrollCue = $('\
+        <div class="scrollCue" aria-hidden="true">\
+            <span class="scrollCueText">SCROLL</span>\
+            <span class="scrollCueLine"></span>\
+        </div>').appendTo($firstSection);
+
+        // 이미 스크롤된 상태로 들어온 경우(새로고침 등)를 위해 첫 판정을 바로 한 번
+        if ($(window).scrollTop() > 40) $scrollCue.addClass('isHidden');
+    }
+
+    // 섹션 위치는 이미 스크롤 스파이가 계산해 둔 사이드 탭(.menuBox li.active)을 그대로 읽어 씀.
+    // 따로 계산하지 않으니 사이드 탭과 항상 같은 값을 가리킴.
+    function updateStripContext() {
+        if (!$strip) return;
+
+        var parts = [];
+
+        // brand-story는 브랜드 탭이 있어서 어느 브랜드를 보는 중인지도 같이 표시
+        var $activeBrand = $('.brandTabBtn.active');
+        if ($activeBrand.length) parts.push($activeBrand.text().trim());
+
+        var $lis = $('#header .menuBox > li');
+        if ($lis.length) {
+            var idx = $lis.index($lis.filter('.active'));
+            if (idx < 0) idx = 0;
+            var name = $lis.eq(idx).find('a > span:nth-of-type(1)').text().trim();
+            if (name) parts.push(name);
+            parts.push((idx + 1) + ' / ' + $lis.length);
+        }
+
+        $strip.find('.tsCtx').text(parts.join(' · '));
+    }
+
+    // 브랜드 탭을 바꾸면 사이드 탭 목록이 통째로 새로 그려지므로 띠배너도 다시 읽어야 함
+    $(document).on('click', '.brandTabBtn', function () { setTimeout(updateStripContext, 0); });
+
+    // 사이드 탭이 다 그려진 뒤(현재 블록이 끝난 뒤) 첫 표시 + 이후 변화 감시.
+    // 스크롤 스파이(IntersectionObserver)는 scroll 이벤트보다 늦게 실행되기 때문에,
+    // scroll 핸들러에서만 갱신하면 띠배너의 섹션 번호가 한 칸씩 밀림.
+    // 그래서 사이드 탭의 active 클래스가 바뀌는 순간을 직접 감시해서 같이 갱신함.
+    setTimeout(function () {
+        updateStripContext();
+
+        var menuBoxEl = document.querySelector('#header .menuBox');
+        if (menuBoxEl && window.MutationObserver) {
+            new MutationObserver(updateStripContext).observe(menuBoxEl, {
+                subtree: true,
+                childList: true,
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
+    }, 0);
 
     // ---- 사이드 탭(#header) 생성 + 스크롤 스파이 + 휠 스냅 스크롤 ----
     if ($header.length && typeof NAV_HTML !== 'undefined') {
@@ -69,7 +225,6 @@ $(function ($) {
         // (.brandSubSection)만 보여줌 -> 탭을 바꾸면 사이드 탭 목록도 그 브랜드 것으로 통째로 교체됨
         // (아래 일반 스크롤 스파이/휠 스냅 분기는 타지 않음)
         if (page === 'brand-story' && $brandPanels.length && $menuBox.length) {
-            var headerH = $topbar.length ? $topbar.outerHeight() : 0;
             var brandSpyObserver = null;
 
             function renderBrandSideNav() {
@@ -99,7 +254,7 @@ $(function ($) {
                     var idx = $(this).closest('li').data('idx');
                     var $target = $subs.eq(idx);
                     if ($target.length) {
-                        $('html,body').stop().animate({ scrollTop: $target.offset().top - headerH }, 600);
+                        $('html,body').stop().animate({ scrollTop: docTop($target) - chromeH() }, 600);
                     }
                 });
 
@@ -121,19 +276,54 @@ $(function ($) {
                 }
             }
 
-            function activateBrandTab(target) {
+            function activateBrandTab(target, updateHash) {
                 $('.brandTabBtn').removeClass('active');
                 $('.brandTabBtn[data-target="' + target + '"]').addClass('active');
                 $brandPanels.removeClass('active');
                 $brandPanels.filter('[data-brand="' + target + '"]').addClass('active');
                 renderBrandSideNav();
+
+                // 주소창에 #브랜드 를 남겨서 "메르디센트 쪽 보세요" 하고 링크로 보낼 수 있게 함.
+                // pushState가 아니라 replaceState라 뒤로가기 기록이 쌓이지 않음.
+                if (updateHash && window.history && history.replaceState) {
+                    history.replaceState(null, '', '#' + target);
+                }
+            }
+
+            // 브랜드를 바꾸면 화면 내용이 통째로 갈리므로, 보던 스크롤 위치를 그대로 두면
+            // 새 브랜드의 엉뚱한 중간 지점을 보게 됨. (섹션 끝의 '다른 브랜드 보기' 버튼은
+            // 4,000px 넘게 내려온 자리에 있어서 특히 티가 남) 그래서 맨 위로 올려줌.
+            function scrollToBrandTop() {
+                if ($(window).scrollTop() < 20) return;
+                $('html,body').stop().animate({ scrollTop: 0 }, 500, 'swing');
             }
 
             $(document).on('click', '.brandTabBtn', function () {
-                activateBrandTab($(this).data('target'));
+                activateBrandTab($(this).data('target'), true);
+                scrollToBrandTop();
             });
 
-            renderBrandSideNav();
+            // 링크에 #merdescent 처럼 붙어 있으면 그 탭을 열고 시작
+            function applyHashTab() {
+                var t = (location.hash || '').replace('#', '');
+                if (t && $brandPanels.filter('[data-brand="' + t + '"]').length) {
+                    activateBrandTab(t, false);
+                    return true;
+                }
+                return false;
+            }
+
+            if (!applyHashTab()) renderBrandSideNav();
+
+            // 이미 페이지를 보고 있는 상태에서 #해시 링크를 받으면 새로고침이 일어나지 않으므로
+            // hashchange 로도 탭을 바꿔줌
+            $(window).on('hashchange', function () {
+                if (applyHashTab()) scrollToBrandTop();
+            });
+
+            // 휠 스냅(한 번 굴리면 다음 화면으로 넘어가는 동작)은 넣었다가 제거했습니다.
+            // 브랜드 섹션은 높이가 제각각이라 스냅이 오히려 스크롤을 어색하게 만들었고,
+            // 지금은 브라우저 기본 스크롤을 그대로 씁니다.
         } else if ($sections.length && $menuBox.length) {
             // 페이지에 있는 섹션 개수만큼 사이드 탭 생성 (예: SECTION 1~4)
             // 섹션 요소에 data-tab="INTRO" 같은 값이 있으면 그 이름을 쓰고,
@@ -150,7 +340,6 @@ $(function ($) {
             });
 
             var $navLis = $menuBox.find('li');
-            var headerH = $topbar.length ? $topbar.outerHeight() : 0;
 
             // 탭 클릭하면 해당 섹션으로 부드럽게 스크롤
             $menuBox.on('click', 'li a', function (e) {
@@ -158,7 +347,7 @@ $(function ($) {
                 var idx = $(this).closest('li').data('idx');
                 var $target = $sections.eq(idx);
                 if ($target.length) {
-                    $('html,body').stop().animate({ scrollTop: $target.offset().top - headerH }, 600);
+                    $('html,body').stop().animate({ scrollTop: docTop($target) - chromeH() }, 600);
                 }
             });
 
@@ -210,10 +399,10 @@ $(function ($) {
 
                 // 현재 스크롤 위치보다 위에 있는 칸들 중 가장 마지막(=가장 가까운) 칸을 현재 칸으로 판단
                 // (소수점 오차로 위/아래 방향이 어긋나지 않도록 반올림해서 비교)
-                var curScroll = Math.round($(window).scrollTop() + headerH + 1);
+                var curScroll = Math.round($(window).scrollTop() + chromeH() + 1);
                 var curIdx = -1;
                 $wheelAnchors.each(function (i) {
-                    if (Math.round($(this).offset().top) <= curScroll) curIdx = i;
+                    if (Math.round(docTop($(this))) <= curScroll) curIdx = i;
                 });
 
                 var nextIdx = deltaY > 0 ? curIdx + 1 : curIdx - 1;
@@ -222,9 +411,9 @@ $(function ($) {
                 e.preventDefault();
                 wheelLock = true;
                 // 애니메이션이 중간에 다른 스크롤(탭 클릭 등)로 끊겨서 complete 콜백이 못 불려도
-                // 휠 입력이 영구히 막히지 않도록 안전장치로 최대 1초 뒤엔 무조건 잠금 해제
+                // 휠 입력이 영구히 막히지 않도록 안전장치로 일정 시간 뒤엔 무조건 잠금 해제
                 clearTimeout(wheelUnlockTimer);
-                wheelUnlockTimer = setTimeout(unlockWheel, 1000);
+                wheelUnlockTimer = setTimeout(unlockWheel, WHEEL_SAFETY_MS);
 
                 var $target = $wheelAnchors.eq(nextIdx);
                 var targetTop;
@@ -236,11 +425,11 @@ $(function ($) {
                     if ($footer.hasClass('grow')) { natDocH -= GROW_EXTRA_PX; }
                     targetTop = (natDocH + GROW_EXTRA_PX) - $(window).height();
                 } else {
-                    targetTop = $target.offset().top - headerH;
+                    targetTop = docTop($target) - chromeH();
                 }
 
-                $('html,body').stop().animate({ scrollTop: targetTop }, 700, 'swing', function () {
-                    setTimeout(unlockWheel, 100);
+                $('html,body').stop().animate({ scrollTop: targetTop }, WHEEL_ANIM_MS, 'swing', function () {
+                    setTimeout(unlockWheel, WHEEL_COOLDOWN_MS);
                 });
             }
 
@@ -293,6 +482,7 @@ $(function ($) {
             <button type="button" class="lightboxNav lightboxPrev" aria-label="이전 사진"><i class="fa-solid fa-chevron-left"></i></button>\
             <div class="lightboxStage">\
                 <img src="" alt="">\
+                <p class="lightboxCaption"></p>\
                 <p class="lightboxCounter"></p>\
             </div>\
             <button type="button" class="lightboxNav lightboxNext" aria-label="다음 사진"><i class="fa-solid fa-chevron-right"></i></button>\
@@ -300,6 +490,7 @@ $(function ($) {
 
         var $lbImg = $lightbox.find('.lightboxStage img');
         var $lbCounter = $lightbox.find('.lightboxCounter');
+        var $lbCaption = $lightbox.find('.lightboxCaption');
         var $lbGroup = $();
         var lbIndex = 0;
 
@@ -309,6 +500,11 @@ $(function ($) {
             var multi = $lbGroup.length > 1;
             $lightbox.find('.lightboxNav').toggle(multi);
             $lbCounter.text(multi ? (lbIndex + 1) + ' / ' + $lbGroup.length : '').toggle(multi);
+
+            // 사진마다 alt에 설명을 적어뒀으므로 그대로 캡션으로 보여줌
+            // (무슨 사진인지 크게 볼 때 알 수 있어야 함)
+            var caption = $img.attr('alt') || '';
+            $lbCaption.text(caption).toggle(!!caption);
         }
 
         function lbOpen($clicked) {
@@ -346,6 +542,27 @@ $(function ($) {
         });
     }
 
+
+    // ---- 섹션 진입 애니메이션 ----
+    // 스크롤로 섹션이 화면에 들어올 때 살짝 올라오며 나타남.
+    // 이미 지나간 요소는 다시 감추지 않음(위로 스크롤할 때 깜빡이면 거슬림).
+    // prefers-reduced-motion 을 켠 사용자에겐 CSS 쪽에서 효과를 끔.
+    var revealTargets = document.querySelectorAll('.brandSubSection, .scrollTestSection, .projSection, .brandIntro');
+    if (revealTargets.length && 'IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('revealed');
+                obs.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
+
+        Array.prototype.forEach.call(revealTargets, function (el) {
+            el.classList.add('reveal');
+            revealObserver.observe(el);
+        });
+    }
+
     // ---- 새로 고침하면 스크롤 맨 위로 + 로딩 화면 숨기기 ----
     $(window).on('load', function () {
         setTimeout(function () {
@@ -358,14 +575,25 @@ $(function ($) {
     });
 
     // ---- 스크롤 이벤트: 진행바 / 상단바 축소 / 맨 위로(TOP) 버튼 / 푸터 grow ----
-    $(window).scroll(function () {
+    // 스크롤 1틱마다 문서 높이·푸터 위치 등 레이아웃을 여러 번 읽으면
+    // 긴 페이지에서 끊길 수 있어, 프레임당 한 번만 실행되도록 묶음(rAF throttle).
+    var scrollTicking = false;
+
+    function onScrollFrame() {
         var scollSize = $(document).height() - $(window).height();
-        var sct = $(this).scrollTop();
+        var sct = $(window).scrollTop();
         var wid = scollSize > 0 ? (sct / scollSize) * 100 + '%' : '0%';
-        $('.slideBar').css({
-            opacity: 1,
-            width: wid
-        });
+        // 띠배너: 진행률 막대 + 퍼센트 + 현재 섹션
+        if ($strip) {
+            $strip.find('.tsProgress').css('width', wid);
+            $strip.find('.tsPct').text(Math.round(scollSize > 0 ? (sct / scollSize) * 100 : 0) + '%');
+            updateStripContext();
+        }
+
+        // 스크롤 유도 표시: 조금이라도 내리면 역할을 다했으므로 숨김
+        if ($scrollCue) {
+            $scrollCue.toggleClass('isHidden', sct > 40);
+        }
 
         // 탑바: 스크롤 80px 지점부터 알약이 작아지며 상단에 고정 + 블러
         if (sct > 80) {
@@ -405,8 +633,17 @@ $(function ($) {
             $gotop.toggleClass('onFooter', onFooter);
             $footer.toggleClass('grow', nearBottom && !isMobile);
 
-            if (onFooter) {
-                if (!isMobile) {
+            // 페이지가 길어져서 푸터에 닿아야만 TOP이 뜨면 중간에서 위로 갈 방법이 없음.
+            // 한 화면 정도 내려가면 그때부터 우측 하단에 떠 있게 하고(floating),
+            // 푸터에 닿으면 기존처럼 푸터 한가운데로 자리를 옮김.
+            var scrolledEnough = sct > (winH * 0.8);
+
+            // 푸터 위에 올라갔을 때만 JS가 top을 직접 잡고, 그 전에는 CSS(floating)에 맡김
+            $gotop.toggleClass('floating', !onFooter && !isMobile);
+            if (!onFooter) { $gotop.css('top', ''); }
+
+            if (onFooter || scrolledEnough) {
+                if (onFooter && !isMobile) {
                     var footerTopOnScreen = footerTop - sct;
                     var centerY = footerTopOnScreen + (footerHeight / 2);
                     $gotop.css('top', centerY);
@@ -416,6 +653,15 @@ $(function ($) {
                 $gotop.removeClass('on').stop().animate({ opacity: 0 }, 300);
             }
         }
+    }
+
+    $(window).scroll(function () {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(function () {
+            onScrollFrame();
+            scrollTicking = false;
+        });
     });
 
     // 맨 위로 버튼 클릭 시 최상단으로 스크롤

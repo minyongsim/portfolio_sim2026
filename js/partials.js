@@ -27,12 +27,20 @@ var TOPBAR_HTML = '\
     </nav>\
 </div>';
 
+// 푸터: 왼쪽에 로고 + 맺음말, 오른쪽에 연락처를 세로로 쌓는 2단 구성.
+// 바닥의 큰 THANKS는 배경 워터마크라 아래쪽이 잘려 보이는 게 정상입니다.
+// {{BASE}}는 site.js가 body[data-base] 값으로 바꿔줍니다. (projects/ 하위 페이지 대비)
 var FOOTER_HTML = '\
 <span class="footerWatermark">THANKS</span>\
-<p class="siteFooterTagline"></p>\
-<div class="row siteFooterInner">\
-    <p><i class="fas fa-mobile"></i> <a href="tel:010-2747-2659">010.2747.2659</a></p>\
-    <p><i class="far fa-envelope"></i> <a href="mailto:eq900bmwm@gmail.com">eq900bmwm@gmail.com</a></p>\
-    <p><i class="fas fa-globe"></i> <a href="pdf/simminyongresume.pdf" target="_blank">RESUME</a></p>\
+<div class="footerGrid">\
+    <div class="footerLeft">\
+        <a class="footerLogo" href="{{BASE}}index.html"><img src="{{BASE}}img/logo-script.png" alt="Portfolio .works2026"></a>\
+        <p class="siteFooterTagline"></p>\
+    </div>\
+    <div class="footerRight">\
+        <p><i class="fas fa-mobile"></i> <a href="tel:010-2747-2659">010.2747.2659</a></p>\
+        <p><i class="far fa-envelope"></i> <a href="mailto:eq900bmwm@gmail.com">eq900bmwm@gmail.com</a></p>\
+        <p><i class="fas fa-file-pdf"></i> <a href="{{BASE}}pdf/simminyongresume.pdf" target="_blank">RESUME</a></p>\
+    </div>\
 </div>\
 <p class="siteFooterCopy">copyright © 2026 SIM MIN YONG. all rights reserved.</p>';

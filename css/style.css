@@ -40,7 +40,7 @@ body {
 }
 
 .menuBox {
-    width: 130px;
+    width: 116px;
 }
 
 .menuBox>li {
@@ -54,35 +54,57 @@ body {
 .menuBox>li a {
     display: block;
     position: relative;
-    width: 130px;
-    height: 32px;
+    width: 116px;
+    height: 27px;
 }
 
 .menuBox>li a span:nth-of-type(1),
 .menuBox>li a span:nth-of-type(2) {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    /* 가운데 정렬이면 활성/비활성 알약의 폭 차이만큼 좌우로 벌어지며 바뀌어 어색함.
+       오른쪽 끝을 맞춰두면 폭이 넓은 활성 알약이 '왼쪽으로 늘어나는' 것처럼 보임 */
+    right: 0;
+    left: auto;
+    transform: translateY(-50%);
+    /* 글자 크기가 서로 달라 높이가 16px / 22px로 들쭉날쭉했음.
+       높이를 고정하고 flex로 가운데 정렬해서 위아래로 가지런하게 맞춤 */
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex로 바꾸면 아이콘과 글자 사이의 공백 문자가 사라지므로 gap으로 되살림 */
+    gap: 5px;
+    box-sizing: border-box;
+    transition: opacity 0.28s ease, transform 0.35s ease;
 }
 
 .menuBox>li a span:nth-of-type(1) {
-    width: 130px;
+    /* 평소엔 폭 0으로 접혀 있다가, active가 되면 오른쪽 끝을 축으로 왼쪽으로 늘어남.
+       overflow:hidden + nowrap 이라 라벨이 가장자리에서 스르륵 드러나는 것처럼 보임.
+       (scaleX로 늘리면 글자가 찌그러지므로 폭 자체를 애니메이션함) */
+    width: 0;
+    padding: 5px 0;
+    overflow: hidden;
+    white-space: nowrap;
     opacity: 0;
-    visibility: hidden;
     background: #FF5C4D;
     color: #FFFFFF;
-    padding: 6px 12px;
     border-radius: 50px;
-    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s 0.35s;
+    transition: width 0.42s cubic-bezier(0.2, 0.8, 0.25, 1),
+                padding 0.42s cubic-bezier(0.2, 0.8, 0.25, 1),
+                opacity 0.2s ease;
 }
 
 .menuBox>li.active a>span:nth-of-type(1) {
+    width: 116px;
+    padding: 5px 10px;
     opacity: 1;
-    visibility: visible;
-    font-size: 13px;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    font-size: 11px;
+    /* 숫자 알약이 먼저 빠진 뒤(0.1s) 늘어나기 시작 */
+    transition: width 0.42s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s,
+                padding 0.42s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s,
+                opacity 0.18s ease 0.1s;
 }
 
 /* active 되기 전(기본) 상태의 사이드 탭 — 숫자가 알약 테두리에 붙지 않도록 상하좌우 여백 */
@@ -92,8 +114,8 @@ body {
     visibility: visible;
     color: #FFFFFF;
     font-weight: normal;
-    width: 44px;
-    font-size: 12px;
+    width: 38px;
+    font-size: 11px;
     padding: 2px;
     border-radius: 50px;
     background: #373737;
@@ -103,19 +125,10 @@ body {
     text-align: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s 0.35s;
+    transition: opacity 0.16s ease, transform 0.35s ease, visibility 0s 0.35s;
 }
 
-.slideBar {
-    position: fixed;
-    z-index: 9999999;
-    top: 0;
-    width: 0;
-    height: 8px;
-    background-color: #FF5C4D;
-    border-radius: 0PX 50PX 50PX 0PX;
-    opacity: 0;
-}
+
 
 /* 페이지 로딩 화면 */
 .pageLoader {
@@ -179,12 +192,14 @@ body {
     letter-spacing: 3px;
 }
 
-/* 맨 위로 버튼: 사이드탭과 정확히 같은 가로 중심선(X축), 푸터가 보일 때 그 영역 위아래 가운데(Y축)로 등장 */
+/* 맨 위로 버튼: 사이드탭과 정확히 같은 가로 중심선(X축)
+   (사이드탭 116px + .headerBox 좌우 패딩 20px = 136px 이어야 중심이 맞음)
+   푸터가 보이면 푸터 영역 한가운데로, 그 전에는 우측 하단에 떠 있음(.floating) */
 .gotop {
     display: none;
     position: fixed;
     right: 24px;
-    width: 150px;
+    width: 136px;
     transform: translateY(-50%);
     z-index: 99999999;
     opacity: 0;
@@ -194,6 +209,13 @@ body {
 
 .gotop.on {
     display: block;
+}
+
+/* 푸터에 닿기 전, 스크롤 중에 떠 있는 상태 */
+.gotop.floating {
+    top: auto;
+    bottom: 48px;
+    transform: none;
 }
 
 .gotop>img {
@@ -510,70 +532,204 @@ body {
     color: #FF5C4D;
 }
 
-/* 사이트 푸터 */
+/* 사이트 푸터
+   구성: [왼쪽] 로고 + 맺음말  /  [오른쪽] 연락처 세로 나열  /  [아래] 구분선 + copyright
+   배경에는 큰 THANKS를 바닥에 붙여 아래쪽이 잘리게 둠. */
 .siteFooter {
     position: relative;
     overflow: hidden;
     background: #373737;
     color: #FFFFFF;
-    padding: 30px 20px;
-    text-align: center;
+    padding: 48px 20px 26px;
+    text-align: left;
     transition: padding 0.5s ease;
 }
 
-/* 스크롤해서 푸터가 화면에 들어오면 높이가 300px 더 늘어남 (위아래 패딩에 150px씩 추가) */
+/* 스크롤해서 푸터가 화면에 들어오면 위아래 패딩이 늘어나며 여백이 생김 */
 .siteFooter.grow {
-    padding: 180px 20px;
+    padding: 150px 20px 120px;
 }
 
-/* 푸터가 커진 만큼 생기는 빈 공간을 채우는 큰 배경 워터마크 텍스트 */
+/* 워터마크는 가운데가 아니라 '바닥'에 붙임.
+   가운데 두면 맺음말·연락처 글자 뒤에 그대로 겹쳐서 지저분해짐.
+   아래쪽이 푸터 밖으로 나가 잘리는 게 의도된 모습 (.siteFooter가 overflow:hidden) */
 .footerWatermark {
     position: absolute;
-    top: 50%;
+    top: auto;
+    bottom: -0.3em;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     z-index: 0;
     font-family: 'LaundryGothic', sans-serif;
-    font-size: 140px;
+    font-size: 150px;
     font-weight: 800;
-    letter-spacing: 10px;
-    color: rgba(255, 255, 255, 0.05);
+    line-height: 1;
+    letter-spacing: 12px;
+    color: rgba(255, 255, 255, 0.09);
     white-space: nowrap;
     pointer-events: none;
     user-select: none;
+    /* 글자 윗부분을 서서히 사라지게 해서, 푸터가 짧아 본문과 겹치는 순간에도
+       배경이 지저분해 보이지 않게 함 */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, #000 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, #000 100%);
 }
 
-.siteFooterTagline {
+/* 2단 배치 */
+.footerGrid {
     position: relative;
     z-index: 1;
-    font-size: 16px;
-    font-style: italic;
-    color: #E8E8E8;
-    letter-spacing: 0.3px;
-    margin-bottom: 20px;
-}
-
-.siteFooterInner {
-    position: relative;
-    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 28px 40px;
+}
+
+.footerLogo {
+    display: inline-block;
     margin-bottom: 14px;
 }
 
-.siteFooterInner p {
+/* 로고 원본이 어두운 색이라 어두운 푸터에선 안 보임 → 흰색으로 반전 */
+.footerLogo img {
+    display: block;
+    height: 38px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.footerLogo:hover img {
+    opacity: 1;
+}
+
+.siteFooterTagline {
+    font-size: 15px;
+    font-style: italic;
+    color: #E8E8E8;
+    letter-spacing: 0.3px;
+    word-break: keep-all;
+}
+
+.footerRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.footerRight p {
+    display: flex;
+    align-items: center;
+    gap: 9px;
     font-size: 14px;
 }
 
-.siteFooterInner a {
+/* 아이콘 폭을 고정해야 세 줄의 글자 시작점이 맞음 */
+.footerRight i {
+    width: 16px;
+    text-align: center;
+    color: #FF5C4D;
+}
+
+.footerRight a {
     color: #FFFFFF;
+    transition: color 0.2s ease;
+}
+
+.footerRight a:hover {
+    color: #FF5C4D;
 }
 
 .siteFooterCopy {
     position: relative;
     z-index: 1;
+    max-width: 1100px;
+    margin: 30px auto 0;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     font-size: 12px;
     color: #D4D4D4;
+}
+
+/* ── 서랍 속 폴더탭 연출 ──────────────────────────────────────────
+   평소엔 탭이 화면 오른쪽 가장자리까지 쭉 이어져 꽂혀 있다가,
+   마우스를 가져가면 위에서부터 차례로 알약 모양으로 정리되며 빠져나옴.
+
+   알약을 통째로 오른쪽으로 밀면 안에 있는 폴더 아이콘과 글자까지 잘림.
+   (알약 폭에 내용이 거의 꽉 차 있어서 밀 여유가 없음)
+   그래서 알약 자체는 제자리에 두고, 오른쪽에 같은 색 '꼬리'를 붙여
+   화면 밖까지 늘여줌 -> 상자만 걸쳐 보이고 내용은 항상 온전함.
+
+   #header(136px)와 .gotop(136px)을 둘 다 right:0에 두면
+   세로 중심선이 68px로 같아져 기존 정렬이 유지됨. */
+@media (hover: hover) and (min-width: 601px) {
+    #header {
+        right: 0;
+    }
+
+    .gotop {
+        right: 0;
+    }
+
+    /* 꼬리: 알약 오른쪽 끝에서 시작해 화면 밖까지 늘어남.
+       활성 알약은 폭이 애니메이션되며 overflow:hidden 이라 그 안에 두면 잘림.
+       그래서 알약이 아니라 바깥의 <a>에 붙임. */
+    .menuBox>li a::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 240px;
+        transform: translateY(-50%);
+        border-radius: 0 50px 50px 0;
+        transition: width 0.42s cubic-bezier(0.2, 0.8, 0.25, 1);
+        pointer-events: none;
+        /* 꼬리를 글자·아이콘보다 뒤에 깔아서 내용이 절대 가려지지 않게 함 */
+        z-index: -1;
+    }
+
+    /* 꼬리 높이는 알약 높이와 같아야 턱이 안 생김 (숫자 16px / 활성 25px).
+       시작 위치도 알약의 둥근 끝 안쪽으로 넣어 이음새를 감춤 */
+    /* 알약과 높이를 똑같이 맞춰야 이어지는 지점에 턱이 안 생김 */
+    .menuBox>li a::after {
+        height: 24px;
+        left: calc(100% - 14px);
+    }
+
+    .menuBox>li:not(.active) a::after {
+        background: #373737;
+    }
+
+    .menuBox>li.active a::after {
+        background: #FF5C4D;
+    }
+
+    /* 마우스를 올리면 꼬리가 접히면서 깔끔한 알약만 남음 */
+    #header:hover .menuBox>li a::after,
+    #header:focus-within .menuBox>li a::after {
+        width: 0;
+    }
+
+    /* 위에서부터 차례로 접히게 (되돌아갈 땐 지연 없이 한 번에) */
+    #header:hover .menuBox>li:nth-child(1) a::after { transition-delay: 0s; }
+    #header:hover .menuBox>li:nth-child(2) a::after { transition-delay: 0.05s; }
+    #header:hover .menuBox>li:nth-child(3) a::after { transition-delay: 0.1s; }
+    #header:hover .menuBox>li:nth-child(4) a::after { transition-delay: 0.15s; }
+    #header:hover .menuBox>li:nth-child(5) a::after { transition-delay: 0.2s; }
+
+    /* 가장자리에 걸쳐 있어도 마우스를 대기 쉽도록 왼쪽에 여유 hit 영역 */
+    .headerBox {
+        padding-left: 34px;
+    }
+}
+
+/* 움직임 줄이기 설정을 켠 사용자에겐 꼬리 없이 알약만 보여줌 */
+@media (prefers-reduced-motion: reduce) {
+    .menuBox>li a::after {
+        display: none !important;
+    }
 }
