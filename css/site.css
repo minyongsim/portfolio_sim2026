@@ -96,6 +96,50 @@ body {
     transform: scale(1.12);
 }
 
+/* 버튼 세 개가 다 같은 무게(240px 흰 알약)면 "케이스 상세 하나 + 다른 카테고리 둘"이라는
+   층위가 안 보임. 주 버튼만 채워서 어디를 먼저 눌러야 하는지 알려줌.
+   색은 새로 만들지 않고 사이트가 이미 쓰는 먹색(#373737) -> hover 코랄 규칙 그대로. */
+.qlBtn.isPrimary {
+    border-color: #373737;
+    background: #373737;
+    color: #FFFFFF;
+}
+
+.qlBtn.isPrimary .qlIcon {
+    color: #FFFFFF;
+}
+
+.qlBtn.isPrimary:hover {
+    border-color: #FF5C4D;
+    background: #FF5C4D;
+    color: #FFFFFF;
+}
+
+.scrollTestSection .qlBtn.isPrimary::after,
+.brandPanel .qlBtn.isPrimary::after {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.scrollTestSection .qlBtn.isPrimary:hover::after,
+.brandPanel .qlBtn.isPrimary:hover::after {
+    color: #FFFFFF;
+}
+
+/* 버튼 묶음 위 안내 한 줄 */
+.nextLead {
+    margin-top: 56px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    color: #6B6B6B;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.nextLead + .quickLinks {
+    padding-top: 18px;
+}
+
 /* 누르면 어디론가 이동한다는 신호. 글자를 늘리지 않고 기호만 붙임 */
 .scrollTestSection .qlBtn::after,
 .brandPanel .qlBtn::after {
@@ -1285,6 +1329,671 @@ body {
     word-break: keep-all;
 }
 
+/* 캠페인 실행: 축 하나 -> 두 갈래 (DATA & CRM 03 섹션)
+   "매달 향 노트 하나"라는 축이 온라인·오프라인 두 채널로 갈라지는 구조.
+   순서(.aboutFlow)가 아니라 동시 실행이라 화살표 대신 위에 축을 한 번 박고
+   아래에 두 카드를 나란히 둠. 카드 규칙은 주문 흐름 카드(.orderStep)·
+   수상 배지(.awardBadge)와 동일 - 새 스타일이 아니라 기존 카드 언어의 재사용. */
+.axisPin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin: 40px 0 0;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #373737;
+}
+
+.axisPin i {
+    font-size: 14px;
+    color: #FF5C4D;
+}
+
+/* 축에서 두 카드로 내려가는 세로선. 카드가 축에 매달려 있다는 표시 */
+.axisPin::after {
+    content: '';
+    display: none;
+}
+
+.channelPair {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 0 auto 8px;
+    padding-top: 28px;
+}
+
+/* 축과 카드 묶음을 잇는 세로 헤어라인 */
+.channelPair::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 1px;
+    height: 16px;
+    background: #E0E0E0;
+}
+
+.channelCard {
+    display: flex;
+    flex-direction: column;
+    width: 306px;
+    padding: 22px 24px 24px;
+    border: 1.5px solid #E8E8E8;
+    border-radius: 14px;
+    background: #FFFFFF;
+    text-align: left;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.channelCard:hover {
+    border-color: #FF5C4D;
+    transform: translateY(-3px);
+}
+
+.ccHead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.ccIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #FFF1EF;
+}
+
+.ccIcon i {
+    font-size: 16px;
+    color: #FF5C4D;
+}
+
+.ccTitle {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #373737;
+}
+
+.ccDesc {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #6B6B6B;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .channelCard {
+        transition: none;
+    }
+
+    .channelCard:hover {
+        transform: none;
+    }
+}
+
+/* 채널별 판단 기준 (MARKETING 기준 섹션)
+   "무엇을 했나"가 아니라 "무엇을 보고 정했나"를 보여주는 표.
+   흔히 보는 지표(회색)에서 실제로 본 지표(코랄)로 넘어가는 구조라
+   카드가 아니라 한 줄씩 대비되는 행으로 만듦 - 넷을 한눈에 훑게. */
+.ruleList {
+    max-width: 720px;
+    margin: 44px auto 0;
+    text-align: left;
+}
+
+.ruleRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 15px 4px;
+    border-bottom: 1px solid #EFEFEF;
+    transition: background-color 0.25s;
+}
+
+.ruleRow:first-child {
+    border-top: 1px solid #EFEFEF;
+}
+
+.ruleRow:hover {
+    background: #FCFCFC;
+}
+
+.rlIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFF1EF;
+}
+
+.rlIcon i {
+    font-size: 14px;
+    color: #FF5C4D;
+}
+
+.rlName {
+    flex: 0 0 96px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #373737;
+    word-break: keep-all;
+}
+
+/* 흔히 보는 쪽 - 맥락이라 회색으로 낮춤 */
+.rlFrom {
+    flex: 1 1 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #9A9A9A;
+    word-break: keep-all;
+}
+
+.rlArrow {
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #C9C9C9;
+}
+
+/* 실제로 본 쪽 - 이 줄의 핵심이라 코랄 */
+.rlTo {
+    flex: 1.2 1 0;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #C7483C;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ruleRow {
+        transition: none;
+    }
+}
+
+/* 담당 범위 그리드 (MARKETING 첫 섹션 · 「직접 합니다」 섹션)
+   케이스 하나만 깊게 보여주면 "오프라인 이벤트만 한 사람"으로 읽힘.
+   무엇을 맡았는지를 먼저 한 판에 펼쳐서 30초 안에 범위가 잡히게 하고,
+   깊이는 그 다음 섹션들이 맡음. 카드 규칙은 다른 카드들과 동일. */
+.scopeGrid {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 44px 0 0;
+}
+
+.scopeItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 268px;
+    padding: 22px 22px 20px;
+    border: 1.5px solid #E8E8E8;
+    border-radius: 14px;
+    background: #FFFFFF;
+    text-align: left;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.scopeItem:hover {
+    border-color: #FF5C4D;
+    transform: translateY(-3px);
+}
+
+.scIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #FFF1EF;
+    margin-bottom: 14px;
+}
+
+.scIcon i {
+    font-size: 15px;
+    color: #FF5C4D;
+}
+
+.scName {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #373737;
+    word-break: keep-all;
+}
+
+.scDesc {
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: #6B6B6B;
+    margin-top: 7px;
+    word-break: keep-all;
+}
+
+/* 어느 브랜드에서 한 일인지. 주장이 아니라 이력이라는 표시 */
+.scWhere {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #ECECEC;
+    width: 100%;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: #9A9A9A;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .scopeItem {
+        transition: none;
+    }
+
+    .scopeItem:hover {
+        transform: none;
+    }
+}
+
+/* CRM 수단 4갈래 (DATA & CRM 명단과 메시지 섹션)
+   알림톡 / 매장 고객 카드 / 네이버 홈페이지 / 공홈 회원 명단.
+   성격이 제각각(발송 경로 · 오프라인 명단 · 유입 접점 · 온라인 명단)이라
+   이름만 나열하면 뭐가 뭔지 안 보임 -> 이름 아래 역할을 한 줄씩 붙임.
+   카드 규칙은 주문 흐름 카드(.orderStep)와 동일. */
+.sourceGrid {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 44px 0 0;
+}
+
+.sourceItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 196px;
+    padding: 20px 14px 18px;
+    border: 1.5px solid #E8E8E8;
+    border-radius: 14px;
+    background: #FFFFFF;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.sourceItem:hover {
+    border-color: #FF5C4D;
+    transform: translateY(-3px);
+}
+
+.srcIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #FFF1EF;
+    margin-bottom: 12px;
+}
+
+.srcIcon i {
+    font-size: 16px;
+    color: #FF5C4D;
+}
+
+.srcName {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #373737;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.srcRole {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #767676;
+    text-align: center;
+    margin-top: 6px;
+    word-break: keep-all;
+}
+
+/* 네 갈래가 한 명단으로 합쳐지는 지점 */
+.mergeLine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.mergeLine i {
+    font-size: 13px;
+    color: #C9C9C9;
+}
+
+.mergeLine span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border: 1.5px solid #FF5C4D;
+    border-radius: 50px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #C7483C;
+    word-break: keep-all;
+}
+
+/* 합류 표시 바로 뒤 문단이 붙어 보여서 한 칸 띄움 */
+.mergeLine + .aboutSub {
+    margin-top: 32px;
+}
+
+/* 실제로 나갔던 카피 인용.
+   지어낸 문장이 아니라 대표 이미지·전단에 인쇄돼 있던 문장이라
+   따옴표를 달아 '자료에서 가져온 말'임을 분명히 함. */
+.copyQuote {
+    max-width: 640px;
+    margin: 44px auto 0;
+    padding: 28px 24px 22px;
+    border-top: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    text-align: center;
+}
+
+.copyQuote i {
+    font-size: 15px;
+    color: #FF5C4D;
+}
+
+/* 상황별 메시지 두 줄. 위는 자료에 실제로 인쇄돼 있던 문구,
+   아래는 같은 기준으로 다시 옮긴 것 - 성격이 다르므로 라벨로 구분하고
+   출처는 아래 cite에서 한 번에 밝힘. */
+.copyLine {
+    margin-top: 16px;
+}
+
+.copyLine + .copyLine {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px dashed #E8E8E8;
+}
+
+.clLabel {
+    display: block;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #C7483C;
+    margin-bottom: 10px;
+}
+
+.copyLine p {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -0.5px;
+    color: #373737;
+    word-break: keep-all;
+    text-wrap: balance;
+}
+
+.copyQuote cite {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: #767676;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .sourceItem {
+        transition: none;
+    }
+
+    .sourceItem:hover {
+        transform: none;
+    }
+}
+
+/* 캠페인 대표 이미지 (DATA & CRM 축 바꾸기 섹션)
+   이미지 자체가 테두리·세로 레터링·브랜드 오벌까지 갖춘 완성된 키비주얼이라
+   프레임을 덧대지 않고 얕은 그림자만 둠 (전단에서 이중 모서리가 났던 것과 같은 이유).
+   원본(566x848)보다 작게 걸어 확대율 0%을 유지함. 큰 히어로가 아니라
+   문서 안에 끼워 넣은 도판처럼 보이게 하고, 대신 위아래 여백을 넉넉히 줌. */
+.kvFigure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 48px 0 8px;
+}
+
+.kvShot {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    /* 이미지가 사방 끝까지 사진이라 밝은 배경에서 경계가 사라짐.
+       얇은 회색 선으로 가장자리만 잡아줌 (전단처럼 자체 테두리가 있는 경우와 다름) */
+    border: 1px solid #E4E4E4;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.kvShot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.kvFigure:hover .kvShot {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.kvCap {
+    margin-top: 14px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: #767676;
+    text-align: center;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .kvShot {
+        transition: none;
+    }
+
+    .kvFigure:hover .kvShot {
+        transform: none;
+    }
+}
+
+/* 월간 운영 사이클 (DATA & CRM 실행 섹션)
+   "한 번 하고 끝나는 이벤트가 아니라 매달 같은 순서로 돌아가는 운영 규칙"이라고
+   본문이 주장하는데 그 순서가 어디에도 안 보였음. 카드는 주문 흐름 카드
+   (.orderStep)를 그대로 재사용하고, 마지막에 다음 달로 되돌아간다는 표시만 붙임. */
+.cycleLoop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 18px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #C7483C;
+    word-break: keep-all;
+}
+
+.cycleLoop::before,
+.cycleLoop::after {
+    content: '';
+    display: block;
+    width: 38px;
+    height: 1px;
+    background: #EEC9C3;
+}
+
+/* 다구매 조건 도식 (DATA & CRM 실행 섹션)
+   원래 매장 전단 사진 3장이 있던 자리. 사진은 원본이 248px밖에 안 되고
+   세 장의 디자인 톤이 제각각이라 페이지 품질을 떨어뜨렸음.
+   전단이 증명하던 건 '무엇이 인쇄돼 있었나'가 아니라 '어떤 조건을 설계했나'라,
+   그 구조를 직접 그리는 쪽으로 바꿈 (04 결과 섹션의 결론이 여기에 걸려 있음).
+   카드 규칙은 주문 흐름 카드(.orderStep)·채널 카드(.channelCard)와 동일. */
+.offerStack {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 44px 0 8px;
+}
+
+.offerStep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 176px;
+    padding: 22px 14px 20px;
+    border: 1.5px solid #E8E8E8;
+    border-radius: 14px;
+    background: #FFFFFF;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.offerStep:hover {
+    border-color: #FF5C4D;
+    transform: translateY(-3px);
+}
+
+/* 두 번째 제품을 고르게 만든 칸이 이 설계의 핵심이라, 여기만 테두리를 세움 */
+.offerStep.isKey {
+    border-color: #FF5C4D;
+}
+
+.osIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #FFF1EF;
+    margin-bottom: 12px;
+}
+
+.osIcon i {
+    font-size: 16px;
+    color: #FF5C4D;
+}
+
+.osCond {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: #767676;
+    word-break: keep-all;
+    text-align: center;
+}
+
+/* 성과 지표(7~8%)가 아니라 내가 정한 설계값이라, 큰 스탯(64px)보다 낮춰 잡음 */
+.osValue {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: #9A9A9A;
+    margin-top: 6px;
+    /* 390px에서 '중복 적/용'으로 쪼개졌음. 값은 한 덩어리라 절대 안 나뉘게 함
+       (줄이 모자라면 옆의 조건 라벨이 두 줄로 접히는 쪽이 맞음) */
+    white-space: nowrap;
+}
+
+.osValue small {
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 2px;
+}
+
+.offerStep.isKey .osValue,
+.offerStep.isStack .osValue {
+    color: #FF5C4D;
+}
+
+.offerStep.isStack .osValue {
+    font-size: 22px;
+    letter-spacing: 0;
+    margin-top: 12px;
+}
+
+/* 칸 사이 기호. 1개 -> 2개는 이동(화살표), 생일은 겹침(플러스) */
+.offerJoin {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    font-size: 13px;
+    color: #C9C9C9;
+}
+
+.offerNote {
+    margin-top: 18px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #767676;
+    text-align: center;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .offerStep {
+        transition: none;
+    }
+
+    .offerStep:hover {
+        transform: none;
+    }
+}
+
 /* 주문 흐름 다이어그램 (메르디센트 운영 섹션)
    숫자 데이터가 아니라 '주문 한 건이 지나가는 단계'를 보여주는 그래픽.
    앞 섹션의 .aboutFlow 와 구분되도록 번호 + 원형 아이콘 + 설명 2줄 구조로 만듦 */
@@ -1379,6 +2088,12 @@ body {
     margin: 0 auto 20px;
 }
 
+/* 이 페이지는 큰 스탯(64px)을 쓰지 않으므로, 수치·조건은 문장 안에서만 도드라지게 함 */
+.brandResult strong {
+    font-weight: 700;
+    color: #373737;
+}
+
 .brandResult a {
     display: inline-flex;
     align-items: center;
@@ -1386,6 +2101,9 @@ body {
     font-size: 14px;
     font-weight: 700;
     color: #C7483C;
+    /* 이게 없어서 390px에서 '보/기'처럼 한글이 글자 단위로 쪼개졌음.
+       헤드라인·본문과 같은 규칙으로 맞춤 */
+    word-break: keep-all;
 }
 
 @media screen and (max-width: 600px) {
@@ -1940,4 +2658,560 @@ body.lightboxOpen {
 
 .qlLogo.isMer {
     height: 12px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   RESUME (resume.html)
+   채용사이트 내보내기 PDF는 공개 웹에 두면 안 되는 항목이 섞여 있고
+   디자인도 사이트와 끊겨서, 같은 서체·색으로 웹 이력서를 따로 둠.
+   스크롤 덱이 아니라 '문서'라 사이드 탭과 휠 스냅은 쓰지 않음
+   (.resumeSection은 site.js의 섹션 셀렉터에 안 걸림).
+   ───────────────────────────────────────────────────────────── */
+.resumeWrap {
+    flex: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 84px 24px 100px;
+}
+
+/* .qlBtn은 <a>로 쓰이다가 이력서의 'PDF로 저장'에서 <button>으로도 쓰임.
+   버튼은 브라우저 기본 서체/여백을 갖고 있어 따로 맞춰줌 */
+button.qlBtn {
+    font-family: 'LaundryGothic', sans-serif;
+    cursor: pointer;
+}
+
+/* 이력서는 사이드 탭이 가리킬 '화면 단위 섹션'이 없어서 빈 탭만 남음 */
+body[data-page="resume"] #header {
+    display: none;
+}
+
+/* ---- 머리말 ---- */
+.rsHead {
+    padding-bottom: 34px;
+    border-bottom: 1px solid #EFEFEF;
+    margin-bottom: 8px;
+}
+
+.rsName {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #373737;
+    margin-top: 14px;
+}
+
+.rsTagline {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 17px;
+    color: #6B6B6B;
+    margin-top: 10px;
+    word-break: keep-all;
+}
+
+.rsMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    margin-top: 22px;
+}
+
+.rsMeta li {
+    font-size: 14px;
+    color: #6B6B6B;
+    letter-spacing: 0.2px;
+}
+
+.rsMeta i {
+    color: #FF5C4D;
+    margin-right: 7px;
+}
+
+.rsMeta a {
+    color: #6B6B6B;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.rsMeta a:hover {
+    color: #FF5C4D;
+    border-bottom-color: #FF5C4D;
+}
+
+.rsActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.rsActionsEnd {
+    justify-content: center;
+    margin-top: 54px;
+}
+
+/* ---- 섹션 공통 ---- */
+.resumeSection {
+    padding-top: 46px;
+}
+
+/* 제목 왼쪽의 코랄 짧은 선 — 사이트의 다른 머리표(01 ─ 이름)와 같은 문법 */
+.rsSectionTitle {
+    position: relative;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #373737;
+    padding-left: 26px;
+    margin-bottom: 22px;
+}
+
+.rsSectionTitle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 16px;
+    height: 1.5px;
+    background: #FF5C4D;
+}
+
+.rsSectionMeta {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #9A9A9A;
+    margin-left: 8px;
+}
+
+.rsLead {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #373737;
+    margin-bottom: 14px;
+    word-break: keep-all;
+}
+
+.rsBody {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #6B6B6B;
+    max-width: 720px;
+    margin-bottom: 10px;
+    word-break: keep-all;
+}
+
+.rsNote {
+    font-size: 13px;
+    font-style: italic;
+    color: #9A9A9A;
+    margin-top: 14px;
+    word-break: keep-all;
+}
+
+.rsNote a {
+    color: #FF5C4D;
+    border-bottom: 1px solid #FF5C4D;
+}
+
+/* ---- 핵심 역량 카드 ---- */
+.rsSkillGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+/* 주문 흐름 카드(.orderStep)와 같은 규칙 — 1.5px 연회색 테두리 + 코랄 아이콘 원 */
+.rsSkillCard {
+    border: 1.5px solid #E8E8E8;
+    border-radius: 12px;
+    background: #FFFFFF;
+    padding: 22px 22px 20px;
+    transition: border-color 0.3s;
+}
+
+.rsSkillCard:hover {
+    border-color: #FF5C4D;
+}
+
+.rsSkillIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #FFF1EF;
+    margin-bottom: 14px;
+}
+
+.rsSkillIcon i {
+    font-size: 15px;
+    color: #FF5C4D;
+}
+
+.rsSkillCard h3 {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #373737;
+    margin-bottom: 12px;
+    word-break: keep-all;
+}
+
+.rsSkillCard ul li,
+.rsTaskGroup ul li {
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #6B6B6B;
+    padding-left: 12px;
+    word-break: keep-all;
+}
+
+.rsSkillCard ul li::before,
+.rsTaskGroup ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 4px;
+    height: 1px;
+    background: #C9C9C9;
+}
+
+/* ---- 경력 ---- */
+.rsJob {
+    display: flex;
+    gap: 30px;
+    padding: 26px 0 30px;
+    border-top: 1px solid #EFEFEF;
+}
+
+.rsJob:first-of-type {
+    border-top: none;
+    padding-top: 6px;
+}
+
+.rsJobPeriod {
+    flex: 0 0 150px;
+    padding-top: 3px;
+}
+
+.rsJobDate {
+    display: block;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #373737;
+    letter-spacing: 0.2px;
+}
+
+.rsJobLen {
+    display: block;
+    font-size: 12px;
+    color: #9A9A9A;
+    margin-top: 5px;
+}
+
+.rsJobBody {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.rsJobCompany {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: #373737;
+}
+
+/* 이력서 본문 중 word-break 규칙이 빠져 있던 것들.
+   핵심 성과 캡션·찾는 자리·주요 성과·직급 줄이 누락돼 있어서
+   '팔/로워', '디/퓨저', '연/장', '구/매'처럼 글자 단위로 쪼개지고 있었음.
+   (site.css 다른 본문에는 이미 걸려 있던 규칙 - 이력서 블록만 누락) */
+.rsKpiCap,
+.rsSeeking,
+.rsAch,
+.rsJobRole,
+.rsJobCompany,
+.rsSectionTitle {
+    word-break: keep-all;
+}
+
+/* 회사 재직이 아닌 개인 활동(해외 셀러 운영).
+   경력 타임라인의 빈 구간을 메우되, 회사 경력과 같은 무게로 읽히면
+   '총 4년 8개월'이라는 숫자와 싸우게 됨. 회사명 크기를 낮추고
+   왼쪽에 회색 선을 둬서 "이 기간엔 이걸 했다"는 표시로만 둠. */
+.rsJob.isSide {
+    padding-left: 18px;
+    border-left: 2px solid #EFEFEF;
+}
+
+.rsJob.isSide .rsJobCompany {
+    font-size: 17px;
+    color: #6B6B6B;
+}
+
+.rsJob.isSide .rsJobDate {
+    color: #767676;
+}
+
+/* 회사 경력이 아니라는 표시 */
+.rsSideTag {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 3px 10px;
+    border: 1px solid #E4E4E4;
+    border-radius: 50px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: #9A9A9A;
+}
+
+.rsSideNote {
+    margin-top: 12px;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: #6B6B6B;
+    word-break: keep-all;
+}
+
+.rsJobRole {
+    font-size: 13px;
+    color: #9A9A9A;
+    margin-top: 6px;
+    letter-spacing: 0.2px;
+}
+
+.rsTaskGroup {
+    margin-top: 20px;
+}
+
+.rsTaskGroup h4 {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: #FF5C4D;
+    margin-bottom: 7px;
+}
+
+.rsCaseLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #373737;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 4px;
+    transition: color 0.25s, border-color 0.25s;
+}
+
+.rsCaseLink i {
+    font-size: 11px;
+    color: #FF5C4D;
+    transition: transform 0.25s ease;
+}
+
+.rsCaseLink:hover {
+    color: #FF5C4D;
+    border-bottom-color: #FF5C4D;
+}
+
+.rsCaseLink:hover i {
+    transform: translateX(4px);
+}
+
+/* ---- 학력 · 교육 ---- */
+.rsRow {
+    display: flex;
+    gap: 30px;
+    padding: 20px 0;
+    border-top: 1px solid #EFEFEF;
+}
+
+.rsRow:first-of-type {
+    border-top: none;
+    padding-top: 2px;
+}
+
+.rsRowDate {
+    flex: 0 0 150px;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #373737;
+    padding-top: 2px;
+}
+
+.rsRowBody h3 {
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #373737;
+    word-break: keep-all;
+}
+
+.rsRowBody p {
+    font-size: 13.5px;
+    color: #6B6B6B;
+    margin-top: 6px;
+    word-break: keep-all;
+}
+
+.rsRowNote {
+    font-size: 12.5px !important;
+    color: #9A9A9A !important;
+}
+
+.rsBadge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 3px 9px;
+    border: 1px solid #E8E8E8;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: #9A9A9A;
+    vertical-align: 2px;
+}
+
+.rsTags {
+    justify-content: flex-start;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   인쇄 / PDF 저장 (Ctrl+P → PDF로 저장)
+   화면용 크롬(띠배너·상단바·푸터·버튼)을 걷어내고 본문만 남김.
+   경력 한 덩어리가 페이지 경계에서 잘리지 않도록 break 규칙을 둠.
+   ───────────────────────────────────────────────────────────── */
+@media print {
+    @page {
+        margin: 14mm 12mm;
+    }
+
+    #pageLoader,
+    .topStrip,
+    .home_header,
+    .chromeSpacer,
+    #header,
+    .siteFooter,
+    .gotop,
+    .rsActions {
+        display: none !important;
+    }
+
+    body {
+        background: #FFFFFF;
+    }
+
+    .resumeWrap {
+        max-width: none;
+        padding: 0;
+    }
+
+    .rsHead {
+        padding-bottom: 20px;
+        margin-bottom: 0;
+    }
+
+    .resumeSection {
+        padding-top: 26px;
+    }
+
+    /* 카드/한 줄짜리 항목과 업무 그룹은 쪼개지면 읽기 어려움.
+       다만 .rsJob(경력 한 곳 전체)까지 묶으면 덩어리가 커서 페이지 아래가
+       통째로 비어버림 -> 경력은 그룹 단위로 넘어가게 둠 */
+    .rsSkillCard,
+    .rsRow,
+    .rsTaskGroup {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* 회사명 바로 뒤에서 페이지가 넘어가면 제목만 덩그러니 남음 */
+    .rsJobCompany,
+    .rsJobRole {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    .rsSectionTitle {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    /* 종이에서는 hover가 없으므로 테두리를 조금 연하게 */
+    .rsSkillCard {
+        border-color: #DEDEDE;
+    }
+
+    /* 사이트 주소는 머리말(.rsMeta)에 한 번 적혀 있으므로,
+       본문 링크마다 주소를 펼치지 않고 밑줄만 정리함 */
+    .rsCaseLink {
+        border-bottom: none;
+        color: #9A9A9A;
+        font-weight: 400;
+    }
+
+    .rsCaseLink i {
+        display: none;
+    }
+
+    /* 여백을 조금씩 줄여 페이지 수를 아낌 */
+    .rsJob {
+        padding: 18px 0 20px;
+    }
+
+    .rsTaskGroup {
+        margin-top: 14px;
+    }
+
+    .rsSkillCard {
+        padding: 16px 18px 14px;
+    }
+}
+
+
+/* 이력서 본문만 프리텐다드.
+   상단바 로고와 푸터는 사이트 공통 크롬이라 런드리고딕을 유지합니다.
+   아이콘(Font Awesome)까지 덮어쓰지 않도록 '*' 대신 실제로 서체를 지정한
+   선택자만 나열했습니다. .caseTag / .qlBtn / .aboutTag는 다른 페이지에서도
+   쓰이므로 .resumeWrap 안쪽으로 한정했습니다. */
+.resumeWrap {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui,
+        'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+.resumeWrap .caseTag,
+.resumeWrap .qlBtn,
+.resumeWrap .aboutTag,
+.rsName,
+.rsTagline,
+.rsSectionTitle,
+.rsLead,
+.rsSkillCard h3,
+.rsJobDate,
+.rsJobCompany,
+.rsTaskGroup h4,
+.rsCaseLink,
+.rsRowDate,
+.rsRowBody h3 {
+    font-family: inherit;
+}
+
+/* 프리텐다드는 런드리고딕보다 자간이 좁아, 이름에 걸어둔 -1px이 과하게 붙어 보임 */
+.rsName {
+    letter-spacing: -1.5px;
 }

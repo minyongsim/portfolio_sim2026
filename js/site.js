@@ -39,6 +39,37 @@ $(function ($) {
         if (page) $topbar.find('.headerNav li[data-nav="' + page + '"]').addClass('active');
     }
 
+    // ---- 이력서: 총 경력 개월 수 자동 계산 ----
+    // 재직 중인 회사가 있으면 '총 4년 8개월' 같은 숫자는 한 달만 지나도 틀림.
+    // 끝난 경력의 합(data-fixed-months)에 재직 시작월(data-since)부터 오늘까지를
+    // 더해 다시 적음. JS가 안 돌면 HTML에 적힌 값이 그대로 보임.
+    $('[data-exp-total]').each(function () {
+        var $el = $(this);
+        var fixed = parseInt($el.attr('data-fixed-months'), 10) || 0;
+        var since = String($el.attr('data-since') || '').split('-');
+        if (since.length < 2) return;
+
+        var now = new Date();
+        var run = (now.getFullYear() - parseInt(since[0], 10)) * 12
+                + (now.getMonth() + 1 - parseInt(since[1], 10)) + 1;
+        var total = fixed + Math.max(0, run);
+
+        var years = Math.floor(total / 12);
+        var months = total % 12;
+        var text = years + '년' + (months ? ' ' + months + '개월' : '');
+        var prefix = $el.attr('data-prefix');
+        $el.text((prefix === undefined ? '총 ' : prefix) + text);
+    });
+
+    // ---- 이력서: 'PDF로 저장' 버튼 ----
+    // 미리 만들어 둔 PDF 파일을 두면 본문을 고칠 때마다 다시 내보내야 하고,
+    // 안 하면 화면과 PDF가 달라짐. 브라우저 인쇄를 그대로 쓰면 항상 최신이고
+    // 사용자 브라우저의 웹폰트로 렌더링돼 화면과 똑같이 나옴.
+    // (인쇄용 규칙은 css/site.css의 @media print 블록)
+    $(document).on('click', '[data-print]', function () {
+        window.print();
+    });
+
     // ---- 푸터 채우기 + 카피 문구 ----
     if ($footer.length && typeof FOOTER_HTML !== 'undefined') {
         // {{BASE}}는 projects/ 같은 하위 폴더에서 열렸을 때 '../'로 치환됨
@@ -62,7 +93,8 @@ $(function ($) {
         'about': 'ABOUT',
         'brand-story': 'BRANDING',
         'data-crm': 'DATA &amp; CRM',
-        'marketing': 'MARKETING'
+        'marketing': 'MARKETING',
+        'resume': 'RESUME'
     };
     var $strip = null;
 
@@ -202,7 +234,13 @@ $(function ($) {
     }, 0);
 
     // ---- 사이드 탭(#header) 생성 + 스크롤 스파이 + 휠 스냅 스크롤 ----
-    if ($header.length && typeof NAV_HTML !== 'undefined') {
+    // projects/ 안의 상세 페이지는 위에서 아래로 한 번에 읽는 문서라 '섹션 이동'이라는 게 없음.
+    // 그런데 아래 PROJECT_DETAIL_SELECTOR가 .projHeader/.projIntro/.projMeta/.projBody/.projNav를
+    // 통째로 섹션으로 세는 바람에 "SECTION 1~5"라는 의미 없는 탭 다섯 개가 붙고 있었음.
+    // (탭을 눌러도 메타 바나 하단 링크로 튀는 게 전부) 상세 페이지에선 아예 만들지 않음.
+    var isProjectDetail = $('.projBody').length > 0;
+
+    if (!isProjectDetail && $header.length && typeof NAV_HTML !== 'undefined') {
         $header.html(NAV_HTML.split('{{BASE}}').join(base));
 
         // about 페이지엔 화면높이(vh) 테스트 섹션만 있고,
@@ -213,8 +251,10 @@ $(function ($) {
         var sectionSelectors = {
             'about': '.scrollTestSection',
             'brand-story': PROJECT_DETAIL_SELECTOR,
-            'data-crm': PROJECT_DETAIL_SELECTOR,
-            'marketing': PROJECT_DETAIL_SELECTOR
+            // data-crm 은 ABOUT 같은 한 화면짜리 덱이 아니라 BRANDING과 같은 문서형이라
+            // 서브섹션(.brandSubSection)도 사이드 탭 대상에 포함시킴
+            'data-crm': PROJECT_DETAIL_SELECTOR + ', .brandSubSection',
+            'marketing': PROJECT_DETAIL_SELECTOR + ', .brandSubSection'
         };
         var $sections = $(sectionSelectors[page] || PROJECT_DETAIL_SELECTOR);
         var $menuBox = $header.find('.menuBox');
@@ -375,6 +415,10 @@ $(function ($) {
                 $sections.each(function () { spyObserver.observe(this); });
             }
 
+            // 문서형 페이지(.brandStorySection: brand-story / data-crm)는 섹션 높이가
+            // 제각각이라 휠 스냅이 오히려 스크롤을 어색하게 만듦. 덱(about/index)에서만 켬.
+            var useWheelSnap = !$('.brandStorySection').length;
+
             // 마우스 휠 스크롤 시 다음/이전 섹션으로 부드럽게 애니메이션 이동
             // (한 번 휠을 굴리면 그 다음 섹션까지 스르륵 이동, 애니메이션 도중엔 추가 휠 입력 무시)
             // 푸터도 이 "칸" 목록의 마지막 한 칸으로 포함시켜서, 섹션4 -> 푸터로 스냅되고
@@ -438,7 +482,7 @@ $(function ($) {
             // (콘솔 경고만 뜨고 실제로는 브라우저 기본 스크롤이 같이 일어나 위/아래 스냅이
             // 서로 다르게 어긋나 보이는 원인이 됨). 그래서 네이티브 addEventListener로
             // { passive: false }를 명시해서 preventDefault가 확실히 먹히도록 등록함.
-            window.addEventListener('wheel', handleWheel, { passive: false });
+            if (useWheelSnap) window.addEventListener('wheel', handleWheel, { passive: false });
         }
     }
 

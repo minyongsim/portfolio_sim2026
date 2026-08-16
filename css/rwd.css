@@ -181,6 +181,139 @@
         padding: 15px 24px;
     }
 
+    /* 기준 표는 390px에서 가로 4칸이 안 들어감.
+       아이콘+이름을 윗줄로 올리고 '흔한 기준 -> 본 기준'을 아랫줄에 둠 */
+    .ruleList {
+        margin-top: 32px;
+    }
+
+    .ruleRow {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 14px 2px;
+    }
+
+    .rlName {
+        flex: 1 1 auto;
+        font-size: 13px;
+    }
+
+    .rlFrom,
+    .rlTo {
+        flex: 1 1 100%;
+        font-size: 12.5px;
+        padding-left: 52px;
+    }
+
+    .rlFrom {
+        margin-top: -4px;
+    }
+
+    .rlArrow {
+        display: none;
+    }
+
+    .rlTo::before {
+        content: '→ ';
+        color: #C9C9C9;
+    }
+
+    /* 담당 범위 카드는 390px에서 한 줄에 하나씩 */
+    .scopeGrid {
+        gap: 10px;
+        margin-top: 32px;
+    }
+
+    .scopeItem {
+        width: 100%;
+        max-width: 320px;
+        padding: 18px 18px 16px;
+    }
+
+    /* CRM 수단 4칸은 390px에서 2x2 로 접음 */
+    .sourceGrid {
+        gap: 10px;
+        margin-top: 32px;
+    }
+
+    .sourceItem {
+        width: calc(50% - 5px);
+        padding: 16px 10px 14px;
+    }
+
+    .srcName {
+        font-size: 12px;
+    }
+
+    .copyQuote {
+        margin-top: 34px;
+        padding: 22px 8px 18px;
+    }
+
+    .copyLine p {
+        font-size: 17px;
+    }
+
+    /* 다구매 조건 3칸은 390px에서 가로로 못 들어감. 세로로 쌓고
+       사이 기호(화살표/플러스)는 90도 돌려 아래를 가리키게 함 */
+    .offerStack {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 34px;
+    }
+
+    .offerStep {
+        width: 100%;
+        max-width: 280px;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 20px;
+    }
+
+    .osIcon {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .offerStep .osCond {
+        flex: 1 1 auto;
+        text-align: left;
+    }
+
+    .offerStep .osValue,
+    .offerStep.isStack .osValue {
+        margin-top: 0;
+        font-size: 24px;
+    }
+
+    .offerJoin {
+        transform: rotate(90deg);
+    }
+
+    .nextLead {
+        margin-top: 44px;
+        font-size: 13px;
+    }
+
+    /* 채널 카드 두 장은 390px에서 나란히 못 들어가므로 세로로 쌓음.
+       폭을 100%로 통일해야 좌우 끝이 맞음(퀵링크 버튼과 같은 처리) */
+    .channelPair {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 24px;
+    }
+
+    .channelCard {
+        width: 100%;
+        max-width: 320px;
+        padding: 18px 20px 20px;
+    }
+
+    .axisPin {
+        margin-top: 32px;
+    }
+
     /* 덤벨 차트: 좁은 화면에선 이름/라벨을 윗줄로 올리고 막대선에 카드 폭을 다 줌.
        (가로로 나란히 두면 선이 92px밖에 안 남아 점 두 개가 겹쳐 버림) */
     .shiftChart {
@@ -436,5 +569,71 @@
     .projMeta,
     .projMetaInner {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ====== RESUME (resume.html) ====== */
+@media screen and (max-width: 768px) {
+    .rsSkillGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .resumeWrap {
+        padding: 70px 20px 80px;
+    }
+
+    .rsName {
+        font-size: 32px;
+    }
+
+    .rsTagline {
+        font-size: 15px;
+    }
+
+    .rsMeta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* 기간을 왼쪽 칸에 두면 본문 폭이 190px밖에 안 남음 -> 위아래로 쌓음 */
+    .rsJob,
+    .rsRow {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rsJobPeriod {
+        flex: none;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    .rsJobLen {
+        margin-top: 0;
+    }
+
+    .rsRowDate {
+        flex: none;
+    }
+
+    .rsJobCompany {
+        font-size: 19px;
+    }
+
+    .rsLead {
+        font-size: 17px;
+    }
+
+    .rsActions .qlBtn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .rsActions {
+        flex-direction: column;
+        align-items: center;
     }
 }

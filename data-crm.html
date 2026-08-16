@@ -38,11 +38,318 @@
 
     <div class="home_header" id="topbar"></div>
 
-    <!-- 화면높이(100vh) 기준 섹션 -->
-    <div class="scrollTestSection t1">DATA &amp; CRM SECTION 1</div>
-    <div class="scrollTestSection t2">DATA &amp; CRM SECTION 2</div>
-    <div class="scrollTestSection t3">DATA &amp; CRM SECTION 3</div>
-    <div class="scrollTestSection t4">DATA &amp; CRM SECTION 4</div>
+    <!-- 이 페이지는 ABOUT 같은 '한 화면 = 한 장면' 스크롤 덱이 아니라,
+         BRANDING과 같은 문서형(.brandStorySection + .brandSubSection)입니다.
+         카테고리 페이지끼리 형식을 맞추고, ABOUT과는 읽는 리듬 자체를 다르게 두기 위함.
+         논지: 세어지는 숫자와 답이 되는 숫자는 다르다.
+         01은 없던 지표를 만든 쪽(신산커피), 02~04는 있던 지표를 다시 읽은 쪽(메르디센트). -->
+    <div class="brandStorySection">
+
+        <div class="brandIntro">
+            <span class="caseTag">DATA &amp; CRM</span>
+            <h1>없는 걸 만들기 전에, 있는 걸 다시 썼습니다</h1>
+            <p>채널이나 예산이 늘어난 적은 없습니다. 이미 돌아가던 CRM 접점과 이미 잡혀 있던 박람회의 쓰임을 바꿔서 풀었고, 풀렸는지는 구매 데이터로 확인했습니다. 한 브랜드를 끝까지 따라간 뒤, 같은 순서가 다른 카테고리에서도 통했는지를 마지막에 붙였습니다.</p>
+        </div>
+
+        <div class="brandPanel active">
+
+            <!-- 01 있던 지표를 다시 읽은 쪽 -->
+            <div class="brandSubSection" data-tab="축 바꾸기">
+                <div class="brandEyebrow">
+                    <span class="beNum">01</span>
+                    <span class="beRule"></span>
+                    <span class="beName">한 제품에만 쏠려 있던 문제</span>
+                </div>
+                <h2 class="aboutHeadline">채널을 늘리는 대신, 매달 보여줄 향&nbsp;노트를 바꿨습니다</h2>
+                <p class="aboutSub">메르디센트는 총합만 보면 이상이 없었습니다. 제품별로 나눠 보고서야 관심이 베스트셀러 한&nbsp;곳에 몰려 있는 게 보였습니다. 충성 고객이 두터워 CRM 전환율은 이미 높았으니, 접점을 늘릴 게 아니라 그 접점이 무엇을 말하는지를 바꿀 문제였습니다.</p>
+                <p class="aboutBridge">안 팔리는 제품이 아니라, 소개될 기회가 없던 제품이었습니다.</p>
+
+                <!-- 캠페인 대표 이미지. 원본이 256px이라 확대하지 않고 원본 크기로 둠 -->
+                <figure class="kvFigure">
+                    <div class="kvShot">
+                        <img loading="lazy" src="img/merdescent-fragrance-kv.webp" alt="메르디센트 이달의 프래그런스 캠페인 대표 이미지 - 이번 달, 새로운 향을 발견하는 시간" width="566" height="848">
+                    </div>
+                    <figcaption class="kvCap">이달의 프래그런스 · 메르디센트</figcaption>
+                </figure>
+            </div>
+
+            <!-- 03 CRM 운영의 실제 - 명단을 모으고, 무슨 말을 할지 정하는 단계.
+                 앞 섹션이 "무엇을 바꿀지"를 정했다면 여기는 "누구에게 무슨 말을 할지". -->
+            <div class="brandSubSection" data-tab="명단과 메시지">
+                <div class="brandEyebrow">
+                    <span class="beNum">02</span>
+                    <span class="beRule"></span>
+                    <span class="beName">고객이 네 군데로 흩어져 있던 문제</span>
+                </div>
+                <h2 class="aboutHeadline">매장 손님과 온라인 회원을, 같은&nbsp;명단으로 봤습니다</h2>
+                <p class="aboutSub">고객 기록이 네 군데에 따로 있었습니다. 따로 보면 같은 사람에게 다른 말을 하게 되고, 매장에서 산 손님은 온라인 소식을 못 받습니다. 네 갈래를 한 명단으로 놓는 것부터 시작했습니다.</p>
+
+                <div class="sourceGrid">
+                    <div class="sourceItem">
+                        <span class="srcIcon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+                        <span class="srcName">알림톡</span>
+                        <span class="srcRole">보낼 수 있는 경로</span>
+                    </div>
+                    <div class="sourceItem">
+                        <span class="srcIcon"><i class="fa-solid fa-address-card" aria-hidden="true"></i></span>
+                        <span class="srcName">매장 고객 카드</span>
+                        <span class="srcRole">오프라인에서 만난 고객</span>
+                    </div>
+                    <div class="sourceItem">
+                        <span class="srcIcon"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+                        <span class="srcName">네이버 홈페이지</span>
+                        <span class="srcRole">검색으로 들어온 접점</span>
+                    </div>
+                    <div class="sourceItem">
+                        <span class="srcIcon"><i class="fa-solid fa-address-book" aria-hidden="true"></i></span>
+                        <span class="srcName">공홈 회원 명단</span>
+                        <span class="srcRole">온라인 가입 고객</span>
+                    </div>
+                </div>
+                <div class="mergeLine">
+                    <i class="fa-solid fa-arrow-down-long" aria-hidden="true"></i>
+                    <span><i class="fa-solid fa-layer-group" aria-hidden="true"></i>하나의 고객 명단</span>
+                </div>
+
+                <p class="aboutSub">한 명단으로 놓으니 누가 무엇을 사고 무엇에 반응했는지가 한 줄로 보였습니다. 그달의 메시지는 거기서부터 짰고, 축은 제품이 아니라 <strong>무드</strong>였습니다.</p>
+
+                <!-- 지어낸 문장이 아니라 대표 이미지와 매장 전단에 실제로 인쇄돼 있던 카피 -->
+                <div class="copyQuote">
+                    <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+                    <div class="copyLine">
+                        <span class="clLabel">그달의 향을 알릴 때</span>
+                        <p>이번 달, 새로운 향을 발견하는 시간.</p>
+                    </div>
+                    <div class="copyLine">
+                        <span class="clLabel">두 번째 제품을 권할 때</span>
+                        <p>낮의 무드와 밤의 무드는 다릅니다. 하나는 곁에 두고, 하나는 잠들기 전 당신의 살결에 남겨보세요.</p>
+                    </div>
+                    <cite>위는 대표 이미지와 매장 전단에 실린 문구, 아래는 같은 기준으로 다시 옮긴 메시지입니다.</cite>
+                </div>
+
+                <div class="brandResult">
+                    <p>메인 장치는 할인이었습니다. 대표 이미지에도 <strong>SPECIAL&nbsp;BENEFIT · UP&nbsp;TO&nbsp;20%&nbsp;OFF</strong>가 크게 들어갑니다. 다만 할인만 앞세우면 어느 브랜드나 하는 세일이 되고, 그건 메르디센트를 골라야 할 이유는 되지 못합니다.</p>
+                    <p>메르디센트는 <strong>충성 고객층이 두터워</strong> CRM 전환율이 이미 높았습니다. 브랜드의 말이 통하는 조건이 갖춰져 있다는 뜻이라, 끌어당기는 문장을 <strong>브랜드의 언어로 옮겼습니다</strong>. 스스로를 MOOD&nbsp;PERFUME이라 부르고 상세페이지도 '감성있는 무드와 영감'으로 시작하는 브랜드니, 메시지도 같은 자리에서 출발하게 했습니다 &mdash; 제품을 고르는 일이 아니라 그달의 무드를 고르는 일로요.</p>
+                    <p><strong>할인이 조건을 만들고, 브랜드의 말이 이유를 만드는 구조</strong>였습니다. 무드는 낮과 밤이 다르니 한 달을 한 가지로 지내기는 어렵다 &mdash; 그렇게 말을 걸면 두&nbsp;번째 제품은 재촉하지 않아도 됐습니다.</p>
+                </div>
+            </div>
+
+            <!-- 03 캠페인 실행 - 온라인과 오프라인을 같은 축으로 -->
+            <div class="brandSubSection" data-tab="실행">
+                <div class="brandEyebrow">
+                    <span class="beNum">03</span>
+                    <span class="beRule"></span>
+                    <span class="beName">실행</span>
+                </div>
+                <h2 class="aboutHeadline">한 달에 향&nbsp;노트 하나로, 메시지와 매장을 같이 맞췄습니다</h2>
+                <p class="aboutSub">매달 향&nbsp;노트를 하나 정하고, 그 노트가 들어간 제품을 그달의 주인공으로 세웠습니다. 채널을 새로 만들지 않고 이미 있던 접점의 축만 바꿨고, 한&nbsp;번 하고 끝나는 이벤트가 아니라 매달 같은 순서로 돌아가는 운영 규칙으로 만들었습니다.</p>
+
+                <!-- 축 하나가 두 갈래로 갈라지는 구조.
+                     카드 규칙은 주문 흐름 카드(.orderStep)·수상 배지(.awardBadge)와 동일
+                     (1.5px #E8E8E8 테두리 + 라운드 + #FFF1EF 원 안의 코랄 아이콘) -->
+                <div class="axisPin">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    <span>그달의 향 노트 하나</span>
+                </div>
+                <div class="channelPair">
+                    <div class="channelCard">
+                        <div class="ccHead">
+                            <span class="ccIcon"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i></span>
+                            <span class="ccTitle">온라인</span>
+                        </div>
+                        <p class="ccDesc">알림톡과 생일&nbsp;메시지는 그대로 두고, 그달에 소개할 향&nbsp;노트만 바꿔 내보냈습니다.</p>
+                    </div>
+                    <div class="channelCard">
+                        <div class="ccHead">
+                            <span class="ccIcon"><i class="fa-solid fa-store" aria-hidden="true"></i></span>
+                            <span class="ccTitle">오프라인</span>
+                        </div>
+                        <p class="ccDesc">같은 달, 같은 향&nbsp;노트를 입점 매장 전단으로 매대 앞에 세웠습니다.</p>
+                    </div>
+                </div>
+
+                <!-- 원래 매장 전단 사진 3장이 있던 자리.
+                     전단이 증명하던 건 인쇄물의 생김새가 아니라 "어떤 조건을 설계했나"라,
+                     사진 대신 그 구조를 그림. 04 결과 섹션의 결론이 이 도식에 걸려 있음. -->
+                <div class="offerStack">
+                    <div class="offerStep">
+                        <span class="osIcon"><i class="fa-solid fa-tag" aria-hidden="true"></i></span>
+                        <span class="osCond">1개 구매</span>
+                        <span class="osValue">5<small>%</small></span>
+                    </div>
+                    <span class="offerJoin" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                    <div class="offerStep isKey">
+                        <span class="osIcon"><i class="fa-solid fa-tags" aria-hidden="true"></i></span>
+                        <span class="osCond">2개 구매</span>
+                        <span class="osValue">15<small>%</small></span>
+                    </div>
+                    <span class="offerJoin" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                    <div class="offerStep isStack">
+                        <span class="osIcon"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i></span>
+                        <span class="osCond">생일 메시지 할인</span>
+                        <span class="osValue">중복 적용</span>
+                    </div>
+                </div>
+                <!-- ▼ 확인 필요: 매장 전단 3종은 "UP TO ~15% OFF", 캠페인 대표 이미지는
+                     "UP TO 20% OFF"로 적혀 있습니다. 달에 따라 폭이 달랐던 것으로 보고
+                     아래 문장을 썼는데, 사실과 다르면 알려주세요. ▲ -->
+                <p class="offerNote">매장 전단과 CRM 메시지에 같은 조건을 붙였고, 혜택 폭은 달에 따라 최대 20%까지 열었습니다.</p>
+
+                <!-- 위 세 가지(축·채널·조건)가 한 달 안에 도는 순서.
+                     카드는 메르디센트 주문 흐름에서 쓰던 .orderStep 규칙 그대로. -->
+                <div class="orderFlow">
+                    <div class="orderStep">
+                        <span class="orderStepNum">01</span>
+                        <span class="orderStepIcon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span>
+                        <span class="orderStepTitle">향 노트 선정</span>
+                        <span class="orderStepDesc">그달의 주인공</span>
+                    </div>
+                    <span class="orderArrow"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    <div class="orderStep">
+                        <span class="orderStepNum">02</span>
+                        <span class="orderStepIcon"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i></span>
+                        <span class="orderStepTitle">메시지 · 전단</span>
+                        <span class="orderStepDesc">같은 축으로 제작</span>
+                    </div>
+                    <span class="orderArrow"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    <div class="orderStep">
+                        <span class="orderStepNum">03</span>
+                        <span class="orderStepIcon"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></span>
+                        <span class="orderStepTitle">동시 노출</span>
+                        <span class="orderStepDesc">알림톡 · 매장</span>
+                    </div>
+                    <span class="orderArrow"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    <div class="orderStep">
+                        <span class="orderStepNum">04</span>
+                        <span class="orderStepIcon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+                        <span class="orderStepTitle">반응 확인</span>
+                        <span class="orderStepDesc">다음 달에 반영</span>
+                    </div>
+                </div>
+                <p class="cycleLoop"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>다음 달, 같은 순서로</p>
+
+                <div class="brandResult">
+                    <p>한 개만 사도 할인이지만, 두 개를 고르면 폭이 <strong>세 배</strong>가 됩니다. 그달의 향을 알리는 것과 두&nbsp;번째 제품을 고르게 만드는 것을 한 장에서 같이 했고, 생일 할인까지 겹칠 수 있게 둬서 두 채널이 서로를 막지 않게 했습니다.</p>
+                </div>
+            </div>
+
+            <!-- 04 결과 -->
+            <div class="brandSubSection" data-tab="결과">
+                <div class="brandEyebrow">
+                    <span class="beNum">04</span>
+                    <span class="beRule"></span>
+                    <span class="beName">결과</span>
+                </div>
+                <h2 class="aboutHeadline">쏠려 있던 관심이, 여러 카테고리로 퍼졌습니다</h2>
+                <!-- 실제 수치는 비공개라 값은 표기하지 않고
+                     '어디에서 어디로 움직였는지'(방향과 상대 위치)만 보여주는 덤벨 차트.
+                     색은 강조(emphasis) 방식 - 이전은 회색(맥락), 이후만 브랜드 코랄(핵심). -->
+                <figure class="shiftChart">
+                    <figcaption class="shiftHead">
+                        <span class="shiftTitle">카테고리 · 향 노트별 CRM 관심도</span>
+                        <span class="shiftLegend">
+                            <span class="shiftLegendItem"><i class="shiftDot isBefore"></i>이전</span>
+                            <span class="shiftLegendItem"><i class="shiftDot isAfter"></i>6개월 뒤</span>
+                        </span>
+                    </figcaption>
+
+                    <div class="shiftRow" style="--from:71%; --to:78%">
+                        <span class="shiftName">룸스프레이</span>
+                        <span class="shiftTrack">
+                            <span class="shiftConnector"></span>
+                            <span class="shiftDot isBefore"></span>
+                            <span class="shiftDot isAfter"></span>
+                        </span>
+                        <span class="shiftNote">유지</span>
+                    </div>
+
+                    <div class="shiftRow" style="--from:26%; --to:72%">
+                        <span class="shiftName">디퓨저</span>
+                        <span class="shiftTrack">
+                            <span class="shiftConnector"></span>
+                            <span class="shiftDot isBefore"></span>
+                            <span class="shiftDot isAfter"></span>
+                        </span>
+                        <span class="shiftNote isUp">크게 상승</span>
+                    </div>
+
+                    <div class="shiftRow" style="--from:19%; --to:58%">
+                        <span class="shiftName">그 외 향 노트</span>
+                        <span class="shiftTrack">
+                            <span class="shiftConnector"></span>
+                            <span class="shiftDot isBefore"></span>
+                            <span class="shiftDot isAfter"></span>
+                        </span>
+                        <span class="shiftNote isUp">상승</span>
+                    </div>
+
+                    <div class="shiftAxis">
+                        <span>관심도 낮음</span>
+                        <span>높음</span>
+                    </div>
+
+                    <p class="shiftFootnote">실제 수치는 계약상 공개할 수 없어, 방향과 상대적 위치만 표시했습니다. 캠페인은 중간에 멈춘 적 없이 매달 이어졌고, 시작 시점과 6개월 뒤를 비교한 것입니다.</p>
+                </figure>
+
+                <!-- 예측이 빗나간 지점. 결과만 적으면 다 맞힌 것처럼 읽히는데,
+                     실제로 배운 건 여기였음 (룸스프레이 유지 + 나머지 상승). -->
+                <p class="aboutBridge">룸스프레이 관심을 디퓨저가 나눠 가질 거라 봤는데, 룸스프레이는 그대로인 채 나머지가 올라왔습니다.</p>
+
+                <div class="brandResult">
+                    <p>돌아보면 전단에 붙여 둔 2개&nbsp;구매 조건이 대체가 아니라 <strong>추가 구매</strong> 쪽으로 작동한 셈입니다. 베스트셀러를 지키면서 옆자리를 늘리는 방식이었습니다.</p>
+                </div>
+
+                <!-- 버튼 셋이 같은 무게면 '케이스 상세 하나 + 다른 카테고리 둘'이라는
+                     층위가 안 보임. 먼저 눌러야 할 곳만 채운 버튼으로 둠. -->
+                <p class="nextLead">다른 문제도 같은 순서로 풀었습니다.</p>
+                <div class="quickLinks">
+                    <a class="qlBtn isPrimary" href="projects/fragrance-crm.html"><i class="fa-solid fa-spray-can qlIcon"></i>이달의 프래그런스</a>
+                    <a class="qlBtn" href="brand-story.html"><i class="fa-solid fa-folder-open qlIcon"></i>BRANDING</a>
+                    <a class="qlBtn" href="marketing.html"><i class="fa-solid fa-bullhorn qlIcon"></i>MARKETING</a>
+                </div>
+            </div>
+
+            <!-- 05 다른 브랜드에서도 - 메르디센트 이야기를 끝까지 민 뒤에 놓음.
+                 앞에 두면 시작하자마자 브랜드가 바뀌어 흐름이 끊기고 곁다리로 읽힘.
+                 맨 뒤에 오면 "사례가 하나 더"가 아니라 "방법이 브랜드를 안 가린다"는 증명이 됨. -->
+            <div class="brandSubSection" data-tab="다른 브랜드">
+                <!-- 머리표에 '문제', 헤드라인에 '해법'을 둠.
+                     성과 나열이 아니라 무엇을 어떻게 풀었는지가 뼈대로 보이게. -->
+                <div class="brandEyebrow">
+                    <span class="beNum">05</span>
+                    <span class="beRule"></span>
+                    <span class="beName">커피에서도 같은 문제가 있었습니다</span>
+                </div>
+                <h2 class="aboutHeadline">카테고리가 바뀌어도, 푸는 순서는 같았습니다</h2>
+                <p class="aboutSub">화장품이 아니라 커피, 온라인이 아니라 박람회 현장이었습니다. 그런데 문제의 모양은 같았습니다 &mdash; 박람회가 남기는 건 방문객 수와 팔로워 증가뿐이고, 그 관심이 구매까지 갔는지는 알 수 없었습니다.</p>
+                <p class="aboutSub">여기서도 도구를 새로 사지 않았습니다. 행사 뒤에 어차피 나갈 감사&nbsp;프로모션에 검증 역할을 겸하게 했습니다.</p>
+                <div class="aboutFlow">
+                    <div class="aboutFlowStep">
+                        <i class="fa-solid fa-users"></i>
+                        <span>현장 접점</span>
+                    </div>
+                    <span class="aboutTimelineLine"></span>
+                    <div class="aboutFlowStep">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>감사 프로모션</span>
+                    </div>
+                    <span class="aboutTimelineLine"></span>
+                    <div class="aboutFlowStep">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>실구매 확인</span>
+                    </div>
+                </div>
+                <!-- 7~8%를 여기서 또 64px로 띄우면 ABOUT·BRANDING에 이어 세 번째가 됨.
+                     이 페이지의 역할은 숫자 자랑이 아니라 '그 숫자를 만든 방법'이라
+                     수치는 문장 안에만 둠. ▼ 확인 필요: 이 라벨이 BRANDING(신규 유입 팔로워
+                     실구매 전환율)과 ABOUT·홈(신규 고객 재구매 전환율)에서 다르게 적혀 있음 ▲ -->
+                <div class="brandResult">
+                    <p>행사 뒤 감사&nbsp;프로모션 참여 데이터로 신규 고객의 실제 구매를 CRM에서 확인했습니다. 신규 유입 팔로워의 실구매 전환은 <strong>7~8%</strong>였고, 일회성에 그치지 않는지 재구매까지 함께 봤습니다.</p>
+                    <a href="brand-story.html#sinsan">신산커피 데이터 검증 과정 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="siteFooter" id="footer"></footer>
 

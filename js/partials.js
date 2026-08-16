@@ -44,7 +44,7 @@ var FOOTER_HTML = '\
     <div class="footerRight">\
         <p><i class="fas fa-mobile"></i> <a href="tel:010-2747-2659">010.2747.2659</a></p>\
         <p><i class="far fa-envelope"></i> <a href="mailto:eq900bmwm@gmail.com">eq900bmwm@gmail.com</a></p>\
-        <p><i class="fas fa-file-pdf"></i> <a href="{{BASE}}pdf/simminyongresume.pdf" target="_blank">RESUME</a></p>\
+        <p><i class="fas fa-address-card"></i> <a href="{{BASE}}resume.html">RESUME</a></p>\
     </div>\
 </div>\
 <p class="siteFooterCopy">copyright © 2026 SIM MIN YONG. all rights reserved.</p>';

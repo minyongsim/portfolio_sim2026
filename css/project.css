@@ -6,6 +6,30 @@ body {
     background: #FFFFFF;
 }
 
+/* ── 한글 줄바꿈 ──────────────────────────────────────────────────
+   projects/ 상세 페이지들은 word-break 규칙이 통째로 빠져 있어서
+   '매/장', '노/트', '카테/고리'처럼 한 단어가 글자 단위로 쪼개지고 있었음
+   (site.css 본문에는 이미 걸려 있던 규칙 — 여기만 누락).
+   어절 단위로만 줄이 나뉘게 하고, 가운데 정렬 문단은 줄 길이도 맞춤. */
+.projIntroInner h1,
+.projIntroInner .projLead,
+.projSection p,
+.projSection li,
+.projLabel,
+.projStat .label,
+.projStat .num,
+.projMeta .projMetaItem p,
+.projKvCap,
+.projNav a,
+.projImg {
+    word-break: keep-all;
+}
+
+.projIntroInner h1,
+.projIntroInner .projLead {
+    text-wrap: balance;
+}
+
 .projHeader {
     background: #373737;
     color: #FFFFFF;
@@ -114,6 +138,61 @@ body {
     padding: 40px 24px 80px;
 }
 
+/* 케이스 대표 이미지(세로형 키비주얼).
+   .projImg 는 16:7 가로 배너라 object-fit:cover 로 세로 이미지를 넣으면
+   얼굴이 가로로 한 줄만 잘려 보임. 연한 밴드 안에 원본(566x848)보다
+   작게 앉혀 확대율 0%을 유지함. */
+.projKv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #F4F4F4;
+    border-radius: 8px;
+    padding: 48px 24px 40px;
+    margin-bottom: 40px;
+}
+
+.projKvShot {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.projKvShot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.projKv:hover .projKvShot {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.projKvCap {
+    margin-top: 16px;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: #767676;
+    text-align: center;
+    word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .projKvShot {
+        transition: none;
+    }
+
+    .projKv:hover .projKvShot {
+        transform: none;
+    }
+}
+
 .projImg {
     width: 100%;
     aspect-ratio: 16/7;
@@ -142,18 +221,63 @@ body {
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 0.02em;
-    margin-bottom: 8px;
-    display: inline-block;
+    margin-bottom: 14px;
+    /* 아이콘 배지와 글자를 한 줄로 묶기 위해 inline-block -> inline-flex */
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
 }
 
 .projSection .projLabel.problem { color: #FF5C4D; }
 .projSection .projLabel.solve { color: #FF5C4D; }
 .projSection .projLabel.result { color: #373737; }
 
+/* 섹션 라벨 아이콘.
+   상세 페이지가 라벨 + 문단 덩어리만 반복돼서 어디가 문제고 어디가 해법인지
+   눈으로 훑기 어려웠음. 라벨 앞에 기호를 붙여 세 단계가 바로 구분되게 함.
+   <i> 태그를 세 페이지에 일일이 넣는 대신 CSS로 붙여서, 라벨 이름이
+   '배경/전략/방식'처럼 페이지마다 달라도 problem/solve/result 클래스만 맞으면 따라옴.
+   유니코드는 이 사이트가 쓰는 FA 6.0.0 free 패키지에서 직접 확인함
+   (돋보기 f002 · 전구 f0eb · 체크 f058). */
+.projSection .projLabel::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 12px;
+    /* 11px 글자 하나로는 눈에 안 걸려서, 사이트가 이미 쓰는 배지 규칙
+       (#FFF1EF 원 안의 코랄 아이콘)으로 키움. 결과 라벨은 글자가 먹색이라
+       색을 따로 지정해 원 안 아이콘은 셋 다 코랄로 통일. */
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #FFF1EF;
+    color: #FF5C4D;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.projSection .projLabel.problem::before { content: "\f002"; }
+.projSection .projLabel.solve::before { content: "\f0eb"; }
+.projSection .projLabel.result::before { content: "\f058"; }
+
+/* 메타 바 라벨 아이콘 (브랜드 · 역할 · 채널 등). 값이 아니라 라벨 쪽에만 붙여
+   흰 글자(값)의 대비를 건드리지 않음 */
+.projMeta .projMetaItem p:first-child i {
+    font-size: 10px;
+    margin-right: 6px;
+    color: #FF5C4D;
+}
+
 .projSection p {
     font-size: 15px;
     line-height: 1.85;
     color: #373737;
+}
+
+/* 한 라벨 아래 문단이 여러 개일 때 여백이 없어 한 덩어리로 붙어 보였음 */
+.projSection p + p {
+    margin-top: 15px;
 }
 
 .projStats {
@@ -168,6 +292,22 @@ body {
     color: #FFFFFF;
     border-radius: 8px;
     padding: 18px;
+}
+
+.projStats .projStat .statIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 92, 77, 0.16);
+    margin-bottom: 12px;
+}
+
+.projStats .projStat .statIcon i {
+    font-size: 13px;
+    color: #FF5C4D;
 }
 
 .projStats .projStat .num {
@@ -188,14 +328,24 @@ body {
     margin: 48px 0;
 }
 
+/* 하단 이동 바.
+   예전엔 '이전 케이스 / 다음 케이스'를 양끝(space-between)에 붙였는데,
+   넓은 화면에서는 두 링크가 화면 좌우 끝까지 벌어져 본문 기둥과 어긋나 보였음.
+   케이스가 늘고 줄 때마다 앞뒤 연결을 손보는 것도 부담이라
+   '목록으로 돌아가기' 하나로 통일하고 가운데 세움. */
 .projNav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 18px 24px;
+    padding: 20px 24px;
     background: #262626;
     color: #D4D4D4;
     font-size: 13px;
+}
+
+.projNav a i {
+    margin-right: 7px;
+    font-size: 11px;
 }
 
 .projNav a {
