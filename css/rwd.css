@@ -273,11 +273,13 @@
 
     .offerStep {
         width: 100%;
-        max-width: 280px;
+        /* 280px + 좌우 20px 여백이면 '생일 메시지 할인'이 두 줄로 접혀
+           이 칸만 높아졌음. 20px 넓히고 안쪽 여백을 줄여 한 줄로 맞춤 */
+        max-width: 300px;
         flex-direction: row;
         align-items: center;
-        gap: 14px;
-        padding: 16px 20px;
+        gap: 12px;
+        padding: 16px;
     }
 
     .osIcon {
@@ -290,10 +292,16 @@
         text-align: left;
     }
 
-    .offerStep .osValue,
-    .offerStep.isStack .osValue {
+    .offerStep .osValue {
         margin-top: 0;
         font-size: 24px;
+    }
+
+    /* '중복 적용'은 줄바꿈을 막아 둔 덩어리라 24px에선 폭을 100px 넘게 먹고,
+       그만큼 왼쪽 조건 라벨('생일 메시지 할인')이 두 줄로 접혀 이 칸만 높아졌음 */
+    .offerStep.isStack .osValue {
+        margin-top: 0;
+        font-size: 19px;
     }
 
     .offerJoin {
@@ -373,10 +381,22 @@
         margin: 26px auto;
     }
 
+    /* 흐름도 폭을 260px로 좁혔는데, site.css의 `.brandPanel .aboutFlow`(margin: 44px 0)와
+       `.brandSubSection:not(:has(.aboutProof)) .aboutFlow`(margin: 38px 0 0)가
+       특이도에서 이겨 좌우 auto가 먹지 않았음.
+       -> 흐름도만 왼쪽으로 82px 치우쳐서, 가운데 정렬된 제목·본문과 축이 어긋나 보였음.
+       같은 특이도로 좌우 auto만 다시 지정함(위아래 간격은 원래 값 유지). */
+    .brandPanel .aboutFlow,
+    .brandSubSection .aboutFlow {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .aboutFlowStep {
         flex-direction: row;
         align-items: center;
-        justify-content: flex-start;
+        /* 사이트 나머지가 전부 가운데 정렬이라 흐름도만 왼쪽에 붙으면 축이 어긋남 */
+        justify-content: center;
         gap: 14px;
         width: 100%;
     }
@@ -394,12 +414,12 @@
         text-align: left;
     }
 
-    /* 가로 연결선 -> 아이콘 아래로 떨어지는 세로선 (10px = 22px 아이콘의 중앙) */
+    /* 가로 연결선 -> 단계 사이를 잇는 세로선 */
     .aboutTimelineLine {
         width: 1.5px;
         height: 14px;
-        margin: 5px 0 5px 10px;
-        align-self: flex-start;
+        margin: 5px 0;
+        align-self: center;
         transform: none;
     }
 
@@ -481,6 +501,13 @@
        같은 특이도로 화살표를 아래로 돌리고 카드도 폭을 채우게 함. */
     @supports selector(:has(*)) {
 
+        /* 위 .brandSubSection .aboutFlow 보다 특이도가 높은 규칙이 site.css에 있어
+           카드형 흐름도만 여전히 왼쪽에 붙었음. 같은 모양의 선택자로 한 번 더 잡음 */
+        .brandSubSection:not(:has(.aboutProof)) .aboutFlow {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .brandSubSection:not(:has(.aboutProof)) .aboutFlowStep {
             width: 100%;
             padding: 16px 18px;
@@ -537,35 +564,49 @@
         margin: 36px 0 8px;
     }
 
+    /* 한 줄에 [번호][아이콘][제목]---[설명] 으로 늘어놓으니
+       제목과 설명이 양끝으로 밀려 둘 다 두 줄로 접혔고(1·2번만),
+       그래서 카드 높이가 칸마다 달라져 흐름이 계단처럼 보였음.
+       -> 번호·아이콘은 왼쪽 고정 칸, 제목과 설명은 오른쪽 한 칸에 위아래로 쌓음.
+       네 칸이 같은 구조·같은 높이가 되고 글자도 접히지 않음. */
     .orderStep {
         width: 100%;
         max-width: 260px;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 18px 36px 1fr;
+        grid-template-areas:
+            "num icon title"
+            "num icon desc";
         align-items: center;
-        gap: 12px;
+        justify-items: start;
+        column-gap: 12px;
+        row-gap: 2px;
         padding: 12px 16px;
     }
 
     .orderStepNum {
+        grid-area: num;
         margin-bottom: 0;
-        order: -1;
     }
 
     .orderStepIcon {
+        grid-area: icon;
         width: 36px;
         height: 36px;
         margin-bottom: 0;
-        flex-shrink: 0;
     }
 
     .orderStepTitle {
+        grid-area: title;
+        align-self: end;
         text-align: left;
     }
 
     .orderStepDesc {
+        grid-area: desc;
+        align-self: start;
         margin-top: 0;
-        margin-left: auto;
-        text-align: right;
+        text-align: left;
     }
 
     .orderArrow {
