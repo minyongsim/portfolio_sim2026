@@ -1109,6 +1109,10 @@ body {
 /* BRANDING 전용: 브랜드별(신산커피/메르디센트) 탭 전환 레이아웃 */
 .brandStorySection {
     flex: 1;
+    /* flex 아이템은 min-width가 auto라서 '내용의 최소 너비'보다 작아지지 못함.
+       320px 같은 좁은 화면에서 안에 고정폭 요소(대표 이미지 300px)가 있으면
+       이 블록이 348px로 늘어나 페이지 전체에 가로 스크롤이 생겼음. */
+    min-width: 0;
     max-width: 900px;
     margin: 0 auto;
     padding: 96px 24px 110px;
@@ -2670,6 +2674,10 @@ body.lightboxOpen {
    ───────────────────────────────────────────────────────────── */
 .resumeWrap {
     flex: 1;
+    /* 위 .brandStorySection과 같은 이유.
+       여기서는 머리말의 사이트 주소(띄어쓰기가 없어 줄바꿈 지점이 없는 긴 문자열)가
+       최소 너비를 290px로 밀어 올려 320px 화면에서 가로 스크롤이 생겼음. */
+    min-width: 0;
     max-width: 900px;
     margin: 0 auto;
     padding: 84px 24px 100px;
@@ -2928,6 +2936,19 @@ body[data-page="resume"] #header {
     font-size: 21px;
     font-weight: 700;
     color: #373737;
+}
+
+/* 주소·이메일처럼 띄어쓰기가 없는 긴 문자열은 좁은 화면에서 줄바꿈 지점이 없어
+   블록 전체의 최소 너비를 밀어 올림. 이런 문자열에만 중간 끊김을 허용함.
+   ※ .rsMeta 전체에 걸면 안 됨 - 옆의 한글까지 '8개/월'처럼 쪼개짐. 링크에만. */
+.rsMeta a,
+.footerRight a {
+    overflow-wrap: anywhere;
+}
+
+/* 링크 옆 한글은 어절 단위로만 */
+.rsMeta {
+    word-break: keep-all;
 }
 
 /* 이력서 본문 중 word-break 규칙이 빠져 있던 것들.

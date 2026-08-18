@@ -432,7 +432,17 @@ $(function ($) {
                 wheelLock = false;
             }
 
+            // 모바일·태블릿에서는 휠 스냅을 쓰지 않음.
+            // 터치 스크롤의 관성이나 트랙패드 제스처가 wheel 이벤트로 들어오는 브라우저가 있어서,
+            // preventDefault가 손가락 스크롤을 끊거나 한 번에 두 칸씩 튀게 만듦.
+            // 창 크기·방향이 바뀌어도 따라오도록 등록 시점이 아니라 매 이벤트마다 판단함.
+            function wheelSnapOff() {
+                return window.innerWidth <= 900
+                    || (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches);
+            }
+
             function handleWheel(e) {
+                if (wheelSnapOff()) return;
                 if (wheelLock) {
                     e.preventDefault();
                     return;
