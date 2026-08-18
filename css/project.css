@@ -146,6 +146,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     background: #F4F4F4;
     border-radius: 8px;
     padding: 48px 24px 40px;
@@ -153,8 +154,8 @@ body {
 }
 
 .projKvShot {
-    width: 400px;
-    max-width: 100%;
+    /* 대표 이미지가 세로형 -> 가로형 배너로 바뀌어, 안의 카피가 읽히도록 폭을 늘림 */
+    width: min(680px, calc(100vw - 48px));
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid #E4E4E4;

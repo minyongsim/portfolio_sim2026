@@ -1798,12 +1798,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* 폭을 안 잡으면 안쪽 .kvShot의 max-width:100% 가 기준을 못 찾아
+       좁은 화면에서 720px 그대로 나가 가로 스크롤이 생김 */
+    width: 100%;
     margin: 48px 0 8px;
 }
 
 .kvShot {
-    width: 300px;
-    max-width: 100%;
+    /* 예전 대표 이미지는 세로형(566x848)이라 300px면 충분했는데,
+       가로형 배너(1366x768)로 바뀌면서 300px에 넣으면 높이가 169px밖에 안 돼
+       안에 인쇄된 한글 카피가 안 읽힘. 글 기둥 안에서 최대한 넓게 잡음. */
+    /* max-width:100% 로는 못 잡힘. 바깥 .brandStorySection이 margin:0 auto 라
+       flex 늘어남이 꺼져 폭이 '콘텐츠 기준'으로 잡히는데, 그 콘텐츠가 바로 이 요소라
+       서로를 참조하는 상태가 됨. 화면 폭(100vw)을 직접 기준으로 써서 끊음.
+       48px은 좌우 본문 여백(24px x 2). */
+    width: min(720px, calc(100vw - 48px));
     border-radius: 4px;
     overflow: hidden;
     /* 이미지가 사방 끝까지 사진이라 밝은 배경에서 경계가 사라짐.
@@ -1811,6 +1820,11 @@ body {
     border: 1px solid #E4E4E4;
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.10);
     transition: box-shadow 0.3s, transform 0.3s;
+}
+
+/* 눌러서 크게 볼 수 있다는 표시 */
+.kvShot {
+    cursor: zoom-in;
 }
 
 .kvShot img {
