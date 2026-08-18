@@ -528,7 +528,9 @@ $(function ($) {
     // ---- 증거 사진 라이트박스 (클릭하면 크게 보기 + 슬라이드) ----
     // 대상: .aboutPhotoSlot img (about.html의 케이스 증거 사진, brand-story.html의 신산커피 패키지/현장 사진 등)
     // 같은 .aboutProof 안의 사진끼리를 한 그룹으로 묶어서, 그 그룹 안에서만 좌우로 슬라이드됨
-    var $photoTriggers = $('.aboutPhotoSlot img');
+    // 대표 배너(.kvShot / .projKvShot)도 포함 — 안에 인쇄된 조건 문구가
+    // 모바일에서 작아지므로 눌러서 크게 볼 수 있어야 함
+    var $photoTriggers = $('.aboutPhotoSlot img, .kvShot img, .projKvShot img');
     if ($photoTriggers.length) {
         var $lightbox = $('\
         <div class="photoLightbox" aria-hidden="true">\
@@ -581,7 +583,7 @@ $(function ($) {
             lbRender();
         }
 
-        $(document).on('click', '.aboutPhotoSlot img', function () { lbOpen($(this)); });
+        $(document).on('click', '.aboutPhotoSlot img, .kvShot img, .projKvShot img', function () { lbOpen($(this)); });
         $lightbox.on('click', '.lightboxClose', lbClose);
         $lightbox.on('click', '.lightboxPrev', function () { lbStep(-1); });
         $lightbox.on('click', '.lightboxNext', function () { lbStep(1); });
