@@ -3053,6 +3053,21 @@ body[data-page="resume"] #header {
     letter-spacing: 0.2px;
 }
 
+/* 모회사(스피드썬) 소속 기간 병기 줄.
+   경력 항목을 쪼개지 않고 한 줄로 붙이는 자리라, 회사명·직급보다 약하게 두되
+   최종 단계에서 경력증명서로 확인되는 사실이라 안 읽히면 안 됨.
+   왼쪽 세로선으로 '이 항목에 딸린 설명'임을 표시함. */
+.rsJobNote {
+    margin-top: 9px;
+    padding-left: 10px;
+    border-left: 2px solid #FFD5CF;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #6B6B6B;
+    letter-spacing: 0.2px;
+    word-break: keep-all;
+}
+
 .rsTaskGroup {
     margin-top: 20px;
 }
