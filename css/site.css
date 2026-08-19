@@ -2978,6 +2978,35 @@ body[data-page="resume"] #header {
     word-break: keep-all;
 }
 
+/* 주요 성과의 회사명 배지.
+   원래 <span>에 아무 규칙이 없어서 '두두인지도가', '메르디센트공식',
+   '하이이미지지역'처럼 회사명이 본문 첫 글자에 그대로 붙어 나오고 있었음.
+   경력의 .rsSideTag, 학력의 .rsBadge와 같은 알약 모양을 쓰되
+   그쪽은 회색 보조 표시라, 여기는 어느 회사 성과인지 먼저 걸려야 해서
+   코랄 톤(#FFF1EF 바탕 + #FF5C4D 글자)으로 두고 본문 위에 한 줄 세움. */
+.rsAch {
+    margin-top: 26px;
+    line-height: 1.8;
+}
+
+.rsAch:first-of-type {
+    margin-top: 0;
+}
+
+.rsAchWho {
+    display: block;
+    width: -webkit-fit-content;
+    width: fit-content;
+    margin-bottom: 9px;
+    padding: 3px 11px;
+    border-radius: 999px;
+    background: #FFF1EF;
+    font-family: 'LaundryGothic', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: #FF5C4D;
+}
+
 /* 회사 재직이 아닌 개인 활동(해외 셀러 운영).
    경력 타임라인의 빈 구간을 메우되, 회사 경력과 같은 무게로 읽히면
    '총 4년 8개월'이라는 숫자와 싸우게 됨. 회사명 크기를 낮추고
