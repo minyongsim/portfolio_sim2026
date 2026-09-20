@@ -2,8 +2,8 @@
 
 body {
     font-family: 'LaundryGothic', sans-serif;
-    color: #1a1a1a;
-    background: #FFFFFF;
+    color: #2B4A3A;
+    background: #F3EDDE;
 }
 
 /* ── 한글 줄바꿈 ──────────────────────────────────────────────────
@@ -31,8 +31,8 @@ body {
 }
 
 .projHeader {
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
 }
 
 .projHeaderInner {
@@ -45,7 +45,7 @@ body {
 }
 
 .projHeaderInner a {
-    color: #FFFFFF;
+    color: #F6F1E3;
     font-size: 13px;
 }
 
@@ -61,8 +61,8 @@ body {
 }
 
 .projIntro {
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
     padding: 30px 24px 40px;
 }
 
@@ -73,8 +73,8 @@ body {
 
 .projTag {
     display: inline-block;
-    background: #FF5C4D;
-    color: #373737;
+    background: #C95F1D;
+    color: #2B4A3A;
     font-size: 12px;
     font-weight: bold;
     padding: 4px 12px;
@@ -91,7 +91,7 @@ body {
 
 .projIntroInner .projLead {
     font-size: 15px;
-    color: #E8E8E8;
+    color: #CFC5A9;
     line-height: 1.7;
     max-width: 640px;
 }
@@ -114,7 +114,7 @@ body {
 
 .projMeta .projMetaItem {
     padding: 16px 24px;
-    color: #FFFFFF;
+    color: #F6F1E3;
     border-left: 1px solid #4D4D4D;
 }
 
@@ -158,7 +158,7 @@ body {
     width: min(680px, calc(100vw - 48px));
     border-radius: 4px;
     overflow: hidden;
-    border: 1px solid #E4E4E4;
+    border: 1px solid #DACFB6;
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.10);
     transition: box-shadow 0.3s, transform 0.3s;
 }
@@ -178,7 +178,7 @@ body {
     margin-top: 16px;
     font-size: 12px;
     letter-spacing: 0.2px;
-    color: #767676;
+    color: #567260;
     text-align: center;
     word-break: keep-all;
 }
@@ -197,7 +197,7 @@ body {
 .projImg {
     width: 100%;
     aspect-ratio: 16/7;
-    background: #E8E8E8;
+    background: #CFC5A9;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -229,9 +229,9 @@ body {
     gap: 9px;
 }
 
-.projSection .projLabel.problem { color: #FF5C4D; }
-.projSection .projLabel.solve { color: #FF5C4D; }
-.projSection .projLabel.result { color: #373737; }
+.projSection .projLabel.problem { color: #C95F1D; }
+.projSection .projLabel.solve { color: #C95F1D; }
+.projSection .projLabel.result { color: #2B4A3A; }
 
 /* 섹션 라벨 아이콘.
    상세 페이지가 라벨 + 문단 덩어리만 반복돼서 어디가 문제고 어디가 해법인지
@@ -245,14 +245,14 @@ body {
     font-weight: 900;
     font-size: 12px;
     /* 11px 글자 하나로는 눈에 안 걸려서, 사이트가 이미 쓰는 배지 규칙
-       (#FFF1EF 원 안의 코랄 아이콘)으로 키움. 결과 라벨은 글자가 먹색이라
+       (#F2E3CD 원 안의 코랄 아이콘)으로 키움. 결과 라벨은 글자가 먹색이라
        색을 따로 지정해 원 안 아이콘은 셋 다 코랄로 통일. */
     flex-shrink: 0;
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: #FFF1EF;
-    color: #FF5C4D;
+    background: #F2E3CD;
+    color: #C95F1D;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -267,13 +267,13 @@ body {
 .projMeta .projMetaItem p:first-child i {
     font-size: 10px;
     margin-right: 6px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .projSection p {
     font-size: 15px;
     line-height: 1.85;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 /* 한 라벨 아래 문단이 여러 개일 때 여백이 없어 한 덩어리로 붙어 보였음 */
@@ -289,8 +289,8 @@ body {
 }
 
 .projStats .projStat {
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
     border-radius: 8px;
     padding: 18px;
 }
@@ -308,24 +308,24 @@ body {
 
 .projStats .projStat .statIcon i {
     font-size: 13px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .projStats .projStat .num {
     font-size: 20px;
     font-weight: bold;
-    color: #FF5C4D;
+    color: #C95F1D;
     margin-bottom: 4px;
 }
 
 .projStats .projStat .label {
     font-size: 12px;
-    color: #D4D4D4;
+    color: #B8C1AD;
 }
 
 .projDivider {
     border: none;
-    border-top: 2px dashed #E8E8E8;
+    border-top: 2px dashed #CFC5A9;
     margin: 48px 0;
 }
 
@@ -340,7 +340,7 @@ body {
     align-items: center;
     padding: 20px 24px;
     background: #262626;
-    color: #D4D4D4;
+    color: #B8C1AD;
     font-size: 13px;
 }
 
@@ -350,7 +350,7 @@ body {
 }
 
 .projNav a {
-    color: #D4D4D4;
+    color: #B8C1AD;
 }
 
 @media screen and (max-width: 700px) {

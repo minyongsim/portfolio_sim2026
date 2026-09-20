@@ -215,7 +215,7 @@
 
     .rlTo::before {
         content: '→ ';
-        color: #C9C9C9;
+        color: #ACB8A6;
     }
 
     /* 대표 이미지가 300px 고정이라, 320px 화면에서는 좌우 여백(24+24)까지

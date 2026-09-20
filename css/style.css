@@ -1,8 +1,10 @@
 @charset "utf-8";
 
 body {
+    /* 배경 베이지 / 텍스트 그린 / 포인트 딥 오렌지 톤 */
+    background: #EDE6D6;
     font-family: 'LaundryGothic', sans-serif;
-    color: #1a1a1a;
+    color: #2B4A3A;
     overflow-x: hidden;
 }
 
@@ -46,7 +48,7 @@ body {
 .menuBox>li {
     text-align: center;
     font-family: 'LaundryGothic', sans-serif;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 10px;
     position: relative;
 }
@@ -88,8 +90,8 @@ body {
     overflow: hidden;
     white-space: nowrap;
     opacity: 0;
-    background: #FF5C4D;
-    color: #FFFFFF;
+    background: #C95F1D;
+    color: #F6F1E3;
     border-radius: 50px;
     transition: width 0.42s cubic-bezier(0.2, 0.8, 0.25, 1),
                 padding 0.42s cubic-bezier(0.2, 0.8, 0.25, 1),
@@ -112,13 +114,13 @@ body {
     text-align: center;
     opacity: 1;
     visibility: visible;
-    color: #FFFFFF;
+    color: #F6F1E3;
     font-weight: normal;
     width: 38px;
     font-size: 11px;
     padding: 2px;
     border-radius: 50px;
-    background: #373737;
+    background: #2B4A3A;
 }
 
 .menuBox>li.active a span:nth-of-type(2) {
@@ -139,7 +141,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #FFFFFF;
+    background: #F3EDDE;
     transition: opacity 0.4s ease, visibility 0s 0.4s;
 }
 
@@ -166,13 +168,13 @@ body {
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 3px;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 /* 상단바 (로고 + 카테고리 메뉴) */
 .home_header {
     height: 10vh;
-    border-bottom: 3px solid #373737;
+    border-bottom: 3px solid #2B4A3A;
     position: relative;
     z-index: 9999999;
 }
@@ -187,7 +189,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #373737;
+    color: #2B4A3A;
     font-family: 'LaundryGothic', sans-serif;
     letter-spacing: 3px;
 }
@@ -204,7 +206,7 @@ body {
     z-index: 99999999;
     opacity: 0;
     text-align: center;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .gotop.on {
@@ -230,7 +232,7 @@ body {
     font-weight: 700;
     letter-spacing: 1px;
     margin-top: 4px;
-    color: #373737;
+    color: #2B4A3A;
     transition: color 0.3s ease;
 }
 
@@ -240,7 +242,7 @@ body {
 }
 
 .gotop.onFooter>h2 {
-    color: #FFFFFF;
+    color: #F6F1E3;
 }
 
 /* ABOUT 페이지 */
@@ -260,9 +262,9 @@ body {
 
 .aboutBox .information h2 {
     text-align: center;
-    color: #373737;
+    color: #2B4A3A;
     padding: 15px 0px;
-    border-bottom: 1px dashed #373737;
+    border-bottom: 1px dashed #2B4A3A;
     font-size: 25px;
     font-weight: bold;
     position: relative;
@@ -279,7 +281,7 @@ body {
 
 .aboutBox .information .infoBox {
     margin-top: 15px;
-    color: #373737;
+    color: #2B4A3A;
     font-weight: bold;
 }
 
@@ -297,8 +299,8 @@ body {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
 }
 
 .aboutBox .information .infoBox li:nth-of-type(1),
@@ -335,7 +337,7 @@ body {
     width: 57%;
     height: 650px;
     padding: 10px;
-    border: 1px solid #373737;
+    border: 1px solid #2B4A3A;
     display: none;
     opacity: 0;
     -webkit-transform: translate3d(100%, 0, 0);
@@ -350,9 +352,9 @@ body {
 .aboutBox .information02>h2 {
     font-size: 35px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #F6F1E3;
     padding: 5px 30px;
-    background: #373737;
+    background: #2B4A3A;
     margin: 15px;
 }
 
@@ -365,8 +367,8 @@ body {
 .aboutBox .information02Inner div>h2 {
     text-align: center;
     font-size: 23px;
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
     width: 150px;
     margin: 10px 15px;
 }
@@ -374,7 +376,7 @@ body {
 .aboutBox .information02Inner div ul>li {
     font-size: 20px;
     margin: 10px;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .aboutBox .information02Inner div ul>li span {
@@ -383,19 +385,19 @@ body {
 
 .aboutBox .information02Inner div:nth-of-type(1) {
     width: 40%;
-    border-right: 1px dashed #373737;
-    border-bottom: 1px dashed #373737;
+    border-right: 1px dashed #2B4A3A;
+    border-bottom: 1px dashed #2B4A3A;
 }
 
 .aboutBox .information02Inner div:nth-of-type(2) {
     padding-left: 10px;
     width: 60%;
-    border-bottom: 1px dashed #373737;
+    border-bottom: 1px dashed #2B4A3A;
 }
 
 .aboutBox .information02Inner div:nth-of-type(3) {
     margin-top: 15px;
-    border-bottom: 1px dashed #373737;
+    border-bottom: 1px dashed #2B4A3A;
 }
 
 .aboutBox .information02Inner div:nth-of-type(3) h2 {
@@ -430,8 +432,8 @@ body {
     display: inline-block;
     font-family: 'LaundryGothic', sans-serif;
     font-size: 14px;
-    color: #FFFFFF;
-    background: #373737;
+    color: #F6F1E3;
+    background: #2B4A3A;
     padding: 3px 12px;
     border-radius: 50px;
     margin-bottom: 10px;
@@ -440,13 +442,13 @@ body {
 .caseHead h2 {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 40px;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 8px;
 }
 
 .caseHead p {
     font-size: 15px;
-    color: #8A8A8A;
+    color: #6B826F;
 }
 
 .caseGrid {
@@ -470,8 +472,8 @@ body {
 
 .caseCard a {
     display: block;
-    background: #FFFFFF;
-    border: 2px solid #373737;
+    background: #F3EDDE;
+    border: 2px solid #2B4A3A;
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s;
@@ -483,7 +485,7 @@ body {
 
 .caseThumb {
     height: 200px;
-    background: #373737;
+    background: #2B4A3A;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -496,7 +498,7 @@ body {
 }
 
 .caseThumb.noimg {
-    color: #D4D4D4;
+    color: #B8C1AD;
     font-size: 13px;
     font-family: 'LaundryGothic', sans-serif;
 }
@@ -508,20 +510,20 @@ body {
 .caseInfo .caseBrand {
     display: inline-block;
     font-size: 12px;
-    color: #FF5C4D;
+    color: #C95F1D;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
 .caseInfo h3 {
     font-size: 20px;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 8px;
 }
 
 .caseInfo p {
     font-size: 13px;
-    color: #8A8A8A;
+    color: #6B826F;
     line-height: 1.6;
     margin-bottom: 14px;
 }
@@ -529,7 +531,7 @@ body {
 .caseInfo .caseMore {
     font-size: 13px;
     font-weight: bold;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 /* 사이트 푸터
@@ -538,8 +540,8 @@ body {
 .siteFooter {
     position: relative;
     overflow: hidden;
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
     padding: 48px 20px 26px;
     text-align: left;
     transition: padding 0.5s ease;
@@ -599,7 +601,7 @@ body {
 .siteFooterTagline {
     font-size: 15px;
     font-style: italic;
-    color: #E8E8E8;
+    color: #CFC5A9;
     letter-spacing: 0.3px;
     word-break: keep-all;
 }
@@ -622,16 +624,16 @@ body {
 .footerRight i {
     width: 16px;
     text-align: center;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .footerRight a {
-    color: #FFFFFF;
+    color: #F6F1E3;
     transition: color 0.2s ease;
 }
 
 .footerRight a:hover {
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .siteFooterCopy {
@@ -642,7 +644,7 @@ body {
     padding-top: 18px;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     font-size: 12px;
-    color: #D4D4D4;
+    color: #B8C1AD;
 }
 
 /* ── 서랍 속 폴더탭 연출 ──────────────────────────────────────────
@@ -690,11 +692,11 @@ body {
     }
 
     .menuBox>li:not(.active) a::after {
-        background: #373737;
+        background: #2B4A3A;
     }
 
     .menuBox>li.active a::after {
-        background: #FF5C4D;
+        background: #C95F1D;
     }
 
     /* 마우스를 올리면 꼬리가 접히면서 깔끔한 알약만 남음 */

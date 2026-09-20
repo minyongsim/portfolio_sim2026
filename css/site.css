@@ -1,9 +1,9 @@
 @charset "utf-8";
 
 /* 회색 계열은 흰 배경에서 대비가 낮아(3.4:1) 접근성 기준(4.5:1) 미달이었음.
-   톤은 유지하면서 기준을 넘도록 조정: #8A8A8A→#6B6B6B(5.3:1), #B9B9B9→#767676(4.5:1).
-   포인트색 #FF5C4D는 큰 숫자(64px)에선 기준(3:1)을 통과하므로 그대로 두고,
-   태그·링크처럼 작은 글자에만 어두운 코랄 #C7483C(4.8:1)를 씀. */
+   톤은 유지하면서 기준을 넘도록 조정: #6B826F→#4E6A57(5.3:1), #B9B9B9→#567260(4.5:1).
+   포인트색 #C95F1D는 큰 숫자(64px)에선 기준(3:1)을 통과하므로 그대로 두고,
+   태그·링크처럼 작은 글자에만 어두운 코랄 #A84D15(4.8:1)를 씀. */
 
 /* 멀티페이지 구조 공통 레이아웃 (index / brand-story / data-crm / marketing) */
 
@@ -37,13 +37,13 @@ body {
 .landingHero h1 {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 48px;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 14px;
 }
 
 .landingHero p {
     font-size: 16px;
-    color: #6B6B6B;
+    color: #4E6A57;
 }
 
 /* 아래 60px 패딩은 눈에 안 보이는 빈 칸인데 블록 높이에는 들어가서,
@@ -65,20 +65,20 @@ body {
     justify-content: center;
     gap: 11px;
     min-width: 240px;
-    border: 1.5px solid #D4D4D4;
+    border: 1.5px solid #B8C1AD;
     border-radius: 50px;
     padding: 18px 28px;
     font-family: 'LaundryGothic', sans-serif;
     font-size: 15px;
     letter-spacing: 0.3px;
-    color: #373737;
-    background: #FFFFFF;
+    color: #2B4A3A;
+    background: #F3EDDE;
     transition: border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .qlBtn:hover {
-    border-color: #FF5C4D;
-    color: #FF5C4D;
+    border-color: #C95F1D;
+    color: #C95F1D;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
 }
@@ -88,7 +88,7 @@ body {
    글자만 있을 때보다 세 갈래가 한눈에 구분됨. */
 .qlIcon {
     font-size: 15px;
-    color: #FF5C4D;
+    color: #C95F1D;
     transition: transform 0.25s ease;
 }
 
@@ -98,21 +98,21 @@ body {
 
 /* 버튼 세 개가 다 같은 무게(240px 흰 알약)면 "케이스 상세 하나 + 다른 카테고리 둘"이라는
    층위가 안 보임. 주 버튼만 채워서 어디를 먼저 눌러야 하는지 알려줌.
-   색은 새로 만들지 않고 사이트가 이미 쓰는 먹색(#373737) -> hover 코랄 규칙 그대로. */
+   색은 새로 만들지 않고 사이트가 이미 쓰는 먹색(#2B4A3A) -> hover 코랄 규칙 그대로. */
 .qlBtn.isPrimary {
-    border-color: #373737;
-    background: #373737;
-    color: #FFFFFF;
+    border-color: #2B4A3A;
+    background: #2B4A3A;
+    color: #F6F1E3;
 }
 
 .qlBtn.isPrimary .qlIcon {
-    color: #FFFFFF;
+    color: #F6F1E3;
 }
 
 .qlBtn.isPrimary:hover {
-    border-color: #FF5C4D;
-    background: #FF5C4D;
-    color: #FFFFFF;
+    border-color: #C95F1D;
+    background: #C95F1D;
+    color: #F6F1E3;
 }
 
 .scrollTestSection .qlBtn.isPrimary::after,
@@ -122,7 +122,7 @@ body {
 
 .scrollTestSection .qlBtn.isPrimary:hover::after,
 .brandPanel .qlBtn.isPrimary:hover::after {
-    color: #FFFFFF;
+    color: #F6F1E3;
 }
 
 /* 버튼 묶음 위 안내 한 줄 */
@@ -131,7 +131,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 14px;
     letter-spacing: 0.2px;
-    color: #6B6B6B;
+    color: #4E6A57;
     text-align: center;
     word-break: keep-all;
 }
@@ -145,13 +145,13 @@ body {
 .brandPanel .qlBtn::after {
     content: '→';
     font-size: 14px;
-    color: #9A9A9A;
+    color: #7E937F;
     transition: transform 0.25s ease, color 0.25s ease;
 }
 
 .scrollTestSection .qlBtn:hover::after,
 .brandPanel .qlBtn:hover::after {
-    color: #FF5C4D;
+    color: #C95F1D;
     transform: translateX(4px);
 }
 
@@ -196,16 +196,16 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 22px;
     letter-spacing: 2px;
-    color: #373737;
+    color: #2B4A3A;
     /* 예전 border-top: 2px dashed 는 스크롤 테스트용 눈금이었음.
        섹션마다 배경색이 이미 다르므로 구분선 없이도 경계가 보이고,
        점선이 있으면 첫 화면 상단바 바로 아래에 개발용 선처럼 보임 */
 }
 
-.scrollTestSection.t1 { background: #FFFFFF; }
-.scrollTestSection.t2 { background: #F2F2F2; }
-.scrollTestSection.t3 { background: #E8E8E8; }
-.scrollTestSection.t4 { background: #F2F2F2; }
+.scrollTestSection.t1 { background: #F3EDDE; }
+.scrollTestSection.t2 { background: #E4DCC7; }
+.scrollTestSection.t3 { background: #CFC5A9; }
+.scrollTestSection.t4 { background: #E4DCC7; }
 
 /* ABOUT 페이지 - 대비 카피 섹션 (짧은 헤드라인 + 서브 한 줄)
    폭을 안 잡아두면 이 블록이 '가장 긴 한 줄'에 맞춰 늘어나서, 섹션마다 콘텐츠
@@ -261,8 +261,8 @@ body {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #C7483C;
-    border: 1px solid #EEC9C3;
+    color: #A84D15;
+    border: 1px solid #DFC7A6;
     border-radius: 50px;
     padding: 6px 16px;
 }
@@ -283,7 +283,7 @@ body {
     display: block;
     font-size: 22px;
     line-height: 1;
-    color: #FF5C4D;
+    color: #C95F1D;
     margin-bottom: 0;
 }
 
@@ -291,7 +291,7 @@ body {
     display: block;
     width: 26px;
     height: 1px;
-    background: #D4D4D4;
+    background: #B8C1AD;
 }
 
 .aboutNum {
@@ -300,7 +300,7 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #9A9A9A;
+    color: #7E937F;
     margin-bottom: 0;
 }
 
@@ -335,7 +335,7 @@ body {
     font-size: 52px;
     font-weight: 700;
     letter-spacing: -1px;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 18px;
     /* '유일/했습니다' 처럼 한 단어가 줄 끝에서 쪼개지지 않게 어절 단위로만 줄바꿈 */
     word-break: keep-all;
@@ -353,7 +353,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 16px;
     letter-spacing: 0.3px;
-    color: #6B6B6B;
+    color: #4E6A57;
     word-break: keep-all;
 }
 
@@ -373,7 +373,7 @@ body {
 /* 머리표에 번호 대신 이름을 넣을 때 (첫 화면). 번호보다 길어서 자간을 조금 벌림 */
 .aboutNum.isName {
     letter-spacing: 3px;
-    color: #767676;
+    color: #567260;
 }
 
 /* 첫 화면 헤드라인은 짧은 세 동사라, 크게 써야 한눈에 읽힘.
@@ -390,7 +390,7 @@ body {
    하나씩 물려주는 문장이라, 다른 섹션의 보조 설명보다 위계를 올림. */
 .scrollTestSection.t1 .aboutSub {
     font-size: 20px;
-    color: #4A4A4A;
+    color: #33523F;
 }
 
 /* -- 섹션1 세로 리듬 --------------------------------------------------
@@ -567,7 +567,7 @@ body {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 3px;
-    color: #9A9A9A;
+    color: #7E937F;
 }
 
 /* 회색 세로선 위를 코랄 조각이 반복해서 내려감 */
@@ -576,7 +576,7 @@ body {
     display: block;
     width: 1px;
     height: 36px;
-    background: #E8E8E8;
+    background: #CFC5A9;
     overflow: hidden;
 }
 
@@ -587,7 +587,7 @@ body {
     top: 0;
     width: 1px;
     height: 14px;
-    background: #FF5C4D;
+    background: #C95F1D;
     animation: scrollCueRun 1.8s cubic-bezier(.5, 0, .5, 1) infinite;
 }
 
@@ -624,7 +624,7 @@ body {
 
 .aboutFlowStep i {
     font-size: 22px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .aboutFlowStep span {
@@ -632,7 +632,7 @@ body {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.2px;
-    color: #373737;
+    color: #2B4A3A;
     text-align: center;
     /* 한글이 '설명하/는' 처럼 단어 중간에서 끊기지 않도록 어절 단위로만 줄바꿈 */
     word-break: keep-all;
@@ -641,7 +641,7 @@ body {
 .aboutTimelineLine {
     width: 28px;
     height: 1.5px;
-    background: #FF5C4D;
+    background: #C95F1D;
     flex-shrink: 0;
 }
 
@@ -650,7 +650,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-style: italic;
-    color: #767676;
+    color: #567260;
     margin-top: 24px;
     margin-bottom: 4px;
     /* 이게 없어서 모바일에서 '자/기', '브/랜드가', '상/세,', '않/기'처럼
@@ -676,7 +676,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 64px;
     font-weight: 800;
-    color: #FF5C4D;
+    color: #C95F1D;
     line-height: 1;
 }
 
@@ -691,7 +691,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     letter-spacing: 0.5px;
-    color: #6B6B6B;
+    color: #4E6A57;
     margin-top: 8px;
 }
 
@@ -740,7 +740,7 @@ body {
 .aboutPhotoSlot {
     width: 200px;
     height: 150px;
-    border: 2px solid #373737;
+    border: 2px solid #2B4A3A;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -834,7 +834,7 @@ body {
     font-size: 120px;
     font-weight: 800;
     line-height: 1;
-    color: #FF5C4D;
+    color: #C95F1D;
     letter-spacing: 4px;
 }
 
@@ -842,7 +842,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 32px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     margin: 22px 0 14px;
     word-break: keep-all;
 }
@@ -851,7 +851,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 15px;
     line-height: 1.9;
-    color: #6B6B6B;
+    color: #4E6A57;
     word-break: keep-all;
 }
 
@@ -880,7 +880,7 @@ body {
     right: 0;
     z-index: 999991;
     height: 34px;
-    background: #373737;
+    background: #2B4A3A;
 }
 
 /* 고정된 띠배너+상단바가 차지하던 자리를 대신 잡아주는 빈 칸 (높이는 JS가 넣음) */
@@ -907,7 +907,7 @@ body {
 
 .tsCat {
     font-weight: 700;
-    color: #FF5C4D;
+    color: #C95F1D;
     flex-shrink: 0;
 }
 
@@ -939,7 +939,7 @@ body {
     bottom: 0;
     width: 0;
     height: 2px;
-    background: #FF5C4D;
+    background: #C95F1D;
 }
 
 /* 상단 헤더바: 화면 전체 폭 바 안에 로고 + 카테고리 메뉴
@@ -964,7 +964,7 @@ body {
 
 /* 스크롤해서 상단바가 본문 위에 떠 있게 되면 구분선 + 그림자로 층을 분리 */
 .home_header.scrolled {
-    border-bottom-color: #E8E8E8;
+    border-bottom-color: #CFC5A9;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
 }
 
@@ -978,7 +978,7 @@ body {
     justify-content: center;
     gap: 10px;
     padding: 20px 28px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     border: none;
     border-radius: 0;
     animation: topbarIn 0.8s both;
@@ -988,7 +988,7 @@ body {
 .home_header.scrolled .home_box {
     gap: 4px;
     padding: 12px 28px;
-    background: #FFFFFF;
+    background: #F3EDDE;
 }
 
 @keyframes topbarIn {
@@ -1027,7 +1027,7 @@ body {
     /* 런드리고딕은 R(400)/B(700) 두 벌뿐이라 700이 곧 볼드 */
     font-weight: 700;
     letter-spacing: 2px;
-    color: #373737;
+    color: #2B4A3A;
     transition: font-size 0.35s ease, letter-spacing 0.35s ease, color 0.2s ease;
 }
 
@@ -1037,13 +1037,13 @@ body {
 }
 
 .home_logo .logoText:hover .logoTitle {
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 /* 어두운 푸터용 반전 버전. 상단바와 같은 형태를 유지하고 색만 바꿈 */
 .footerLogo .logoTitle {
     font-size: 24px;
-    color: #FFFFFF;
+    color: #F6F1E3;
     opacity: 0.92;
     transition: opacity 0.2s ease;
 }
@@ -1067,7 +1067,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 12px;
     letter-spacing: 0.5px;
-    color: #6B6B6B;
+    color: #4E6A57;
     padding-bottom: 3px;
     border-bottom: 2px solid transparent;
     transition: all 0.3s, font-size 0.35s ease;
@@ -1078,12 +1078,12 @@ body {
 }
 
 .headerNav ul li a:hover {
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .headerNav ul li.active a {
-    color: #FF5C4D;
-    border-bottom-color: #FF5C4D;
+    color: #C95F1D;
+    border-bottom-color: #C95F1D;
 }
 
 @media screen and (max-width: 900px) {
@@ -1123,7 +1123,7 @@ body {
     text-align: center;
     padding-bottom: 56px;
     margin-bottom: 80px;
-    border-bottom: 1px solid #EFEFEF;
+    border-bottom: 1px solid #E0D8C2;
 }
 
 .brandIntro .caseTag {
@@ -1134,14 +1134,14 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 34px;
     line-height: 1.4;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 16px;
     word-break: keep-all;
 }
 
 .brandIntro p {
     font-size: 15px;
-    color: #6B6B6B;
+    color: #4E6A57;
     /* 모바일에서 '브랜드/를'로 쪼개지던 것 방지 (h1에는 이미 걸려 있었음) */
     word-break: keep-all;
 }
@@ -1154,22 +1154,22 @@ body {
 }
 
 .brandTabBtn {
-    border: 2px solid #373737;
+    border: 2px solid #2B4A3A;
     border-radius: 50px;
     padding: 10px 28px;
     font-family: 'LaundryGothic', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    color: #373737;
-    background: #FFFFFF;
+    color: #2B4A3A;
+    background: #F3EDDE;
     cursor: pointer;
     transition: all 0.3s;
 }
 
 .brandTabBtn.active,
 .brandTabBtn:hover {
-    background: #373737;
-    color: #FFFFFF;
+    background: #2B4A3A;
+    color: #F6F1E3;
 }
 
 .brandPanel {
@@ -1190,7 +1190,7 @@ body {
 }
 
 .brandLabel i {
-    color: #FF5C4D;
+    color: #C95F1D;
     font-size: 18px;
 }
 
@@ -1206,7 +1206,7 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .brandPanel .aboutHeadline,
@@ -1253,7 +1253,7 @@ body {
 /* 한 브랜드 패널 안에 서브섹션이 여러 개일 때(예: 신산커피 정체성/실행/검증) 구분선으로 끊어줌 */
 /* 2px 점선은 개발용 눈금처럼 보여서 얇은 실선으로 낮춤 (ABOUT에서 뺀 것과 같은 이유) */
 .brandSubSection + .brandSubSection {
-    border-top: 1px solid #EFEFEF;
+    border-top: 1px solid #E0D8C2;
     margin-top: 96px;
     padding-top: 96px;
 }
@@ -1273,22 +1273,22 @@ body {
 /* 'TOP 10'은 내가 측정한 수치가 아니라 주최 측이 매긴 선정 결과라,
    7~8%(실구매 전환율)와 똑같은 64px 숫자로 두면 두 성격이 섞여 보임.
    게다가 사진 여덟 장 띠 아래에 큰 글자만 덩그러니 떠 붙을 자리가 없었음.
-   같은 페이지의 주문 흐름 카드와 같은 규칙(1.5px #E8E8E8 테두리 + 라운드 +
-   #FFF1EF 원 안의 코랄 아이콘)으로 배지를 만들어 '받은 것'처럼 보이게 함 */
+   같은 페이지의 주문 흐름 카드와 같은 규칙(1.5px #CFC5A9 테두리 + 라운드 +
+   #F2E3CD 원 안의 코랄 아이콘)으로 배지를 만들어 '받은 것'처럼 보이게 함 */
 .awardBadge {
     display: inline-flex;
     align-items: center;
     gap: 16px;
     padding: 16px 26px 16px 18px;
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 14px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     text-align: left;
     transition: border-color 0.3s, transform 0.3s;
 }
 
 .awardBadge:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
     transform: translateY(-3px);
 }
 
@@ -1300,12 +1300,12 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
 }
 
 .abIcon i {
     font-size: 18px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .abBody {
@@ -1314,21 +1314,21 @@ body {
 }
 
 /* 30px 볼드는 WCAG 큰 글자 기준(18.66px 볼드 이상)에 들어가므로
-   코랄(#FF5C4D)의 흰 배경 대비 3.05:1로 기준(3:1)을 통과함 */
+   코랄(#C95F1D)의 흰 배경 대비 3.05:1로 기준(3:1)을 통과함 */
 .abRank {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 30px;
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: 0.5px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .abLabel {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     letter-spacing: 0.3px;
-    color: #6B6B6B;
+    color: #4E6A57;
     margin-top: 6px;
     word-break: keep-all;
 }
@@ -1348,12 +1348,12 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.3px;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .axisPin i {
     font-size: 14px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 /* 축에서 두 카드로 내려가는 세로선. 카드가 축에 매달려 있다는 표시 */
@@ -1389,15 +1389,15 @@ body {
     flex-direction: column;
     width: 306px;
     padding: 22px 24px 24px;
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 14px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     text-align: left;
     transition: border-color 0.3s, transform 0.3s;
 }
 
 .channelCard:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
     transform: translateY(-3px);
 }
 
@@ -1416,12 +1416,12 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
 }
 
 .ccIcon i {
     font-size: 16px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .ccTitle {
@@ -1429,13 +1429,13 @@ body {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .ccDesc {
     font-size: 13px;
     line-height: 1.85;
-    color: #6B6B6B;
+    color: #4E6A57;
     word-break: keep-all;
 }
 
@@ -1464,12 +1464,12 @@ body {
     align-items: center;
     gap: 16px;
     padding: 15px 4px;
-    border-bottom: 1px solid #EFEFEF;
+    border-bottom: 1px solid #E0D8C2;
     transition: background-color 0.25s;
 }
 
 .ruleRow:first-child {
-    border-top: 1px solid #EFEFEF;
+    border-top: 1px solid #E0D8C2;
 }
 
 .ruleRow:hover {
@@ -1484,12 +1484,12 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
 }
 
 .rlIcon i {
     font-size: 14px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .rlName {
@@ -1497,7 +1497,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     word-break: keep-all;
 }
 
@@ -1506,14 +1506,14 @@ body {
     flex: 1 1 0;
     font-size: 13px;
     line-height: 1.6;
-    color: #9A9A9A;
+    color: #7E937F;
     word-break: keep-all;
 }
 
 .rlArrow {
     flex-shrink: 0;
     font-size: 11px;
-    color: #C9C9C9;
+    color: #ACB8A6;
 }
 
 /* 실제로 본 쪽 - 이 줄의 핵심이라 코랄 */
@@ -1522,7 +1522,7 @@ body {
     font-size: 13px;
     font-weight: 700;
     line-height: 1.6;
-    color: #C7483C;
+    color: #A84D15;
     word-break: keep-all;
 }
 
@@ -1551,15 +1551,15 @@ body {
     align-items: flex-start;
     width: 268px;
     padding: 22px 22px 20px;
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 14px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     text-align: left;
     transition: border-color 0.3s, transform 0.3s;
 }
 
 .scopeItem:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
     transform: translateY(-3px);
 }
 
@@ -1570,13 +1570,13 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
     margin-bottom: 14px;
 }
 
 .scIcon i {
     font-size: 15px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .scName {
@@ -1584,14 +1584,14 @@ body {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.2px;
-    color: #373737;
+    color: #2B4A3A;
     word-break: keep-all;
 }
 
 .scDesc {
     font-size: 12.5px;
     line-height: 1.75;
-    color: #6B6B6B;
+    color: #4E6A57;
     margin-top: 7px;
     word-break: keep-all;
 }
@@ -1605,7 +1605,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 11px;
     letter-spacing: 0.3px;
-    color: #9A9A9A;
+    color: #7E937F;
     word-break: keep-all;
 }
 
@@ -1640,14 +1640,14 @@ body {
     align-items: center;
     width: 196px;
     padding: 20px 14px 18px;
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 14px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     transition: border-color 0.3s, transform 0.3s;
 }
 
 .sourceItem:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
     transform: translateY(-3px);
 }
 
@@ -1658,20 +1658,20 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
     margin-bottom: 12px;
 }
 
 .srcIcon i {
     font-size: 16px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .srcName {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     text-align: center;
     word-break: keep-all;
 }
@@ -1680,7 +1680,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 11px;
     line-height: 1.6;
-    color: #767676;
+    color: #567260;
     text-align: center;
     margin-top: 6px;
     word-break: keep-all;
@@ -1697,7 +1697,7 @@ body {
 
 .mergeLine i {
     font-size: 13px;
-    color: #C9C9C9;
+    color: #ACB8A6;
 }
 
 .mergeLine span {
@@ -1705,13 +1705,13 @@ body {
     align-items: center;
     gap: 8px;
     padding: 9px 20px;
-    border: 1.5px solid #FF5C4D;
+    border: 1.5px solid #C95F1D;
     border-radius: 50px;
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.2px;
-    color: #C7483C;
+    color: #A84D15;
     word-break: keep-all;
 }
 
@@ -1727,14 +1727,14 @@ body {
     max-width: 640px;
     margin: 44px auto 0;
     padding: 28px 24px 22px;
-    border-top: 1px solid #E8E8E8;
-    border-bottom: 1px solid #E8E8E8;
+    border-top: 1px solid #CFC5A9;
+    border-bottom: 1px solid #CFC5A9;
     text-align: center;
 }
 
 .copyQuote i {
     font-size: 15px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 /* 상황별 메시지 두 줄. 위는 자료에 실제로 인쇄돼 있던 문구,
@@ -1747,7 +1747,7 @@ body {
 .copyLine + .copyLine {
     margin-top: 24px;
     padding-top: 22px;
-    border-top: 1px dashed #E8E8E8;
+    border-top: 1px dashed #CFC5A9;
 }
 
 .clLabel {
@@ -1756,7 +1756,7 @@ body {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #C7483C;
+    color: #A84D15;
     margin-bottom: 10px;
 }
 
@@ -1766,7 +1766,7 @@ body {
     font-weight: 700;
     line-height: 1.6;
     letter-spacing: -0.5px;
-    color: #373737;
+    color: #2B4A3A;
     word-break: keep-all;
     text-wrap: balance;
 }
@@ -1778,7 +1778,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 12px;
     letter-spacing: 0.2px;
-    color: #767676;
+    color: #567260;
     word-break: keep-all;
 }
 
@@ -1821,7 +1821,7 @@ body {
     overflow: hidden;
     /* 이미지가 사방 끝까지 사진이라 밝은 배경에서 경계가 사라짐.
        얇은 회색 선으로 가장자리만 잡아줌 (전단처럼 자체 테두리가 있는 경우와 다름) */
-    border: 1px solid #E4E4E4;
+    border: 1px solid #DACFB6;
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.10);
     transition: box-shadow 0.3s, transform 0.3s;
 }
@@ -1847,7 +1847,7 @@ body {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 12px;
     letter-spacing: 0.2px;
-    color: #767676;
+    color: #567260;
     text-align: center;
     word-break: keep-all;
 }
@@ -1877,7 +1877,7 @@ body {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.3px;
-    color: #C7483C;
+    color: #A84D15;
     word-break: keep-all;
 }
 
@@ -1887,7 +1887,7 @@ body {
     display: block;
     width: 38px;
     height: 1px;
-    background: #EEC9C3;
+    background: #DFC7A6;
 }
 
 /* 다구매 조건 도식 (DATA & CRM 실행 섹션)
@@ -1911,20 +1911,20 @@ body {
     align-items: center;
     width: 176px;
     padding: 22px 14px 20px;
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 14px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     transition: border-color 0.3s, transform 0.3s;
 }
 
 .offerStep:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
     transform: translateY(-3px);
 }
 
 /* 두 번째 제품을 고르게 만든 칸이 이 설계의 핵심이라, 여기만 테두리를 세움 */
 .offerStep.isKey {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
 }
 
 .osIcon {
@@ -1934,20 +1934,20 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
     margin-bottom: 12px;
 }
 
 .osIcon i {
     font-size: 16px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .osCond {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 12px;
     letter-spacing: 0.2px;
-    color: #767676;
+    color: #567260;
     word-break: keep-all;
     text-align: center;
 }
@@ -1959,7 +1959,7 @@ body {
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.5px;
-    color: #9A9A9A;
+    color: #7E937F;
     margin-top: 6px;
     /* 390px에서 '중복 적/용'으로 쪼개졌음. 값은 한 덩어리라 절대 안 나뉘게 함
        (줄이 모자라면 옆의 조건 라벨이 두 줄로 접히는 쪽이 맞음) */
@@ -1974,7 +1974,7 @@ body {
 
 .offerStep.isKey .osValue,
 .offerStep.isStack .osValue {
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .offerStep.isStack .osValue {
@@ -1989,14 +1989,14 @@ body {
     align-items: center;
     align-self: center;
     font-size: 13px;
-    color: #C9C9C9;
+    color: #ACB8A6;
 }
 
 .offerNote {
     margin-top: 18px;
     font-size: 12px;
     line-height: 1.7;
-    color: #767676;
+    color: #567260;
     text-align: center;
     word-break: keep-all;
 }
@@ -2030,14 +2030,14 @@ body {
     align-items: center;
     width: 132px;
     padding: 18px 8px 16px;
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 12px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     transition: border-color 0.3s, transform 0.3s;
 }
 
 .orderStep:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
     transform: translateY(-3px);
 }
 
@@ -2046,7 +2046,7 @@ body {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #C9C9C9;
+    color: #ACB8A6;
     margin-bottom: 10px;
 }
 
@@ -2057,20 +2057,20 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
     margin-bottom: 12px;
 }
 
 .orderStepIcon i {
     font-size: 17px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .orderStepTitle {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     text-align: center;
     word-break: keep-all;
 }
@@ -2078,7 +2078,7 @@ body {
 .orderStepDesc {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 11px;
-    color: #6B6B6B;
+    color: #4E6A57;
     text-align: center;
     margin-top: 5px;
     word-break: keep-all;
@@ -2088,7 +2088,7 @@ body {
     display: flex;
     align-items: center;
     align-self: center;
-    color: #FF5C4D;
+    color: #C95F1D;
     font-size: 12px;
 }
 
@@ -2101,7 +2101,7 @@ body {
     font-size: 15px;
     line-height: 1.85;
     word-break: keep-all;
-    color: #373737;
+    color: #2B4A3A;
     max-width: 640px;
     margin: 0 auto 20px;
 }
@@ -2109,7 +2109,7 @@ body {
 /* 이 페이지는 큰 스탯(64px)을 쓰지 않으므로, 수치·조건은 문장 안에서만 도드라지게 함 */
 .brandResult strong {
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .brandResult a {
@@ -2118,7 +2118,7 @@ body {
     gap: 8px;
     font-size: 14px;
     font-weight: 700;
-    color: #C7483C;
+    color: #A84D15;
     /* 이게 없어서 390px에서 '보/기'처럼 한글이 글자 단위로 쪼개졌음.
        헤드라인·본문과 같은 규칙으로 맞춤 */
     word-break: keep-all;
@@ -2184,7 +2184,7 @@ body {
 }
 
 .lightboxCounter {
-    color: #FFFFFF;
+    color: #F6F1E3;
     font-size: 13px;
     letter-spacing: 0.5px;
     opacity: 0.75;
@@ -2196,7 +2196,7 @@ body {
     right: 28px;
     background: none;
     border: none;
-    color: #FFFFFF;
+    color: #F6F1E3;
     font-size: 24px;
     cursor: pointer;
     line-height: 1;
@@ -2209,7 +2209,7 @@ body {
     transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.12);
     border: none;
-    color: #FFFFFF;
+    color: #F6F1E3;
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -2262,7 +2262,7 @@ body.lightboxOpen {
 /* ── 섹션3: 카테고리 편중 → 분산 덤벨 차트 ────────────────────────────
    형태 선택: 데이터가 하는 일이 "항목별 before → after"라 덤벨.
    색 선택: 강조(emphasis) — 이전은 무채색 회색(맥락), 이후만 브랜드 코랄(핵심).
-   검증: 이전 #9A9A9A ↔ 이후 #FF5C4D 의 색각 이상 구분도 ΔE 11.3(deutan) /
+   검증: 이전 #7E937F ↔ 이후 #C95F1D 의 색각 이상 구분도 ΔE 11.3(deutan) /
    일반 시야 20.1 로 기준(8 / 15)을 넘김. 흰 카드 위 대비가 3:1 미만이라
    '보이는 라벨'로 보완해야 하는데, 범례 + 항목명 + 직접 라벨(크게 상승/유지)이
    전부 글자로 있어 색에만 의존하지 않음.
@@ -2274,8 +2274,8 @@ body.lightboxOpen {
     /* 아래 맺음 문장과 붙어 보이지 않게 카드 밑에도 여백을 둠 */
     margin: 34px auto 28px;
     padding: 22px 24px 18px;
-    background: #FFFFFF;
-    border: 1px solid #DEDEDE;
+    background: #F3EDDE;
+    border: 1px solid #D4C9AE;
     border-radius: 8px;
     text-align: left;
 }
@@ -2294,7 +2294,7 @@ body.lightboxOpen {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.4px;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 /* 계열이 둘이면 범례는 항상 둠 — 색만으로 구분하게 두지 않기 위함 */
@@ -2310,7 +2310,7 @@ body.lightboxOpen {
     gap: 6px;
     font-size: 11px;
     letter-spacing: 0.3px;
-    color: #6B6B6B;
+    color: #4E6A57;
 }
 
 .shiftRow {
@@ -2324,7 +2324,7 @@ body.lightboxOpen {
     flex: 0 0 74px;
     font-size: 12px;
     letter-spacing: 0.2px;
-    color: #4A4A4A;
+    color: #33523F;
     transition: color 0.2s ease;
 }
 
@@ -2342,7 +2342,7 @@ body.lightboxOpen {
     right: 0;
     top: 50%;
     height: 1px;
-    background: #EAEAEA;
+    background: #DED5BE;
 }
 
 /* 이전 → 이후로 움직인 구간 */
@@ -2363,7 +2363,7 @@ body.lightboxOpen {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    box-shadow: 0 0 0 2px #FFFFFF;
+    box-shadow: 0 0 0 2px #F3EDDE;
     transition: transform 0.2s ease;
 }
 
@@ -2374,11 +2374,11 @@ body.lightboxOpen {
 }
 
 .shiftDot.isBefore {
-    background: #9A9A9A;
+    background: #7E937F;
 }
 
 .shiftDot.isAfter {
-    background: #FF5C4D;
+    background: #C95F1D;
 }
 
 .shiftTrack .shiftDot.isBefore {
@@ -2397,16 +2397,16 @@ body.lightboxOpen {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.3px;
-    color: #767676;
+    color: #567260;
 }
 
 .shiftNote.isUp {
-    color: #C7483C;
+    color: #A84D15;
 }
 
 /* 마우스를 올린 줄만 또렷하게 (값이 없으므로 툴팁 대신 강조로 대신함) */
 .shiftRow:hover .shiftName {
-    color: #373737;
+    color: #2B4A3A;
 }
 
 .shiftRow:hover .shiftDot {
@@ -2419,18 +2419,18 @@ body.lightboxOpen {
     margin-top: 12px;
     padding-left: 86px;
     padding-right: 74px;
-    border-top: 1px solid #EAEAEA;
+    border-top: 1px solid #DED5BE;
     padding-top: 8px;
     font-size: 10px;
     letter-spacing: 0.5px;
-    color: #767676;
+    color: #567260;
 }
 
 .shiftFootnote {
     margin-top: 12px;
     font-size: 11px;
     line-height: 1.6;
-    color: #767676;
+    color: #567260;
     word-break: keep-all;
 }
 
@@ -2530,14 +2530,14 @@ body.lightboxOpen {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .beRule {
     display: block;
     width: 26px;
     height: 1px;
-    background: #D4D4D4;
+    background: #B8C1AD;
 }
 
 .beName {
@@ -2545,7 +2545,7 @@ body.lightboxOpen {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #767676;
+    color: #567260;
 }
 
 /* 브랜드 탭 안의 로고/아이콘 — 두 브랜드를 글자 읽기 전에 구분시켜 줌 */
@@ -2588,14 +2588,14 @@ body.lightboxOpen {
         width: 168px;
         gap: 0;
         padding: 22px 14px 20px;
-        border: 1.5px solid #E8E8E8;
+        border: 1.5px solid #CFC5A9;
         border-radius: 12px;
-        background: #FFFFFF;
+        background: #F3EDDE;
         transition: border-color 0.3s ease, transform 0.3s ease;
     }
 
     .brandSubSection:not(:has(.aboutProof)) .aboutFlowStep:hover {
-        border-color: #FF5C4D;
+        border-color: #C95F1D;
         transform: translateY(-3px);
     }
 
@@ -2609,7 +2609,7 @@ body.lightboxOpen {
         height: 46px;
         margin: 0 auto 14px;
         border-radius: 50%;
-        background: #FFF1EF;
+        background: #F2E3CD;
         font-size: 18px;
         padding: 14px;
         box-sizing: border-box;
@@ -2625,7 +2625,7 @@ body.lightboxOpen {
         height: 0;
         border-top: 5px solid transparent;
         border-bottom: 5px solid transparent;
-        border-left: 7px solid #D4D4D4;
+        border-left: 7px solid #B8C1AD;
         background: none;
         align-self: center;
     }
@@ -2647,17 +2647,17 @@ body.lightboxOpen {
    같은 줄의 다른 버튼(회색 테두리)보다 한 단계 앞선다는 걸 색으로 표시.
    배경을 채우지 않고 테두리·글자만 코랄로 둬서 사이트의 가벼운 톤을 유지함. */
 .qlBtn.isBrandNext {
-    border-color: #FF5C4D;
-    color: #C7483C;
+    border-color: #C95F1D;
+    color: #A84D15;
 }
 
 .qlBtn.isBrandNext:hover {
-    border-color: #FF5C4D;
-    color: #FF5C4D;
+    border-color: #C95F1D;
+    color: #C95F1D;
 }
 
 .qlBtn.isBrandNext::after {
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 /* 버튼 안에 들어가는 브랜드 로고 (신산커피) */
@@ -2712,7 +2712,7 @@ body[data-page="resume"] #header {
 /* ---- 머리말 ---- */
 .rsHead {
     padding-bottom: 34px;
-    border-bottom: 1px solid #EFEFEF;
+    border-bottom: 1px solid #E0D8C2;
     margin-bottom: 8px;
 }
 
@@ -2721,14 +2721,14 @@ body[data-page="resume"] #header {
     font-size: 44px;
     font-weight: 700;
     letter-spacing: -1px;
-    color: #373737;
+    color: #2B4A3A;
     margin-top: 14px;
 }
 
 .rsTagline {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 17px;
-    color: #6B6B6B;
+    color: #4E6A57;
     margin-top: 10px;
     word-break: keep-all;
 }
@@ -2742,24 +2742,24 @@ body[data-page="resume"] #header {
 
 .rsMeta li {
     font-size: 14px;
-    color: #6B6B6B;
+    color: #4E6A57;
     letter-spacing: 0.2px;
 }
 
 .rsMeta i {
-    color: #FF5C4D;
+    color: #C95F1D;
     margin-right: 7px;
 }
 
 .rsMeta a {
-    color: #6B6B6B;
+    color: #4E6A57;
     border-bottom: 1px solid transparent;
     transition: color 0.2s, border-color 0.2s;
 }
 
 .rsMeta a:hover {
-    color: #FF5C4D;
-    border-bottom-color: #FF5C4D;
+    color: #C95F1D;
+    border-bottom-color: #C95F1D;
 }
 
 .rsActions {
@@ -2786,7 +2786,7 @@ body[data-page="resume"] #header {
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #373737;
+    color: #2B4A3A;
     padding-left: 26px;
     margin-bottom: 22px;
 }
@@ -2798,14 +2798,14 @@ body[data-page="resume"] #header {
     top: 50%;
     width: 16px;
     height: 1.5px;
-    background: #FF5C4D;
+    background: #C95F1D;
 }
 
 .rsSectionMeta {
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.5px;
-    color: #9A9A9A;
+    color: #7E937F;
     margin-left: 8px;
 }
 
@@ -2813,7 +2813,7 @@ body[data-page="resume"] #header {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 20px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 14px;
     word-break: keep-all;
 }
@@ -2821,7 +2821,7 @@ body[data-page="resume"] #header {
 .rsBody {
     font-size: 15px;
     line-height: 1.85;
-    color: #6B6B6B;
+    color: #4E6A57;
     max-width: 720px;
     margin-bottom: 10px;
     word-break: keep-all;
@@ -2830,14 +2830,14 @@ body[data-page="resume"] #header {
 .rsNote {
     font-size: 13px;
     font-style: italic;
-    color: #9A9A9A;
+    color: #7E937F;
     margin-top: 14px;
     word-break: keep-all;
 }
 
 .rsNote a {
-    color: #FF5C4D;
-    border-bottom: 1px solid #FF5C4D;
+    color: #C95F1D;
+    border-bottom: 1px solid #C95F1D;
 }
 
 /* ---- 핵심 역량 카드 ---- */
@@ -2849,15 +2849,15 @@ body[data-page="resume"] #header {
 
 /* 주문 흐름 카드(.orderStep)와 같은 규칙 — 1.5px 연회색 테두리 + 코랄 아이콘 원 */
 .rsSkillCard {
-    border: 1.5px solid #E8E8E8;
+    border: 1.5px solid #CFC5A9;
     border-radius: 12px;
-    background: #FFFFFF;
+    background: #F3EDDE;
     padding: 22px 22px 20px;
     transition: border-color 0.3s;
 }
 
 .rsSkillCard:hover {
-    border-color: #FF5C4D;
+    border-color: #C95F1D;
 }
 
 .rsSkillIcon {
@@ -2867,20 +2867,20 @@ body[data-page="resume"] #header {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #FFF1EF;
+    background: #F2E3CD;
     margin-bottom: 14px;
 }
 
 .rsSkillIcon i {
     font-size: 15px;
-    color: #FF5C4D;
+    color: #C95F1D;
 }
 
 .rsSkillCard h3 {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     margin-bottom: 12px;
     word-break: keep-all;
 }
@@ -2890,7 +2890,7 @@ body[data-page="resume"] #header {
     position: relative;
     font-size: 13.5px;
     line-height: 1.75;
-    color: #6B6B6B;
+    color: #4E6A57;
     padding-left: 12px;
     word-break: keep-all;
 }
@@ -2903,7 +2903,7 @@ body[data-page="resume"] #header {
     top: 11px;
     width: 4px;
     height: 1px;
-    background: #C9C9C9;
+    background: #ACB8A6;
 }
 
 /* ---- 경력 ---- */
@@ -2911,7 +2911,7 @@ body[data-page="resume"] #header {
     display: flex;
     gap: 30px;
     padding: 26px 0 30px;
-    border-top: 1px solid #EFEFEF;
+    border-top: 1px solid #E0D8C2;
 }
 
 .rsJob:first-of-type {
@@ -2929,14 +2929,14 @@ body[data-page="resume"] #header {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     letter-spacing: 0.2px;
 }
 
 .rsJobLen {
     display: block;
     font-size: 12px;
-    color: #9A9A9A;
+    color: #7E937F;
     margin-top: 5px;
 }
 
@@ -2949,7 +2949,7 @@ body[data-page="resume"] #header {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 21px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
 }
 
 /* 주소·이메일처럼 띄어쓰기가 없는 긴 문자열은 좁은 화면에서 줄바꿈 지점이 없어
@@ -2984,16 +2984,16 @@ body[data-page="resume"] #header {
    왼쪽에 회색 선을 둬서 "이 기간엔 이걸 했다"는 표시로만 둠. */
 .rsJob.isSide {
     padding-left: 18px;
-    border-left: 2px solid #EFEFEF;
+    border-left: 2px solid #E0D8C2;
 }
 
 .rsJob.isSide .rsJobCompany {
     font-size: 17px;
-    color: #6B6B6B;
+    color: #4E6A57;
 }
 
 .rsJob.isSide .rsJobDate {
-    color: #767676;
+    color: #567260;
 }
 
 /* 회사 경력이 아니라는 표시 */
@@ -3001,25 +3001,25 @@ body[data-page="resume"] #header {
     display: inline-block;
     margin-bottom: 8px;
     padding: 3px 10px;
-    border: 1px solid #E4E4E4;
+    border: 1px solid #DACFB6;
     border-radius: 50px;
     font-family: 'LaundryGothic', sans-serif;
     font-size: 11px;
     letter-spacing: 0.3px;
-    color: #9A9A9A;
+    color: #7E937F;
 }
 
 .rsSideNote {
     margin-top: 12px;
     font-size: 12.5px;
     line-height: 1.8;
-    color: #6B6B6B;
+    color: #4E6A57;
     word-break: keep-all;
 }
 
 .rsJobRole {
     font-size: 13px;
-    color: #9A9A9A;
+    color: #7E937F;
     margin-top: 6px;
     letter-spacing: 0.2px;
 }
@@ -3033,7 +3033,7 @@ body[data-page="resume"] #header {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.6px;
-    color: #FF5C4D;
+    color: #C95F1D;
     margin-bottom: 7px;
 }
 
@@ -3045,21 +3045,21 @@ body[data-page="resume"] #header {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: #373737;
-    border-bottom: 1px solid #E8E8E8;
+    color: #2B4A3A;
+    border-bottom: 1px solid #CFC5A9;
     padding-bottom: 4px;
     transition: color 0.25s, border-color 0.25s;
 }
 
 .rsCaseLink i {
     font-size: 11px;
-    color: #FF5C4D;
+    color: #C95F1D;
     transition: transform 0.25s ease;
 }
 
 .rsCaseLink:hover {
-    color: #FF5C4D;
-    border-bottom-color: #FF5C4D;
+    color: #C95F1D;
+    border-bottom-color: #C95F1D;
 }
 
 .rsCaseLink:hover i {
@@ -3071,7 +3071,7 @@ body[data-page="resume"] #header {
     display: flex;
     gap: 30px;
     padding: 20px 0;
-    border-top: 1px solid #EFEFEF;
+    border-top: 1px solid #E0D8C2;
 }
 
 .rsRow:first-of-type {
@@ -3084,7 +3084,7 @@ body[data-page="resume"] #header {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     padding-top: 2px;
 }
 
@@ -3092,32 +3092,32 @@ body[data-page="resume"] #header {
     font-family: 'LaundryGothic', sans-serif;
     font-size: 16px;
     font-weight: 700;
-    color: #373737;
+    color: #2B4A3A;
     word-break: keep-all;
 }
 
 .rsRowBody p {
     font-size: 13.5px;
-    color: #6B6B6B;
+    color: #4E6A57;
     margin-top: 6px;
     word-break: keep-all;
 }
 
 .rsRowNote {
     font-size: 12.5px !important;
-    color: #9A9A9A !important;
+    color: #7E937F !important;
 }
 
 .rsBadge {
     display: inline-block;
     margin-left: 8px;
     padding: 3px 9px;
-    border: 1px solid #E8E8E8;
+    border: 1px solid #CFC5A9;
     border-radius: 999px;
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.3px;
-    color: #9A9A9A;
+    color: #7E937F;
     vertical-align: 2px;
 }
 
@@ -3148,7 +3148,7 @@ body[data-page="resume"] #header {
     }
 
     body {
-        background: #FFFFFF;
+        background: #F3EDDE;
     }
 
     .resumeWrap {
@@ -3189,14 +3189,14 @@ body[data-page="resume"] #header {
 
     /* 종이에서는 hover가 없으므로 테두리를 조금 연하게 */
     .rsSkillCard {
-        border-color: #DEDEDE;
+        border-color: #D4C9AE;
     }
 
     /* 사이트 주소는 머리말(.rsMeta)에 한 번 적혀 있으므로,
        본문 링크마다 주소를 펼치지 않고 밑줄만 정리함 */
     .rsCaseLink {
         border-bottom: none;
-        color: #9A9A9A;
+        color: #7E937F;
         font-weight: 400;
     }
 
