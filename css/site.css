@@ -3294,3 +3294,35 @@ body[data-page="resume"] #header {
 .rsName {
     letter-spacing: -1.5px;
 }
+
+/* -- 메르디센트 03 운영: 오프라인 중국 고객 채널 ---------------------------
+   위 주문 흐름(온라인)과 구분되게 얇은 선으로 한 칸 띄움 */
+.cnChannel {
+    max-width: 820px;
+    margin: 46px auto 0;
+    padding-top: 34px;
+    border-top: 1px solid #CFC5A9;
+    text-align: center;
+}
+.cnLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    letter-spacing: 1px;
+    color: #A84D15;
+    margin-bottom: 12px;
+}
+.cnLead {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #33523F;
+    letter-spacing: 0;
+    word-break: keep-all;
+    max-width: 680px;
+    margin: 0 auto 6px;
+}
+@media screen and (max-width: 768px) {
+    .cnChannel { margin-top: 34px; padding-top: 26px; max-width: 340px; }
+    .cnLead { font-size: 14px; }
+}

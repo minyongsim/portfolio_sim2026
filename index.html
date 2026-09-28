@@ -50,11 +50,26 @@
                 <span class="aboutNum isName">SIM MIN YONG</span>
             </div>
             <h2 class="aboutHeadline heroVerbs"><span class="hv">만들고,</span> <span class="hv">팔고,</span> <span class="hv">확인합니다</span></h2>
-            <p class="aboutSub">커피·화장품 브랜드 인하우스 마케터. 브랜드를 세우고, 온·오프라인에서 팔고, 구매 데이터로 확인했습니다.</p>
-            <div class="aboutTags">
-                <span class="aboutTag">커피 · 화장품</span>
-                <span class="aboutTag">국내 · 해외</span>
-                <span class="aboutTag">기획 → 운영</span>
+            <!-- 30초 판단용 첫 화면: 누구인지(직무·연차·업종) → 증거 3개 → 다음 행동.
+                 연차는 이력서와 같은 계산(site.js의 data-exp-total). JS가 안 돌면 적힌 값이 보임. -->
+            <p class="aboutSub heroMeta"><span class="nbGroup">브랜드 마케터 <span class="hmDot">·</span> 경력 <b data-exp-total data-fixed-months="26" data-since="2024-03-19" data-prefix="">4년 8개월</b></span><span class="hmDot hmBreak"> · </span><span class="nbGroup">커피·화장품 <span class="hmDot">·</span> 국내·해외</span></p>
+            <div class="heroKpis">
+                <a class="heroKpi" href="brand-story.html">
+                    <span class="hkNum">TOP 10</span>
+                    <span class="hkCap">2026 커피엑스포 선정<br>'꼭 사야 할 커피'</span>
+                </a>
+                <a class="heroKpi" href="data-crm.html">
+                    <span class="hkNum">7~8<small>%</small></span>
+                    <span class="hkCap">박람회 신규 유입 팔로워의<br>실구매 전환</span>
+                </a>
+                <a class="heroKpi" href="brand-story.html#merdescent">
+                    <span class="hkNum">0 → 1</span>
+                    <span class="hkCap">공식 해외 채널 신규 개설<br><span class="nbGroup">글로벌 사이트·위챗·샤오훙수</span></span>
+                </a>
+            </div>
+            <div class="heroCta">
+                <a class="qlBtn isPrimary" href="resume.html"><i class="fa-solid fa-address-card qlIcon" aria-hidden="true"></i>이력서 보기</a>
+                <a class="qlBtn" href="#cases" data-scroll-to=".scrollTestSection.t4"><i class="fa-solid fa-folder-open qlIcon" aria-hidden="true"></i>케이스 보기</a>
             </div>
         </div>
     </div>
@@ -159,7 +174,7 @@
             <p class="aboutSub">베스트셀러 한 곳에 몰려 있던 관심을, 매달 이어간 향 노트 캠페인으로 다른 카테고리와 향 노트까지 넓혔습니다.</p>
         </div>
     </div>
-    <div class="scrollTestSection t4" data-tab="NEXT">
+    <div class="scrollTestSection t4" id="cases" data-tab="NEXT">
         <span class="aboutWatermark">NEXT</span>
         <div class="aboutSectionInner">
             <div class="aboutEyebrow">
@@ -169,10 +184,29 @@
             </div>
             <h2 class="aboutHeadline">증거는, 케이스에 있습니다</h2>
             <p class="aboutSub">만들고, 팔고, 확인한 과정을 세 갈래로 나눠 담았습니다.</p>
-            <div class="quickLinks">
-                <a class="qlBtn" href="brand-story.html"><i class="fa-solid fa-folder-open qlIcon"></i>BRANDING</a>
-                <a class="qlBtn" href="data-crm.html"><i class="fa-solid fa-chart-pie qlIcon"></i>DATA &amp; CRM</a>
-                <a class="qlBtn" href="marketing.html"><i class="fa-solid fa-bullhorn qlIcon"></i>MARKETING</a>
+            <!-- 카테고리 이름만 있던 버튼을 '무엇을 풀었나' 한 줄이 붙은 카드로.
+                 BRANDING / DATA & CRM / MARKETING 은 분류라서, 눌러봐야 할 이유가 안 보였음. -->
+            <div class="nextCases">
+                <a class="nextCase" href="brand-story.html">
+                    <span class="ncLabel"><i class="fa-solid fa-folder-open" aria-hidden="true"></i>BRANDING</span>
+                    <span class="ncQ">인지도 0에서, 고를 이유를 어떻게 만들었나</span>
+                    <span class="ncWhere">신산커피 · 메르디센트 글로벌</span>
+                </a>
+                <a class="nextCase" href="data-crm.html">
+                    <span class="ncLabel"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i>DATA &amp; CRM</span>
+                    <span class="ncQ">베스트셀러에 쏠린 관심을, 채널을 늘리지 않고 어떻게 나눴나</span>
+                    <span class="ncWhere">이달의 프래그런스 · 박람회 전환 검증</span>
+                </a>
+                <a class="nextCase" href="marketing.html">
+                    <span class="ncLabel"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i>MARKETING</span>
+                    <span class="ncQ">예산으로 못 이기는 싸움을, 어디서 이겼나</span>
+                    <span class="ncWhere">지역 키워드 SEO · 채널별 판단 기준</span>
+                </a>
+            </div>
+            <!-- 케이스를 보고 마음에 들었을 때 바로 갈 곳. 푸터까지 내려가지 않아도 되게 -->
+            <div class="quickLinks nextCta">
+                <a class="qlBtn isPrimary" href="resume.html"><i class="fa-solid fa-address-card qlIcon"></i>이력서 보기</a>
+                <a class="qlBtn" href="mailto:eq900bmwm@gmail.com"><i class="fa-regular fa-envelope qlIcon"></i>메일 보내기</a>
             </div>
         </div>
     </div>

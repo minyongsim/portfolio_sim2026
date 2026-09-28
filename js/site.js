@@ -51,7 +51,15 @@ $(function ($) {
 
         var now = new Date();
         var run = (now.getFullYear() - parseInt(since[0], 10)) * 12
-                + (now.getMonth() + 1 - parseInt(since[1], 10)) + 1;
+                + (now.getMonth() + 1 - parseInt(since[1], 10));
+        if (since.length >= 3) {
+            // 입사일(YYYY-MM-DD)까지 적혀 있으면 경력증명서와 같은 일 단위 기준:
+            // 입사일에 해당하는 날이 아직 안 지났으면 그 달은 빼고 셈.
+            if (now.getDate() < parseInt(since[2], 10)) run -= 1;
+        } else {
+            // 월만 적혀 있으면 예전처럼 입사 월을 포함해서 셈
+            run += 1;
+        }
         var total = fixed + Math.max(0, run);
 
         var years = Math.floor(total / 12);
@@ -66,6 +74,15 @@ $(function ($) {
     // 안 하면 화면과 PDF가 달라짐. 브라우저 인쇄를 그대로 쓰면 항상 최신이고
     // 사용자 브라우저의 웹폰트로 렌더링돼 화면과 똑같이 나옴.
     // (인쇄용 규칙은 css/site.css의 @media print 블록)
+    // ---- 첫 화면 '케이스 보기': 같은 페이지 안의 섹션으로 부드럽게 이동 ----
+    // href="#cases"만 두면 고정 헤더 높이만큼 가려져서, 휠 스냅과 같은 기준(chromeH)으로 맞춤.
+    $(document).on('click', '[data-scroll-to]', function (e) {
+        var $t = $($(this).attr('data-scroll-to')).first();
+        if (!$t.length) return;
+        e.preventDefault();
+        $('html,body').stop().animate({ scrollTop: docTop($t) - chromeH() }, 600);
+    });
+
     $(document).on('click', '[data-print]', function () {
         window.print();
     });
@@ -620,15 +637,15 @@ $(function ($) {
     }
 
     // ---- 새로 고침하면 스크롤 맨 위로 + 로딩 화면 숨기기 ----
-    $(window).on('load', function () {
-        setTimeout(function () {
-            $('html,body').scrollTop(0);
-        }, 100);
-
-        setTimeout(function () {
-            $('#pageLoader').addClass('hide');
-        }, 500);
-    });
+    // 예전에는 사진까지 전부 받은 뒤(window load) 0.5초를 더 기다렸다가 로딩 화면을 걷었음.
+    // 사진이 30장 넘는 케이스 페이지는 이게 수 초씩 걸려, 채용담당자가 빈 로딩 화면만 보다
+    // 탭을 넘길 수 있었음. 이제는 문서 구조가 준비되는 즉시(이 함수가 도는 시점) 걷고,
+    // 사진은 각자 받아지는 대로 뜸(이미 loading="lazy").
+    // '맨 위로'도 load 때 강제로 올리면, 그새 스크롤을 시작한 사람을 다시 위로 끌어올리게 되므로
+    // 브라우저의 스크롤 위치 복원을 끄고 지금 한 번만 올림.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    $('#pageLoader').addClass('hide');
 
     // ---- 스크롤 이벤트: 진행바 / 상단바 축소 / 맨 위로(TOP) 버튼 / 푸터 grow ----
     // 스크롤 1틱마다 문서 높이·푸터 위치 등 레이아웃을 여러 번 읽으면
