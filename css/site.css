@@ -2966,11 +2966,10 @@ body[data-page="resume"] #header {
 }
 
 /* 이력서 본문 중 word-break 규칙이 빠져 있던 것들.
-   핵심 성과 캡션·찾는 자리·주요 성과·직급 줄이 누락돼 있어서
+   핵심 성과 캡션·주요 성과·직급 줄이 누락돼 있어서
    '팔/로워', '디/퓨저', '연/장', '구/매'처럼 글자 단위로 쪼개지고 있었음.
    (site.css 다른 본문에는 이미 걸려 있던 규칙 - 이력서 블록만 누락) */
 .rsKpiCap,
-.rsSeeking,
 .rsAch,
 .rsJobRole,
 .rsJobCompany,
@@ -3325,4 +3324,76 @@ body[data-page="resume"] #header {
 @media screen and (max-width: 768px) {
     .cnChannel { margin-top: 34px; padding-top: 26px; max-width: 340px; }
     .cnLead { font-size: 14px; }
+}
+
+/* -- 이력서 핵심 성과 --------------------------------------------------------
+   HTML에는 .rsKpi 구조가 있었는데 규칙이 하나도 없어서
+   숫자와 설명이 한 줄씩 그냥 나열되고 있었음.
+   숫자는 굵은 코랄로 먼저 걸리게, 설명은 보조 톤으로 둠. */
+.rsKpi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.rsKpiItem {
+    border: 1.5px solid #CFC5A9;
+    border-radius: 12px;
+    background: #F3EDDE;
+    padding: 22px 18px 20px;
+    text-align: center;
+}
+
+.rsKpiNum {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    color: #C95F1D;
+    margin-bottom: 12px;
+    white-space: nowrap;
+}
+
+.rsKpiCap {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #4E6A57;
+}
+
+
+@media screen and (max-width: 768px) {
+    .rsKpi {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .rsKpiItem {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        text-align: left;
+    }
+
+    .rsKpiNum {
+        flex: 0 0 86px;
+        font-size: 22px;
+        margin-bottom: 0;
+    }
+
+    .rsKpiCap {
+        font-size: 12.5px;
+    }
+}
+
+@media print {
+    .rsKpiItem {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .rsKpiItem {
+        border-color: #D4C9AE;
+        padding: 16px 14px 14px;
+    }
 }
