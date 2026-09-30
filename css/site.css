@@ -3397,3 +3397,27 @@ body[data-page="resume"] #header {
         padding: 16px 14px 14px;
     }
 }
+
+/* -- 이력서 경력: 회사별 주요 성과 --------------------------------------------
+   업무 목록만 있으면 경력 칸만 훑는 사람에게 성과가 안 보여서,
+   회사마다 맨 위에 성과 묶음을 두고 카드처럼 한 톤 띄움 */
+.rsTaskGroup.isKey {
+    margin-top: 16px;
+    padding: 14px 18px 12px;
+    border-radius: 10px;
+    background: #F3EDDE;
+    border: 1px solid #E0D8C2;
+}
+.rsTaskGroup.isKey ul li {
+    color: #2B4A3A;
+}
+.rsTaskGroup.isKey ul li b {
+    color: #A84D15;
+    font-weight: 700;
+}
+@media print {
+    .rsTaskGroup.isKey {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
